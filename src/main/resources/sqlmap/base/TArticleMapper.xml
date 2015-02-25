@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.clbus.matouwang.dao.base.TArticleMapper" >
+  <resultMap id="BaseResultMap" type="com.clbus.matouwang.pojo.base.TArticle" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="ARTICLE_TITLE" property="articleTitle" jdbcType="VARCHAR" />
+    <result column="ARTICLE_TAG" property="articleTag" jdbcType="VARCHAR" />
+    <result column="ARTICLE_URL" property="articleUrl" jdbcType="VARCHAR" />
+    <result column="DATE_ADD" property="dateAdd" jdbcType="TIMESTAMP" />
+    <result column="ARTICLE_YINYONG" property="articleYinyong" jdbcType="VARCHAR" />
+    <result column="SORT_ID" property="sortId" jdbcType="VARCHAR" />
+    <result column="ARTICLE_PROFILE" property="articleProfile" jdbcType="VARCHAR" />
+    <result column="ARTICLE_CONTENT" property="articleContent" jdbcType="VARCHAR" />
+    <result column="ARTICLE_ADD_USER_NAME" property="articleAddUserName" jdbcType="VARCHAR" />
+    <result column="ARTICLE_PIC" property="articlePic" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <trim prefix="where" prefixOverrides="and|or" >
+      <if test="condition.articleTitle != null" >
+         and ARTICLE_TITLE = #{condition.articleTitle,jdbcType=VARCHAR}
+      </if>
+      <if test="condition.articleTag != null" >
+         and ARTICLE_TAG = #{condition.articleTag,jdbcType=VARCHAR}
+      </if>
+      <if test="condition.articleUrl != null" >
+         and ARTICLE_URL = #{condition.articleUrl,jdbcType=VARCHAR}
+      </if>
+      <if test="condition.dateAdd != null" >
+         and DATE_ADD = #{condition.dateAdd,jdbcType=TIMESTAMP}
+      </if>
+      <if test="condition.articleYinyong != null" >
+         and ARTICLE_YINYONG = #{condition.articleYinyong,jdbcType=VARCHAR}
+      </if>
+      <if test="condition.sortId != null" >
+         and SORT_ID = #{condition.sortId,jdbcType=VARCHAR}
+      </if>
+      <if test="condition.articleProfile != null" >
+         and ARTICLE_PROFILE = #{condition.articleProfile,jdbcType=VARCHAR}
+      </if>
+      <if test="condition.articleContent != null" >
+         and ARTICLE_CONTENT = #{condition.articleContent,jdbcType=VARCHAR}
+      </if>
+      <if test="condition.articleAddUserName != null" >
+         and ARTICLE_ADD_USER_NAME = #{condition.articleAddUserName,jdbcType=VARCHAR}
+      </if>
+      <if test="condition.articlePic != null" >
+         and ARTICLE_PIC = #{condition.articlePic,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <trim prefix="where" prefixOverrides="and|or" >
+      <if test="example.condition.articleTitle != null" >
+         and ARTICLE_TITLE = #{example.condition.articleTitle,jdbcType=VARCHAR}
+      </if>
+      <if test="example.condition.articleTag != null" >
+         and ARTICLE_TAG = #{example.condition.articleTag,jdbcType=VARCHAR}
+      </if>
+      <if test="example.condition.articleUrl != null" >
+         and ARTICLE_URL = #{example.condition.articleUrl,jdbcType=VARCHAR}
+      </if>
+      <if test="example.condition.dateAdd != null" >
+         and DATE_ADD = #{example.condition.dateAdd,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.condition.articleYinyong != null" >
+         and ARTICLE_YINYONG = #{example.condition.articleYinyong,jdbcType=VARCHAR}
+      </if>
+      <if test="example.condition.sortId != null" >
+         and SORT_ID = #{example.condition.sortId,jdbcType=VARCHAR}
+      </if>
+      <if test="example.condition.articleProfile != null" >
+         and ARTICLE_PROFILE = #{example.condition.articleProfile,jdbcType=VARCHAR}
+      </if>
+      <if test="example.condition.articleContent != null" >
+         and ARTICLE_CONTENT = #{example.condition.articleContent,jdbcType=VARCHAR}
+      </if>
+      <if test="example.condition.articleAddUserName != null" >
+         and ARTICLE_ADD_USER_NAME = #{example.condition.articleAddUserName,jdbcType=VARCHAR}
+      </if>
+      <if test="example.condition.articlePic != null" >
+         and ARTICLE_PIC = #{example.condition.articlePic,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, ARTICLE_TITLE, ARTICLE_TAG, ARTICLE_URL, DATE_ADD, ARTICLE_YINYONG, SORT_ID, 
+    ARTICLE_PROFILE, ARTICLE_CONTENT, ARTICLE_ADD_USER_NAME, ARTICLE_PIC
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.clbus.matouwang.pojo.base.Criteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_article
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <include refid="common.Mysql_Pagination_Limit" />
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_article
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_article
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.clbus.matouwang.pojo.base.Criteria" >
+    delete from t_article
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.clbus.matouwang.pojo.base.TArticle" >
+    insert into t_article (ID, ARTICLE_TITLE, ARTICLE_TAG, 
+      ARTICLE_URL, DATE_ADD, ARTICLE_YINYONG, 
+      SORT_ID, ARTICLE_PROFILE, ARTICLE_CONTENT, 
+      ARTICLE_ADD_USER_NAME, ARTICLE_PIC)
+    values (#{id,jdbcType=VARCHAR}, #{articleTitle,jdbcType=VARCHAR}, #{articleTag,jdbcType=VARCHAR}, 
+      #{articleUrl,jdbcType=VARCHAR}, #{dateAdd,jdbcType=TIMESTAMP}, #{articleYinyong,jdbcType=VARCHAR}, 
+      #{sortId,jdbcType=VARCHAR}, #{articleProfile,jdbcType=VARCHAR}, #{articleContent,jdbcType=VARCHAR}, 
+      #{articleAddUserName,jdbcType=VARCHAR}, #{articlePic,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.clbus.matouwang.pojo.base.TArticle" >
+    insert into t_article
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="articleTitle != null" >
+        ARTICLE_TITLE,
+      </if>
+      <if test="articleTag != null" >
+        ARTICLE_TAG,
+      </if>
+      <if test="articleUrl != null" >
+        ARTICLE_URL,
+      </if>
+      <if test="dateAdd != null" >
+        DATE_ADD,
+      </if>
+      <if test="articleYinyong != null" >
+        ARTICLE_YINYONG,
+      </if>
+      <if test="sortId != null" >
+        SORT_ID,
+      </if>
+      <if test="articleProfile != null" >
+        ARTICLE_PROFILE,
+      </if>
+      <if test="articleContent != null" >
+        ARTICLE_CONTENT,
+      </if>
+      <if test="articleAddUserName != null" >
+        ARTICLE_ADD_USER_NAME,
+      </if>
+      <if test="articlePic != null" >
+        ARTICLE_PIC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="articleTitle != null" >
+        #{articleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="articleTag != null" >
+        #{articleTag,jdbcType=VARCHAR},
+      </if>
+      <if test="articleUrl != null" >
+        #{articleUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="dateAdd != null" >
+        #{dateAdd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="articleYinyong != null" >
+        #{articleYinyong,jdbcType=VARCHAR},
+      </if>
+      <if test="sortId != null" >
+        #{sortId,jdbcType=VARCHAR},
+      </if>
+      <if test="articleProfile != null" >
+        #{articleProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="articleContent != null" >
+        #{articleContent,jdbcType=VARCHAR},
+      </if>
+      <if test="articleAddUserName != null" >
+        #{articleAddUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="articlePic != null" >
+        #{articlePic,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.clbus.matouwang.pojo.base.Criteria" resultType="java.lang.Integer" >
+    select count(*) from t_article
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_article
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.articleTitle != null" >
+        ARTICLE_TITLE = #{record.articleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.articleTag != null" >
+        ARTICLE_TAG = #{record.articleTag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.articleUrl != null" >
+        ARTICLE_URL = #{record.articleUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dateAdd != null" >
+        DATE_ADD = #{record.dateAdd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.articleYinyong != null" >
+        ARTICLE_YINYONG = #{record.articleYinyong,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sortId != null" >
+        SORT_ID = #{record.sortId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.articleProfile != null" >
+        ARTICLE_PROFILE = #{record.articleProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.articleContent != null" >
+        ARTICLE_CONTENT = #{record.articleContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.articleAddUserName != null" >
+        ARTICLE_ADD_USER_NAME = #{record.articleAddUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.articlePic != null" >
+        ARTICLE_PIC = #{record.articlePic,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_article
+    set ID = #{record.id,jdbcType=VARCHAR},
+      ARTICLE_TITLE = #{record.articleTitle,jdbcType=VARCHAR},
+      ARTICLE_TAG = #{record.articleTag,jdbcType=VARCHAR},
+      ARTICLE_URL = #{record.articleUrl,jdbcType=VARCHAR},
+      DATE_ADD = #{record.dateAdd,jdbcType=TIMESTAMP},
+      ARTICLE_YINYONG = #{record.articleYinyong,jdbcType=VARCHAR},
+      SORT_ID = #{record.sortId,jdbcType=VARCHAR},
+      ARTICLE_PROFILE = #{record.articleProfile,jdbcType=VARCHAR},
+      ARTICLE_CONTENT = #{record.articleContent,jdbcType=VARCHAR},
+      ARTICLE_ADD_USER_NAME = #{record.articleAddUserName,jdbcType=VARCHAR},
+      ARTICLE_PIC = #{record.articlePic,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.clbus.matouwang.pojo.base.TArticle" >
+    update t_article
+    <set >
+      <if test="articleTitle != null" >
+        ARTICLE_TITLE = #{articleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="articleTag != null" >
+        ARTICLE_TAG = #{articleTag,jdbcType=VARCHAR},
+      </if>
+      <if test="articleUrl != null" >
+        ARTICLE_URL = #{articleUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="dateAdd != null" >
+        DATE_ADD = #{dateAdd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="articleYinyong != null" >
+        ARTICLE_YINYONG = #{articleYinyong,jdbcType=VARCHAR},
+      </if>
+      <if test="sortId != null" >
+        SORT_ID = #{sortId,jdbcType=VARCHAR},
+      </if>
+      <if test="articleProfile != null" >
+        ARTICLE_PROFILE = #{articleProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="articleContent != null" >
+        ARTICLE_CONTENT = #{articleContent,jdbcType=VARCHAR},
+      </if>
+      <if test="articleAddUserName != null" >
+        ARTICLE_ADD_USER_NAME = #{articleAddUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="articlePic != null" >
+        ARTICLE_PIC = #{articlePic,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.clbus.matouwang.pojo.base.TArticle" >
+    update t_article
+    set ARTICLE_TITLE = #{articleTitle,jdbcType=VARCHAR},
+      ARTICLE_TAG = #{articleTag,jdbcType=VARCHAR},
+      ARTICLE_URL = #{articleUrl,jdbcType=VARCHAR},
+      DATE_ADD = #{dateAdd,jdbcType=TIMESTAMP},
+      ARTICLE_YINYONG = #{articleYinyong,jdbcType=VARCHAR},
+      SORT_ID = #{sortId,jdbcType=VARCHAR},
+      ARTICLE_PROFILE = #{articleProfile,jdbcType=VARCHAR},
+      ARTICLE_CONTENT = #{articleContent,jdbcType=VARCHAR},
+      ARTICLE_ADD_USER_NAME = #{articleAddUserName,jdbcType=VARCHAR},
+      ARTICLE_PIC = #{articlePic,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

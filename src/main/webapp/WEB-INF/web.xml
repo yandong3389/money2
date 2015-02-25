@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+	
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+    <!-- Spring MVC start -->
+    <servlet>
+        <servlet-name>SpringMVC</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!-- 默认所对应的配置文件是WEB-INF下的{servlet-name}-servlet.xml，这里可以自定义路径 -->
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:/spring/springmvc-servlet.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SpringMVC</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+	<!-- Spring ApplicationContext配置文件的路径 ,可使用通配符，多个路径用,号分隔 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:/spring/spring-common.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<!-- session 超时时间 -->
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/common/404.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/common/404.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/common/500.jsp</location>
+	</error-page>
+	<login-config>
+		<auth-method>BASIC</auth-method>
+	</login-config>
+	<!-- 防止内存泄露 -->   
+	<listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+</web-app>
