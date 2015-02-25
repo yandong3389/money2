@@ -2,20 +2,23 @@
 奖金管理
 
 
-# 项目地址：https://github.com/yandong3389/money.git
+# 项目地址
+https://github.com/yandong3389/money.git
 
 
-# 关于框架：
-框架使用：Spring-webmvc-3.1.0、Spring-3.1.0、MyBatis-3.2.2
+# 关于框架
+Spring-webmvc-3.1.0、Spring-3.1.0、MyBatis-3.2.2
 
-# 代码生成工具：mybatis-generator-core
-      配置文件：/project/src/main/resources/generatorConfig.xml
+# 代码生成工具
+mybatis-generator-core
+  配置文件：/project/src/main/resources/generatorConfig.xml
       
 mybatis生成代码(需要有pom.xml文件,注意.bak重命名)：
 org.mybatis.generator:mybatis-generator-maven-plugin:1.3.2:generate
 
-# 日志：logback
-      配置文件：/project/src/main/resources/logback.xml
+# 日志
+logback
+ 配置文件：/project/src/main/resources/logback.xml
 
 
 # generate_version工程
