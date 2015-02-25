@@ -7,6 +7,8 @@
 
 	<context id="Mybatis3" targetRuntime="Mybatis3">
 
+      <plugin type="org.mybatis.generator.plugins.AddLimitOffsetPlugin" />
+
       <commentGenerator>
         <property name="suppressAllComments" value="true"/>
       </commentGenerator>
@@ -21,7 +23,7 @@
          <property name="forceBigDecimals" value="false"/>
       </javaTypeResolver>
       
-      <javaModelGenerator targetPackage="com.mybatis.model" targetProject="src/main/java">
+      <javaModelGenerator targetPackage="com.d.money.pojo.base" targetProject="src/main/java">
           <property name="enableSubPackages" value="true"/>
           <property name="trimStrings" value="true"/>
       </javaModelGenerator>
@@ -30,12 +32,12 @@
            <property name="enableSubPackages" value="true"/>
       </sqlMapGenerator>
        
-      <javaClientGenerator type="XMLMAPPER" targetPackage="com.mybatis.mapper" targetProject="src/main/java">
+      <javaClientGenerator type="XMLMAPPER" targetPackage="com.d.money.mapper.base" targetProject="src/main/java">
         <property name="enableSubPackages" value="true"/>
       </javaClientGenerator>
       
       
-      <table tableName="user_info" domainObjectName="userInfo" enableCountByExample="false" enableSelectByExample="false" enableUpdateByExample="false" enableDeleteByExample="false">
+      <table tableName="user_info" domainObjectName="userInfo" enableCountByExample="true" enableSelectByExample="true" enableUpdateByExample="true" enableDeleteByExample="true">
        
       </table>
 
