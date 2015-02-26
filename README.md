@@ -17,7 +17,7 @@ mybatis生成代码(需要有pom.xml文件,注意.bak重命名)：
 org.mybatis.generator:mybatis-generator-maven-plugin:1.3.2:generate
 
 # 日志
-logback框架
+logback框架 
  配置文件：/project/src/main/resources/logback.xml
 
 
