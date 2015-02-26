@@ -4,14 +4,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class userInfoExample {
+public class UserInfoExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public userInfoExample() {
+    protected Integer mysqlOffset;
+
+    protected Integer mysqlLength;
+
+    public UserInfoExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -62,6 +66,22 @@ public class userInfoExample {
         oredCriteria.clear();
         orderByClause = null;
         distinct = false;
+    }
+
+    public void setMysqlOffset(Integer mysqlOffset) {
+        this.mysqlOffset=mysqlOffset;
+    }
+
+    public Integer getMysqlOffset() {
+        return mysqlOffset;
+    }
+
+    public void setMysqlLength(Integer mysqlLength) {
+        this.mysqlLength=mysqlLength;
+    }
+
+    public Integer getMysqlLength() {
+        return mysqlLength;
     }
 
     protected abstract static class GeneratedCriteria {

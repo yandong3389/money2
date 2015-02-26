@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.d.money.mapper.base.SmFunctionInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.d.money.pojo.base.SmFunctionInfo" >
+    <id column="function_id" property="functionId" jdbcType="VARCHAR" />
+    <result column="function_code" property="functionCode" jdbcType="VARCHAR" />
+    <result column="function_name" property="functionName" jdbcType="VARCHAR" />
+    <result column="function_description" property="functionDescription" jdbcType="VARCHAR" />
+    <result column="parent_function" property="parentFunction" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    function_id, function_code, function_name, function_description, parent_function
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.d.money.pojo.base.SmFunctionInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sm_function_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="mysqlOffset != null and mysqlOffset>=0" >
+      limit #{mysqlOffset} , #{mysqlLength}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sm_function_info
+    where function_id = #{functionId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sm_function_info
+    where function_id = #{functionId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.d.money.pojo.base.SmFunctionInfoExample" >
+    delete from sm_function_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.d.money.pojo.base.SmFunctionInfo" >
+    insert into sm_function_info (function_id, function_code, function_name, 
+      function_description, parent_function)
+    values (#{functionId,jdbcType=VARCHAR}, #{functionCode,jdbcType=VARCHAR}, #{functionName,jdbcType=VARCHAR}, 
+      #{functionDescription,jdbcType=VARCHAR}, #{parentFunction,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.d.money.pojo.base.SmFunctionInfo" >
+    insert into sm_function_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="functionId != null" >
+        function_id,
+      </if>
+      <if test="functionCode != null" >
+        function_code,
+      </if>
+      <if test="functionName != null" >
+        function_name,
+      </if>
+      <if test="functionDescription != null" >
+        function_description,
+      </if>
+      <if test="parentFunction != null" >
+        parent_function,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="functionId != null" >
+        #{functionId,jdbcType=VARCHAR},
+      </if>
+      <if test="functionCode != null" >
+        #{functionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="functionName != null" >
+        #{functionName,jdbcType=VARCHAR},
+      </if>
+      <if test="functionDescription != null" >
+        #{functionDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="parentFunction != null" >
+        #{parentFunction,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.d.money.pojo.base.SmFunctionInfoExample" resultType="java.lang.Integer" >
+    select count(*) from sm_function_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sm_function_info
+    <set >
+      <if test="record.functionId != null" >
+        function_id = #{record.functionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.functionCode != null" >
+        function_code = #{record.functionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.functionName != null" >
+        function_name = #{record.functionName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.functionDescription != null" >
+        function_description = #{record.functionDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentFunction != null" >
+        parent_function = #{record.parentFunction,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sm_function_info
+    set function_id = #{record.functionId,jdbcType=VARCHAR},
+      function_code = #{record.functionCode,jdbcType=VARCHAR},
+      function_name = #{record.functionName,jdbcType=VARCHAR},
+      function_description = #{record.functionDescription,jdbcType=VARCHAR},
+      parent_function = #{record.parentFunction,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.d.money.pojo.base.SmFunctionInfo" >
+    update sm_function_info
+    <set >
+      <if test="functionCode != null" >
+        function_code = #{functionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="functionName != null" >
+        function_name = #{functionName,jdbcType=VARCHAR},
+      </if>
+      <if test="functionDescription != null" >
+        function_description = #{functionDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="parentFunction != null" >
+        parent_function = #{parentFunction,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where function_id = #{functionId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.d.money.pojo.base.SmFunctionInfo" >
+    update sm_function_info
+    set function_code = #{functionCode,jdbcType=VARCHAR},
+      function_name = #{functionName,jdbcType=VARCHAR},
+      function_description = #{functionDescription,jdbcType=VARCHAR},
+      parent_function = #{parentFunction,jdbcType=VARCHAR}
+    where function_id = #{functionId,jdbcType=VARCHAR}
+  </update>
+</mapper>

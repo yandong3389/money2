@@ -2,12 +2,16 @@
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-    <!-- 指oracle 驱动包的路径 -->
-	<classPathEntry location="E:/000_jinrongbang/workspace/matouwang/src/main/webapp/WEB-INF/lib/mysql-connector-java-5.1.18.jar" />
+    <!-- 指jdbc 驱动包的路径,两种配置方式,第一种在此配置classPathEntry,第二种方式在pom中的plugin标签中追加dependencies标签和dependency标签 -->
+<!-- 	<classPathEntry location="E:/000_jinrongbang/workspace/matouwang/src/main/webapp/WEB-INF/lib/mysql-connector-java-5.1.18.jar" /> -->
 
 	<context id="Mybatis3" targetRuntime="Mybatis3">
 
-      <plugin type="org.mybatis.generator.plugins.AddLimitOffsetPlugin" />
+    <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
+	<!-- mysql分页插件 -->   
+    <plugin type="d.mybatis_generator_plugin.GeneratorMysqlLimitOffsetPlugin" />  
+    <!-- 生成mybatis-config配置 -->
+    <plugin type="d.mybatis_generator_plugin.GeneratorMybatisConfigPlugin" />  
 
       <commentGenerator>
         <property name="suppressAllComments" value="true"/>
@@ -28,7 +32,7 @@
           <property name="trimStrings" value="true"/>
       </javaModelGenerator>
        
-      <sqlMapGenerator targetPackage="sqlmap" targetProject="src/main/resources">
+      <sqlMapGenerator targetPackage="sqlmap.base" targetProject="src/main/resources">
            <property name="enableSubPackages" value="true"/>
       </sqlMapGenerator>
        
@@ -37,12 +41,11 @@
       </javaClientGenerator>
       
       
-      <table tableName="user_info" domainObjectName="userInfo" enableCountByExample="true" enableSelectByExample="true" enableUpdateByExample="true" enableDeleteByExample="true">
-       
-      </table>
+<!--       <table tableName="user_info" domainObjectName="userInfo" enableCountByExample="true" enableSelectByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"></table> -->
 
         <!-- 数据库表名列表 -->
-<!-- 	<table tableName="user_info"></table> -->
+	<table tableName="user_info" />
+	<table tableName="sm_function_info" />
 	
 	</context>
 </generatorConfiguration>
