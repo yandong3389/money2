@@ -14,7 +14,8 @@
     <plugin type="d.mybatis_generator_plugin.GeneratorMybatisConfigPlugin" />  
 
       <commentGenerator>
-        <property name="suppressAllComments" value="true"/>
+        <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+        <property name="suppressAllComments" value="false"/>
       </commentGenerator>
       
 		<!-- ORACLE数据库连接信息 -->
