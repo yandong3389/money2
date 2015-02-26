@@ -11,7 +11,7 @@
 	default-lazy-init="false">
 
 	<!-- 自动搜索@Component , @Service , @Repository等标注的类 -->
-	<context:component-scan base-package="com.clbus.matouwang;" annotation-config="true">
+	<context:component-scan base-package="d.money;" annotation-config="true">
 	</context:component-scan>
 	
 	<!-- enable autowire -->
@@ -22,7 +22,7 @@
 	<context:property-placeholder location="classpath:/mybatis/jdbc.properties"/>
 	
 	<!-- 用于持有ApplicationContext,可以使用SpringContextHolder.getBean('xxxx')的静态方法得到spring bean对象 -->
-	<bean class="com.clbus.matouwang.common.spring.SpringContextHolder" lazy-init="false" />
+	<bean class="d.money.common.spring.SpringContextHolder" lazy-init="false" />
 	
     <!-- 数据连接事务-->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -34,7 +34,7 @@
     </bean>
 
     <bean name="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.clbus.matouwang.dao" />
+        <property name="basePackage" value="d.money.mapper" />
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
     </bean>
     <!-- 连接事务的注解配置 -->
@@ -55,13 +55,13 @@
     
     <!-- 配置事务生效的类和方法 -->
     <aop:config>
-        <aop:pointcut id="allManagerMethod" expression="execution(* com.clbus.matouwang.service..*.*(..))" />
+        <aop:pointcut id="allManagerMethod" expression="execution(* d.money.service..*.*(..))" />
         <aop:advisor advice-ref="txAdvice" pointcut-ref="allManagerMethod" />
     </aop:config>
     
 	<!-- mybatis接口  TODO 有重复配置 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.clbus.matouwang.dao.base;com.clbus.matouwang.dao.common;com.clbus.matouwang.dao" />
+		<property name="basePackage" value="d.money.mapper.base;d.money.mapper.common;d.money.mapper" />
 	</bean>
 	
 	<!-- 应用属性文件读入 -->
@@ -77,7 +77,7 @@
 	</bean>
 
 	<!-- 用于持有applicationProperties,将properties转变为静态方法使用,PropertiesHolder.getProperty("somekey") -->
-	<bean class="com.clbus.matouwang.common.utils.PropertiesHolder">
+	<bean class="d.money.common.utils.PropertiesHolder">
 		<property name="properties" ref="applicationProperties" />
 	</bean>
 

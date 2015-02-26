@@ -15,7 +15,7 @@
 	<appender name="logfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<!-- 按天分文件夹存放 ，并压缩 -->
-			<fileNamePattern>${USER_HOME}/logs/matouwang/%d{yyyy-MM-dd}/log.%i.txt</fileNamePattern>
+			<fileNamePattern>${USER_HOME}/logs/money/%d{yyyy-MM-dd}/log.%i.txt</fileNamePattern>
 			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
 				<!-- 每个文件的最大值 5MB,超过则编号,生成新文件 -->
 				<maxFileSize>2MB</maxFileSize>
@@ -35,7 +35,7 @@
 	
  	<logger name="java.sql" level="DEBUG" />
 	<logger name="org.springframework" level="DEBUG" />
-	<logger name="com.clbus.matouwang" level="DEBUG" /> 
+	<logger name="d.money" level="DEBUG" /> 
 
 	<root level="info">
 		<appender-ref ref="stdout" />

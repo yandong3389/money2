@@ -3,7 +3,7 @@
 
 <generatorConfiguration>
     <!-- 指jdbc 驱动包的路径,两种配置方式,第一种在此配置classPathEntry,第二种方式在pom中的plugin标签中追加dependencies标签和dependency标签 -->
-<!-- 	<classPathEntry location="E:/000_jinrongbang/workspace/matouwang/src/main/webapp/WEB-INF/lib/mysql-connector-java-5.1.18.jar" /> -->
+<!-- 	<classPathEntry location="E:/000_jinrongbang/workspace/money/src/main/webapp/WEB-INF/lib/mysql-connector-java-5.1.18.jar" /> -->
 
 	<context id="Mybatis3" targetRuntime="Mybatis3">
 
@@ -28,7 +28,7 @@
          <property name="forceBigDecimals" value="false"/>
       </javaTypeResolver>
       
-      <javaModelGenerator targetPackage="com.d.money.pojo.base" targetProject="src/main/java">
+      <javaModelGenerator targetPackage="d.money.pojo.base" targetProject="src/main/java">
           <!-- enableSubPackages:是否让schema作为包的后缀 -->
           <property name="enableSubPackages" value="true"/>
           <property name="trimStrings" value="true"/>
@@ -38,7 +38,7 @@
            <property name="enableSubPackages" value="true"/>
       </sqlMapGenerator>
        
-      <javaClientGenerator type="XMLMAPPER" targetPackage="com.d.money.mapper.base" targetProject="src/main/java">
+      <javaClientGenerator type="XMLMAPPER" targetPackage="d.money.mapper.base" targetProject="src/main/java">
         <property name="enableSubPackages" value="true"/>
       </javaClientGenerator>
       

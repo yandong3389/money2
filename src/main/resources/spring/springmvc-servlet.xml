@@ -10,7 +10,7 @@
     default-lazy-init="true">
 
     <!-- 只搜索@Controller 标注的类 不搜索其他标注的类 -->
-    <context:component-scan base-package="com.clbus.matouwang" use-default-filters="false">
+    <context:component-scan base-package="d.money" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
     </context:component-scan>
 
@@ -29,7 +29,7 @@
     </bean>
 
     <!-- 用于持有applicationProperties,将properties转变为静态方法使用,PropertiesHolder.getProperty("somekey") -->
-    <bean class="com.clbus.matouwang.common.utils.PropertiesHolder">
+    <bean class="d.money.common.utils.PropertiesHolder">
         <property name="properties" ref="applicationProperties" />
     </bean>
 
@@ -95,7 +95,7 @@
 			<mvc:mapping path="/user**/**" />
 			<mvc:mapping path="/module**/**" />
 			<mvc:mapping path="/**/**" />
-			<bean class="com.clbus.matouwang.web.interceptor.AuthenticatorInterceptor"></bean>
+			<bean class="d.money.web.interceptor.AuthenticatorInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
 
