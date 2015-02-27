@@ -31,3 +31,15 @@ logback框架
 所有配置文件放在/project/src/main/resources目录下
 
 数据库连接配置：/project/src/main/resources/mybatis/jdbc.properties
+
+
+# 删除目录下所有的.svn文件bat脚本
+@echo On
+@Rem 删除.svn版本控制目录
+@PROMPT [Com]#
+
+@for /r . %%a in (.) do @if exist "%%a\.svn" rd /s /q "%%a\.svn"
+@Rem for /r . %%a in (.) do @if exist "%%a\.svn" @echo "%%a\.svn"
+
+@echo Mission Completed.
+@pause
