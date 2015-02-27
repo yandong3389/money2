@@ -34,14 +34,19 @@ logback框架
 
 
 # 删除目录下所有的.svn文件bat脚本
-<p>
+
 @echo On
+<br />
 @Rem 删除.svn版本控制目录
+<br />
 @PROMPT [Com]#
+<br />
 
 @for /r . %%a in (.) do @if exist "%%a\.svn" rd /s /q "%%a\.svn"
+<br />
 @Rem for /r . %%a in (.) do @if exist "%%a\.svn" @echo "%%a\.svn"
-
+<br />
 @echo Mission Completed.
+<br />
 @pause
-</p>
+<br />
