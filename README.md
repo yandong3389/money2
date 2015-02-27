@@ -34,6 +34,7 @@ logback框架
 
 
 # 删除目录下所有的.svn文件bat脚本
+<p>
 @echo On
 @Rem 删除.svn版本控制目录
 @PROMPT [Com]#
@@ -43,3 +44,4 @@ logback框架
 
 @echo Mission Completed.
 @pause
+</p>
