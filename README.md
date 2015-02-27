@@ -18,6 +18,9 @@ mybatis生成代码(需要有pom.xml文件,注意.bak重命名)：
 <br />
 org.mybatis.generator:mybatis-generator-maven-plugin:1.3.2:generate
 
+# mybatis-generator附加插件地址
+https://github.com/yandong3389/mybatis-generator-plugin.git
+
 # 日志
 logback框架 
 <br />
@@ -25,6 +28,7 @@ logback框架
 
 
 # generate_version工程
+https://github.com/yandong3389/generate_version.git
 1、压缩js、css文件
 <br />
 2、为jsp中引用的js、css文件追加版本号(svn)
