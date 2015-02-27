@@ -29,6 +29,7 @@ logback框架
 
 # generate_version工程
 https://github.com/yandong3389/generate_version.git
+<br />
 1、压缩js、css文件
 <br />
 2、为jsp中引用的js、css文件追加版本号(svn)
@@ -43,7 +44,8 @@ https://github.com/yandong3389/generate_version.git
 
 
 # 删除目录下所有的.svn文件bat脚本
-
+新建.bat文件,将该文件复制到想要清除.svn的目录中,双击执行后会递归删除当前及子目录的所有.svn文件
+<br />
 @echo On
 <br />
 @Rem 删除.svn版本控制目录
