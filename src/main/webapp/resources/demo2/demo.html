@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>...</title>
+
+<style type="text/css">
+div#contain {
+	width: 1000em;
+	background: #fff;
+	font-family: verdan;
+}
+
+ul#xflow {
+	float: none;
+	margin: 0 auto;
+}
+
+ul {
+	clear: left;
+	margin: 2em 0 0 0;
+	padding: 0;
+	background: #fff;
+}
+
+ul ul {
+	border-top: 1px solid #000;
+	width: auto;
+	min-width: 375px;
+}
+
+ul.solo {
+	border-top: 0;
+}
+
+li {
+	float: left;
+	list-style: none;
+	position: relative;
+}
+
+li li {
+	margin: -1px 0 0 0;
+}
+
+#xflow div {
+	background: url(img/vLine.png) 50% repeat-y;
+	padding: 2em 5px 0 5px;
+	margin: 0 .3em -2em 0em;
+	
+}
+
+#xflow div.section {
+	padding: 2em 5px 2em 5px;
+	height: 80px;
+}
+
+#xflow div.first {
+	background: url(img/first.png) 50% repeat-y;
+	margin-left: 0;
+}
+
+#xflow div.last {
+	background: url(img/last.png) 50% repeat-y;
+	margin-right: 0;
+}
+
+.none {
+	border: 0px;
+}
+
+#xflow div.root {
+	padding-top: 0;
+}
+
+#xflow a {
+	display: block;
+	background: #fff;
+	border: 1px solid #000;
+	padding: .25em .2em .2em .2em;
+	color: #222;
+	text-decoration: none;
+	margin: 0 auto;
+	width: 10em;
+	line-height: 2em;
+	text-align: center;
+}
+
+/*IE 6 (when comma-separated, IE6 didn't work, so these are duped for IE7)*/
+* html {
+	text-align: center;
+}
+
+* html  a {
+	margin: 0;
+	position: relative;
+}
+/*IE 7*/
+*:first-child+html {
+	text-align: center;
+}
+
+*:first-child+html  a {
+	margin: 0;
+	position: relative;
+}
+</style>
+
+</head>
+<body>
+	<div id="contain">
+		<ul class="solo" id="xflow">
+			<li>
+				<div class='root section'>
+					<a>总经理</a>
+				</div>
+				<ul class="">
+
+
+					<li>
+						<div class='first section'>
+							<a>营销总监</a>
+						</div>
+						<ul class="none">
+							<li>
+								<div class='first section'>
+									<a>营销经理</a>
+								</div>
+								<ul class="none">
+									<li>
+										<div class='first'>
+											<a>营销助理</a>
+										</div>
+									</li>
+									<li>
+										<div class='last'>
+											<a>营销助理</a>
+										</div>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<div class='last section'>
+									<a>人力资源总监</a>
+								</div>
+								<ul>
+								    <li>
+								        <div class="first">
+								        <a>节点22</a>
+								        </div>
+								    </li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+
+					<li>
+						<div class='last section'>
+							<a>研发总监</a>
+						</div>
+						<ul>
+							<li>
+								<div class='first section'>
+									<a>产品总监</a>
+								</div>
+								<ul class="">
+									<li>
+										<div class='first'>
+											<a>经理</a>
+										</div>
+									</li>
+									<li>
+										<div class='last'>
+											<a>经理</a>
+										</div>
+									</li>
+								</ul>
+							</li>
+							<li>
+                            <div class="last section">	
+                            <a>产品总监2</a>
+                            </div>
+                            <ul></ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>
