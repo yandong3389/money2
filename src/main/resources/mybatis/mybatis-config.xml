@@ -24,5 +24,7 @@
 	<mappers>
 		<mapper resource="sqlmap/base/UserInfoMapper.xml" />
 		
+		<mapper resource="sqlmap/base/MoneyHistoryMapper.xml" />
+		<mapper resource="sqlmap/base/NodeMapper.xml" />
 	</mappers>
 </configuration>
