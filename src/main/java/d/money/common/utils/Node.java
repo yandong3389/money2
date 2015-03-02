@@ -6,15 +6,13 @@ public class Node {
 
 	private int id;
 	private int parentId;
-	private int leftFlag; 
 	private int level;
 	private Node parentNode;
 	private List<Node> children;
 	
-	public Node(int id, int parentId, int leftFlag, int level){
+	public Node(int id, int parentId, int level){
 		this.id = id;
 		this.parentId = parentId;
-		this.leftFlag = leftFlag;
 		this.level = level;
 	}
 	
@@ -39,12 +37,6 @@ public class Node {
 		this.parentId = parentId;
 	}
 
-	public int getLeftFlag() {
-		return leftFlag;
-	}
-	public void setLeftFlag(int leftFlag) {
-		this.leftFlag = leftFlag;
-	}
 	public int getLevel() {
 		return level;
 	}

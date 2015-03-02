@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import com.alibaba.fastjson.JSONArray;
+
 /**
  * 获取子节点
  */
@@ -35,10 +37,10 @@ public class NodeUtil {
 	}
 
 	private void recursionFn(List<Node> list, Node node, int level) {
-		
+
 		// 得到子节点列表
 		List<Node> childList = getChildList(list, node);
-		
+
 		// 判断是否有子节点
 		if (hasChild(list, node)) {
 			if (node.getLevel() == level) {
@@ -58,6 +60,7 @@ public class NodeUtil {
 
 	/**
 	 * 得到子节点列表
+	 * 
 	 * @param list
 	 * @param node
 	 * @return
@@ -76,6 +79,7 @@ public class NodeUtil {
 
 	/**
 	 * 判断是否有子节点
+	 * 
 	 * @param list
 	 * @param node
 	 * @return
@@ -86,6 +90,7 @@ public class NodeUtil {
 
 	/**
 	 * 根据ID取得节点
+	 * 
 	 * @param dataList
 	 * @param id
 	 * @return
@@ -101,5 +106,47 @@ public class NodeUtil {
 			}
 		}
 		return thisNode;
+	}
+
+	public static void convertChild(List<Node> dataList) {
+
+		List<Node> nodeList = new ArrayList<Node>();
+		for (Node node1 : dataList) {
+			boolean markChild = false;
+			for (Node node2 : dataList) {
+				if (node1.getParentId() != 0
+						&& node1.getParentId() == node2.getId()) {
+					markChild = true;
+					if (node2.getChildren() == null)
+						node2.setChildren(new ArrayList<Node>());
+					node2.getChildren().add(node1);
+					break;
+				}
+			}
+			if (!markChild) {
+				nodeList.add(node1);
+			}
+		}
+
+		// 转为json格式
+		String json = JSONArray.toJSONString(nodeList).toString();
+		System.out.println("json:" + json);
+	}
+
+	public static void convertParent(List<Node> dataList) {
+
+		for (Node node1 : dataList) {
+			for (Node node2 : dataList) {
+				if (node1.getParentId() != 0
+						&& node1.getParentId() == node2.getId()) {
+					node1.setParentNode(node2);
+					break;
+				}
+			}
+		}
+
+		// 转为json格式
+		String json = JSONArray.toJSONString(dataList).toString();
+		System.out.println("json:" + json);
 	}
 }
