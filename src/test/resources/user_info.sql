@@ -9,7 +9,6 @@ Source Database       : test
 Target Server Type    : MYSQL
 Target Server Version : 50532
 File Encoding         : 65001
-test 
 Date: 2015-02-25 17:13:49
 */
 
