@@ -4,11 +4,11 @@
 <head>
 </head>
 <body>
-		<form id="myform" action="hello2" method="post">
-			用户名：<input name="userName" value="" /><br/>
-			密码：<input name="userPass" value=""/><br/>
-			<input type="submit" value="新增用户1" />
-		</form>
+	<form id="myform" action="hello2" method="post">
+		用户名：<input name="userName" value="" /><br/>
+		密码：<input name="userPass" value=""/><br/>
+		<input type="submit" value="新增用户1" />
+	</form>
 <table>
 <c:forEach items="${userinfos}" var="user" varStatus="status">
 <tr>
