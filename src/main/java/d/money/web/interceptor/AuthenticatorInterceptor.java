@@ -11,9 +11,7 @@ public class AuthenticatorInterceptor implements HandlerInterceptor {
     
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object obj, Exception exception) throws Exception {
-        
         System.out.println("afterCompletion.................1");
-        
     }
 
     @Override
