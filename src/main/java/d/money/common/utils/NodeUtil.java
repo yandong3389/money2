@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.alibaba.fastjson.JSONArray;
-
 /**
  * 获取子节点
  */
@@ -20,6 +18,7 @@ public class NodeUtil {
 	 *            分类表
 	 * @param parentId
 	 *            传入的父节点ID
+	 * @param level 传入-1表示,不限级别,传入正数表示取得指定级别的子节点
 	 * @return String
 	 */
 	public List<Integer> getChildNodes(List<Node> list, int parentId, int level) {
@@ -43,7 +42,7 @@ public class NodeUtil {
 
 		// 判断是否有子节点
 		if (hasChild(list, node)) {
-			if (node.getLevel() == level) {
+			if (level == -1 || node.getLevel() == level) {
 				returnList.add(node.getId());
 			}
 			Iterator<Node> it = childList.iterator();
@@ -52,7 +51,7 @@ public class NodeUtil {
 				recursionFn(list, n, level);
 			}
 		} else {
-			if (node.getLevel() == level) {
+			if (level == -1 || node.getLevel() == level) {
 				returnList.add(node.getId());
 			}
 		}
@@ -129,8 +128,8 @@ public class NodeUtil {
 		}
 
 		// 转为json格式
-		String json = JSONArray.toJSONString(nodeList).toString();
-		System.out.println("json:" + json);
+//		String json = JSONArray.toJSONString(nodeList).toString();
+//		System.out.println("json:" + json);
 	}
 
 	public static void convertParent(List<Node> dataList) {
@@ -146,7 +145,7 @@ public class NodeUtil {
 		}
 
 		// 转为json格式
-		String json = JSONArray.toJSONString(dataList).toString();
-		System.out.println("json:" + json);
+//		String json = JSONArray.toJSONString(dataList).toString();
+//		System.out.println("json:" + json);
 	}
 }
