@@ -27,5 +27,9 @@
 		<mapper resource="sqlmap/base/MoneyHistoryMapper.xml" />
 		<mapper resource="sqlmap/base/NodeMapper.xml" />
 		<mapper resource="sqlmap/NodeExtMapper.xml" />
+		
+		<!-- 		panc -->
+		<mapper resource="sqlmap/base/AdminMapper.xml" />
+		<!-- 		panc end-->
 	</mappers>
 </configuration>

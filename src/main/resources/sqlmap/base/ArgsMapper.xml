@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="d.money.mapper.base.ArgsMapper" >
+  <resultMap id="BaseResultMap" type="d.money.pojo.base.Args" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="bonus" property="bonus" jdbcType="INTEGER" />
+    <result column="tj_bonus_percent" property="tjBonusPercent" jdbcType="REAL" />
+    <result column="px_bonus_percent" property="pxBonusPercent" jdbcType="REAL" />
+    <result column="zx_bonus_percent" property="zxBonusPercent" jdbcType="REAL" />
+    <result column="comment" property="comment" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, bonus, tj_bonus_percent, px_bonus_percent, zx_bonus_percent, comment
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="d.money.pojo.base.ArgsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from args
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="mysqlOffset != null and mysqlOffset>=0" >
+      limit #{mysqlOffset} , #{mysqlLength}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from args
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from args
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="d.money.pojo.base.ArgsExample" >
+    delete from args
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="d.money.pojo.base.Args" >
+    insert into args (id, bonus, tj_bonus_percent, 
+      px_bonus_percent, zx_bonus_percent, comment
+      )
+    values (#{id,jdbcType=INTEGER}, #{bonus,jdbcType=INTEGER}, #{tjBonusPercent,jdbcType=REAL}, 
+      #{pxBonusPercent,jdbcType=REAL}, #{zxBonusPercent,jdbcType=REAL}, #{comment,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="d.money.pojo.base.Args" >
+    insert into args
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="bonus != null" >
+        bonus,
+      </if>
+      <if test="tjBonusPercent != null" >
+        tj_bonus_percent,
+      </if>
+      <if test="pxBonusPercent != null" >
+        px_bonus_percent,
+      </if>
+      <if test="zxBonusPercent != null" >
+        zx_bonus_percent,
+      </if>
+      <if test="comment != null" >
+        comment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="bonus != null" >
+        #{bonus,jdbcType=INTEGER},
+      </if>
+      <if test="tjBonusPercent != null" >
+        #{tjBonusPercent,jdbcType=REAL},
+      </if>
+      <if test="pxBonusPercent != null" >
+        #{pxBonusPercent,jdbcType=REAL},
+      </if>
+      <if test="zxBonusPercent != null" >
+        #{zxBonusPercent,jdbcType=REAL},
+      </if>
+      <if test="comment != null" >
+        #{comment,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="d.money.pojo.base.ArgsExample" resultType="java.lang.Integer" >
+    select count(*) from args
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update args
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.bonus != null" >
+        bonus = #{record.bonus,jdbcType=INTEGER},
+      </if>
+      <if test="record.tjBonusPercent != null" >
+        tj_bonus_percent = #{record.tjBonusPercent,jdbcType=REAL},
+      </if>
+      <if test="record.pxBonusPercent != null" >
+        px_bonus_percent = #{record.pxBonusPercent,jdbcType=REAL},
+      </if>
+      <if test="record.zxBonusPercent != null" >
+        zx_bonus_percent = #{record.zxBonusPercent,jdbcType=REAL},
+      </if>
+      <if test="record.comment != null" >
+        comment = #{record.comment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update args
+    set id = #{record.id,jdbcType=INTEGER},
+      bonus = #{record.bonus,jdbcType=INTEGER},
+      tj_bonus_percent = #{record.tjBonusPercent,jdbcType=REAL},
+      px_bonus_percent = #{record.pxBonusPercent,jdbcType=REAL},
+      zx_bonus_percent = #{record.zxBonusPercent,jdbcType=REAL},
+      comment = #{record.comment,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="d.money.pojo.base.Args" >
+    update args
+    <set >
+      <if test="bonus != null" >
+        bonus = #{bonus,jdbcType=INTEGER},
+      </if>
+      <if test="tjBonusPercent != null" >
+        tj_bonus_percent = #{tjBonusPercent,jdbcType=REAL},
+      </if>
+      <if test="pxBonusPercent != null" >
+        px_bonus_percent = #{pxBonusPercent,jdbcType=REAL},
+      </if>
+      <if test="zxBonusPercent != null" >
+        zx_bonus_percent = #{zxBonusPercent,jdbcType=REAL},
+      </if>
+      <if test="comment != null" >
+        comment = #{comment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="d.money.pojo.base.Args" >
+    update args
+    set bonus = #{bonus,jdbcType=INTEGER},
+      tj_bonus_percent = #{tjBonusPercent,jdbcType=REAL},
+      px_bonus_percent = #{pxBonusPercent,jdbcType=REAL},
+      zx_bonus_percent = #{zxBonusPercent,jdbcType=REAL},
+      comment = #{comment,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
