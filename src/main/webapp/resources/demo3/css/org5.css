@@ -1,0 +1,85 @@
+div#contain {
+    width:1000em;
+    background:#fff;
+    font-family:verdan;
+}
+ul#xflow {
+    float: none;
+    margin: 0 auto;
+}
+ul {
+    clear: left;
+    margin: 2em 0 0 0;
+    padding: 0;
+    background: #fff;
+}
+ul ul {
+    border-top: 1px solid #000;
+    width: auto;
+}
+ul.solo {
+    border-top: 0;
+}
+li {
+    float: left;
+    list-style: none;
+    position: relative;
+}
+li li {
+    margin: -1px 0 0 0;
+}
+#xflow div{
+    background: url(../images/split.jpg) 50% repeat-y;
+    padding: 2em 5px 0 5px;
+    margin: 0 .3em -2em 0em;
+}
+#xflow div.section {
+    padding: 2em 5px 2em 5px;
+}
+#xflow #section {
+    padding: 2em 5px 2em 5px;
+}
+#xflow div .first{
+    padding-bottom: 2em;
+}
+#xflow div.first {
+    background: url(../images/left_split.png) 50% repeat-y;
+    margin-left: 0;
+}
+#xflow div.last {
+    background: url(../images/right_split.png) 50% repeat-y;
+    margin-right:0;
+}
+.none{border:0px;}
+#xflow div.root {
+    padding-top: 0;
+}
+#xflow a {
+    display: block;
+    background: #fff;
+    border: 1px solid #000;
+    padding: .25em .2em .2em .2em;
+    color: #222;
+    text-decoration: none;
+    margin: 0 auto;
+    width: 10em;
+    line-height: 2em;
+    text-align: center;
+}
+
+/*IE 6 (when comma-separated, IE6 didn't work, so these are duped for IE7)*/
+*html  {
+    text-align: center;
+}
+*html  a {
+    margin: 0;
+    position: relative;
+}
+/*IE 7*/
+*:first-child+html  {
+    text-align: center;
+}
+*:first-child+html  a {
+    margin: 0;
+    position: relative;
+}
