@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/reset.css"/>" type="text/css" media="screen" />
 <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>" type="text/css" media="screen" />
 <link rel="stylesheet" href="<c:url value="/resources/css/invalid.css"/>" type="text/css" media="screen" />
+<link rel="stylesheet" href="<c:url value="/resources/css/module2/org5.css"/>" type="text/css" media="screen" />
 <link rel="shortcut icon" href="resources/images/favicon.ico" />
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-1.3.2.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/simpla.jquery.configuration.js"/>"></script>
@@ -17,7 +18,7 @@
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.wysiwyg.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.datePicker.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.date.js"/>"></script>
-
+<script type="text/javascript" src="<c:url value="/resources/js/module2/index.js"/>"></script>
 </head>
 <body>
 <div id="body-wrapper">
@@ -26,20 +27,36 @@
   <!-- End #sidebar -->
   <div id="main-content">
     <!-- Main Content Section with everything -->
-    <noscript>
-    <!-- Show a notification if the user has disabled javascript -->
-    <div class="notification error png_bg">
-      <div> Javascript is disabled or is not supported by your browser. Please <a href="###" title="Upgrade to a better browser">upgrade</a> your browser or <a href="#" title="Enable Javascript in your browser">enable</a> Javascript to navigate the interface properly.
-        Download From <a href="###">exet.tk</a></div>
-    </div>
-    </noscript>
     <!-- Page Head -->
-    <h2>欢迎登录见网站</h2>
+    <h2>欢迎登录网站后台管理</h2>
     <p id="page-intro">你想做些什么？</p>
     <!-- End .shortcut-buttons-set -->
     <div class="clear"></div>
     <!-- End .clear -->
-    <div class="content-box">
+    <div class="content-box"  style="float: left">
+      <!-- Start Content Box -->
+      <div class="content-box-header">
+        <h3>组织结构图</h3>
+        <div class="clear"></div>
+      </div>
+      <!-- End .content-box-header -->
+      <!-- 统计数据 -->
+      <div class="content-box-content" style="float: left;padding: 0 150px 150px 150px;">
+      
+      <div id="contain">
+         <ul class="solo" id="xflow">
+         </ul>
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      </div>
+      <!-- End .content-box-content -->
+    </div>
     <!-- End .content-box -->
     <div class="clear"></div>
 

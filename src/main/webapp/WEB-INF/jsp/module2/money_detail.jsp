@@ -26,15 +26,8 @@
   <!-- End #sidebar -->
   <div id="main-content">
     <!-- Main Content Section with everything -->
-    <noscript>
-    <!-- Show a notification if the user has disabled javascript -->
-    <div class="notification error png_bg">
-      <div> Javascript is disabled or is not supported by your browser. Please <a href="###" title="Upgrade to a better browser">upgrade</a> your browser or <a href="#" title="Enable Javascript in your browser">enable</a> Javascript to navigate the interface properly.
-        Download From <a href="###">exet.tk</a></div>
-    </div>
-    </noscript>
     <!-- Page Head -->
-    <h2>欢迎登录见网站</h2>
+    <h2>欢迎登录网站后台管理</h2>
     <p id="page-intro">你想做些什么？</p>
     <!-- End .shortcut-buttons-set -->
     <div class="clear"></div>
@@ -42,10 +35,11 @@
     <div class="content-box">
       <!-- Start Content Box -->
       <div class="content-box-header">
-        <h3>用户信息管理</h3>
+        <h3>组织结构图</h3>
         <div class="clear"></div>
       </div>
       <!-- End .content-box-header -->
+      <!-- 统计数据 -->
       <div class="content-box-content">
         <div class="tab-content default-tab" id="tab1">
           <!-- This is the target div. id must match the href of this div's tab -->
@@ -61,6 +55,7 @@
                 <th>性别</th>
                 <th>注册时间</th>
                 <th>最后登录</th>
+                <th>IP地址</th>
                 <th>操作</th>
               </tr>
             </thead>
@@ -92,9 +87,9 @@
 	                <td>${backUserInfo.userSex == "0" ? "女" : "男"}</td>
 	                <td><fmt:formatDate value="${backUserInfo.registerDate}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
 	                <td><fmt:formatDate value="${backUserInfo.lastLoginDate}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+	                <td>${backUserInfo.ip}<br/>${backUserInfo.ipaddress}</td>
 	                <td>
-	                  <!-- Icons -->
-	                  <a href="#" title="Edit"><img src="resources_back/images/common/icons/pencil.png" alt="Edit" /></a> <a href="#" title="Delete"><img src="resources_back/images/common/icons/cross.png" alt="Delete" /></a> <a href="#" title="Edit Meta"><img src="resources_back/images/common/icons/hammer_screwdriver.png" alt="Edit Meta" /></a> </td>
+	                </td>
 	              </tr>
                 </c:forEach>
             </tbody>
