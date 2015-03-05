@@ -2,11 +2,16 @@ package d.money.common.utils;
 
 import java.util.List;
 
+import d.money.pojo.base.User;
+
 public class Node {
 
 	private int id;
 	private int parentId;
 	private int level;
+	
+	private User user;
+	
 	private Node parentNode;
 	private List<Node> children;
 	
@@ -16,6 +21,14 @@ public class Node {
 		this.level = level;
 	}
 	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	public Node getParentNode() {
 		return parentNode;
 	}
