@@ -30,6 +30,7 @@
 		
 		<!-- 		panc -->
 		<mapper resource="sqlmap/base/AdminMapper.xml" />
+		<mapper resource="sqlmap/base/ArgsMapper.xml" />
 		<!-- 		panc end-->
 	</mappers>
 </configuration>
