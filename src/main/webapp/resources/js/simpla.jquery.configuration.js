@@ -1,8 +1,8 @@
 $(document).ready(function(){
 	
-	//Sidebar Accordion Menu:
+	//Sidebar Accordion Menu:  main-nav li ul li a
 		
-		$("#main-nav li ul").hide(); // Hide all sub menus
+		$("#main-nav li ul").show(); // Hide all sub menus
 		$("#main-nav li a.current").parent().find("ul").slideToggle("slow"); // Slide down the current menu item's sub menu
 		
 		$("#main-nav li a.nav-top-item").click( // When a top menu item is clicked...
@@ -12,6 +12,15 @@ $(document).ready(function(){
 				return false;
 			}
 		);
+		
+		// add 20150303 21:48
+		$("#main-nav li ul li a").click(function(){
+			$("#main-nav li ul li a").each(function(){
+				if($(this).attr("class")=="current")
+					$(this).removeClass("current");
+			  });
+			$(this).addClass("current");
+		});
 		
 		$("#main-nav li a.no-submenu").click( // When a menu item with no sub menu is clicked...
 			function () {

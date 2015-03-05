@@ -36,18 +36,33 @@ public class AdminLoginController {
 		AdminExample example = new AdminExample();
 		example.or().andAccountEqualTo(account);
 		example.or().andAccountEqualTo(password);
-		
 
 		List<Admin> list = adminservice.selectByExample(example);
 
 		if (list.size() > 0) {
-			request.getSession().setAttribute("username", list.get(0).getName());
+			request.getSession()
+					.setAttribute("username", list.get(0).getName());
 			request.getSession().setAttribute("password", password);
-			return "money/adminmain";
+			request.getSession().setAttribute("isAdmin", true);
+			return "money/adminmain1";
 		} else {
 			request.setAttribute("message", "用户名或密码错误");
 			return "adminLogin";
 		}
+	}
 
+	@RequestMapping("main1")
+	public String skipMain1() {
+		return "money/adminmain1";
+	}
+
+	@RequestMapping("main2")
+	public String skipMain2() {
+		return "money/adminmain2";
+	}
+
+	@RequestMapping("main3")
+	public String skipMain3() {
+		return "money/adminmain3";
 	}
 }
