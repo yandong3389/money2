@@ -14,6 +14,7 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.wysiwyg.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.datePicker.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.date.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin.js"></script>
 </head>
 <body>
 <div id="body-wrapper">

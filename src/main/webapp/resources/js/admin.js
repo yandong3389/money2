@@ -29,4 +29,32 @@ $(function(){
 		form1.action="/admin/signup";
 		form1.submit();
 	});
+	
+	// 修改参数
+	$("#modify").click(function(){
+		var id= $("#t_id").val();
+		var bonus= $("#t_bonus").val();
+		var tjBonusPercent= $("#t_tjBonusPercent").val();
+		var pxBonusPercent= $("#t_pxBonusPercent").val();
+		var zxBonusPercent= $("#t_zxBonusPercent").val();
+		var comment= $("#t_comment").val();
+		
+		$("#id").val(id);
+		$("#bonus").val(bonus);
+		$("#tjBonusPercent").val(tjBonusPercent);
+		$("#pxBonusPercent").val(pxBonusPercent);
+		$("#zxBonusPercent").val(zxBonusPercent);
+		$("#comment").val(comment);
+	});
+	
+	// 保存参数
+	$("#argsSave").click(function(){
+		if(!$("#id").val()){
+			alert("请先点击修改按钮！");
+			return false;
+		}
+		var fomr1 = document.getElementById("form1");
+		form1.action="/admin/saveArgs";
+		form1.submit();
+	});
 });

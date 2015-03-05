@@ -14,6 +14,7 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.wysiwyg.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.datePicker.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.date.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin.js"></script>
 </head>
 <body>
 <div id="body-wrapper">
@@ -38,11 +39,12 @@
     </div>
   </div>
   <!-- End #sidebar -->
-<div id="main-content">
+<div id="main-content" style="padding-top:40px;">
+	<!--       表格 -->
   <div class="content-box">
       <!-- Start Content Box -->
       <div class="content-box-header">
-        <h3>Content box</h3>
+        <h3>奖金配置</h3>
         <div class="clear"></div>
       </div>
       <!-- End .content-box-header -->
@@ -57,24 +59,18 @@
                 <th>
                   <input class="check-all" type="checkbox" />
                 </th>
-                <th>Column 1</th>
-                <th>Column 2</th>
-                <th>Column 3</th>
-                <th>Column 4</th>
-                <th>Column 5</th>
+                <th>价格（元）</th>
+                <th>推荐奖金比例（%）</th>
+                <th>直接奖金比例（%）</th>
+                <th>旁系奖金比例（%）</th>
+                <th>备注</th>
               </tr>
             </thead>
             <tfoot>
               <tr>
                 <td colspan="6">
-                  <div class="bulk-actions align-left">
-                    <select name="dropdown">
-                      <option value="option1">Choose an action...</option>
-                      <option value="option2">Edit</option>
-                      <option value="option3">Delete</option>
-                    </select>
-                    <a class="button" href="#">Apply to selected</a> </div>
-                  <div class="pagination"> <a href="#" title="First Page">&laquo; First</a><a href="#" title="Previous Page">&laquo; Previous</a> <a href="#" class="number" title="1">1</a> <a href="#" class="number" title="2">2</a> <a href="#" class="number current" title="3">3</a> <a href="#" class="number" title="4">4</a> <a href="#" title="Next Page">Next &raquo;</a><a href="#" title="Last Page">Last &raquo;</a> </div>
+                  <div class="bulk-actions align-right">
+                    <a class="button" href="javascript:void(0)" id="modify" >&nbsp;&nbsp;&nbsp;&nbsp;修&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;改&nbsp;&nbsp;&nbsp;&nbsp;</a> </div>
                   <!-- End .pagination -->
                   <div class="clear"></div>
                 </td>
@@ -83,109 +79,80 @@
             <tbody>
               <tr>
                 <td>
-                  <input type="checkbox" />
+                  <input type="checkbox" /> <input type="hidden" id="t_id" value="${args.id}" />
                 </td>
-                <td>Lorem ipsum dolor</td>
-                <td><a href="#" title="title">Sit amet</a></td>
-                <td>Consectetur adipiscing</td>
-                <td>Donec tortor diam</td>
+                <td><input type="text" value="${args.bonus}" id="t_bonus" disabled="disabled" style="width:80px;border:0;background: #f3f3f3;" /></td>
+                <td><input type="text" value="${args.tjBonusPercent}" id="t_tjBonusPercent" disabled="disabled" style="width:80px;border:0;background: #f3f3f3;" /></td>
+                <td><input type="text" value="${args.pxBonusPercent}" id="t_pxBonusPercent" disabled="disabled" style="width:80px;border:0;background: #f3f3f3;" /></td>
+                <td><input type="text" value="${args.zxBonusPercent}" id="t_zxBonusPercent" disabled="disabled" style="width:80px;border:0;background: #f3f3f3;" /></td>
                 <td>
-                  <!-- Icons -->
-                  <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a> <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a> </td>
-              </tr>
-              <tr>
-                <td>
-                  <input type="checkbox" />
+                	<input type="text" value="${args.comment}" id="t_comment" disabled="disabled" style="width:180px;border:0;background: #f3f3f3;" />
                 </td>
-                <td>Lorem ipsum dolor</td>
-                <td><a href="#" title="title">Sit amet</a></td>
-                <td>Consectetur adipiscing</td>
-                <td>Donec tortor diam</td>
-                <td>
-                  <!-- Icons -->
-                  <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a> <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a> </td>
-              </tr>
-              <tr>
-                <td>
-                  <input type="checkbox" />
-                </td>
-                <td>Lorem ipsum dolor</td>
-                <td><a href="#" title="title">Sit amet</a></td>
-                <td>Consectetur adipiscing</td>
-                <td>Donec tortor diam</td>
-                <td>
-                  <!-- Icons -->
-                  <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a> <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a> </td>
-              </tr>
-              <tr>
-                <td>
-                  <input type="checkbox" />
-                </td>
-                <td>Lorem ipsum dolor</td>
-                <td><a href="#" title="title">Sit amet</a></td>
-                <td>Consectetur adipiscing</td>
-                <td>Donec tortor diam</td>
-                <td>
-                  <!-- Icons -->
-                  <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a> <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a> </td>
-              </tr>
-              <tr>
-                <td>
-                  <input type="checkbox" />
-                </td>
-                <td>Lorem ipsum dolor</td>
-                <td><a href="#" title="title">Sit amet</a></td>
-                <td>Consectetur adipiscing</td>
-                <td>Donec tortor diam</td>
-                <td>
-                  <!-- Icons -->
-                  <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a> <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a> </td>
-              </tr>
-              <tr>
-                <td>
-                  <input type="checkbox" />
-                </td>
-                <td>Lorem ipsum dolor</td>
-                <td><a href="#" title="title">Sit amet</a></td>
-                <td>Consectetur adipiscing</td>
-                <td>Donec tortor diam</td>
-                <td>
-                  <!-- Icons -->
-                  <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a> <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a> </td>
-              </tr>
-              <tr>
-                <td>
-                  <input type="checkbox" />
-                </td>
-                <td>Lorem ipsum dolor</td>
-                <td><a href="#" title="title">Sit amet</a></td>
-                <td>Consectetur adipiscing</td>
-                <td>Donec tortor diam</td>
-                <td>
-                  <!-- Icons -->
-                  <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a> <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a> </td>
-              </tr>
-              <tr>
-                <td>
-                  <input type="checkbox" />
-                </td>
-                <td>Lorem ipsum dolor</td>
-                <td><a href="#" title="title">Sit amet</a></td>
-                <td>Consectetur adipiscing</td>
-                <td>Donec tortor diam</td>
-                <td>
-                  <!-- Icons -->
-                  <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a> <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a> </td>
               </tr>
             </tbody>
           </table>
         </div>
-        <!-- End #tab1 -->
       </div>
-      <!-- End .content-box-content -->
+    </div>
+    <!--  end     表格 -->
+    <!--  start     表单-->
+    <div class="content-box">
+      <!-- Start Content Box -->
+      <div class="content-box-header">
+        <h3>奖金配置修改</h3>
+        <div class="clear"></div>
+      </div>
+      <!-- End .content-box-header -->
+      <div class="content-box-content">
+        <div class="tab-content default-tab" id="tab1">
+          <form id="form1" action="" method="post">
+            <fieldset>
+            <table>
+            	<tr>
+            	<td>
+		              <label>价格（元）</label>
+		              <input class="text-input small-input" type="text" id="bonus" name="bonus" />
+<!-- 		              <span class="input-notification success png_bg">Successful message</span> -->
+            	</td>
+            	<td>
+		              <label>推荐奖金比例（%）</label>
+		              <input class="text-input small-input" type="text" id="tjBonusPercent" name="tjBonusPercent" />
+<!-- 		              <span class="input-notification success png_bg">Successful message</span> -->
+            	</td>
+            	<td>
+		              <label>旁系奖金比例（%）</label>
+		              <input class="text-input small-input" type="text" id="pxBonusPercent" name="pxBonusPercent" />
+<!-- 		              <span class="input-notification success png_bg">Successful message</span> -->
+            	</td>
+            	</tr>
+            	<tr>
+            	<td>
+		              <label>直系奖金比例（%）</label>
+		              <input class="text-input small-input" type="text" id="zxBonusPercent" name="zxBonusPercent" />
+<!-- 		              <span class="input-notification success png_bg">Successful message</span> -->
+            	</td>
+            	<td colspan="2">
+		              <label>备注</label>
+		              <input class="text-input medium-input" type="text" id="comment" name="comment" />
+<!-- 		              <span class="input-notification success png_bg">Successful message</span> -->
+            	</td>
+            	<td></td>
+            	</tr>
+            	<tr>
+            		<td></td><td></td><td><div class="bulk-actions align-right">
+            		  <input type="hidden" value="" name="id" id="id" />
+		              <input class="button" type="button" value="保     存" id="argsSave" style="width:100px;" />
+            		</div></td>
+            	</tr>
+            </table>
+            </fieldset>
+            <div class="clear"></div>
+            <!-- End .clear -->
+          </form>
+        </div>
+      </div>
     </div>
 </div>
 </div>
 </body>
-<!-- Download From www.exet.tk-->
 </html>

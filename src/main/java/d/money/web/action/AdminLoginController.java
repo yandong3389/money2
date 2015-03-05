@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import d.money.common.utils.MD5Util;
 import d.money.pojo.base.Admin;
 import d.money.pojo.base.AdminExample;
+import d.money.pojo.base.Args;
+import d.money.pojo.base.ArgsExample;
 import d.money.service.AdminService;
 
 @Controller
@@ -34,8 +36,8 @@ public class AdminLoginController {
 		String password = MD5Util.MD5(admin.getPassword());
 
 		AdminExample example = new AdminExample();
-		example.or().andAccountEqualTo(account);
-		example.or().andAccountEqualTo(password);
+		example.createCriteria().andAccountEqualTo(account)
+				.andPasswordEqualTo(password);
 
 		List<Admin> list = adminservice.selectByExample(example);
 
@@ -62,7 +64,20 @@ public class AdminLoginController {
 	}
 
 	@RequestMapping("main3")
-	public String skipMain3() {
+	public String skipMain3(HttpServletRequest request,
+			HttpServletResponse response) {
+		ArgsExample example = new ArgsExample();
+		example.setMysqlOffset(0);
+		example.setMysqlLength(10);
+		Args args = adminservice.selectByExmple(example).get(0);
+		request.setAttribute("args", args);
+		return "money/adminmain3";
+	}
+
+	@RequestMapping("saveArgs")
+	public String saveArgs(Args args, HttpServletRequest request,
+			HttpServletResponse response) {
+		adminservice.updateByPrimaryKey(args);
 		return "money/adminmain3";
 	}
 }

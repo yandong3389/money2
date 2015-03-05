@@ -14,6 +14,7 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.wysiwyg.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.datePicker.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.date.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin.js"></script>
 </head>
 <body>
 <div id="body-wrapper">
@@ -39,16 +40,13 @@
   </div>
   <!-- End #sidebar -->
   <div id="main-content">
-  	<div class="content-box column-left">
+  	<div class="content-box">
+  		<!-- Start Content Box -->
       <div class="content-box-header">
-        <h3>Content box left</h3>
+        <h3>截止</h3>
+        <div class="clear"></div>
       </div>
-      <!-- End .content-box-header -->
-      <div class="content-box-content">
-        <div class="tab-content default-tab">
-        </div>
-      </div>
-    </div>
+  	</div>
   </div>
  </div>
 </body>
