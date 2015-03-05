@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import d.money.common.utils.PageUtil;
 import d.money.common.utils.StringUtil;
 import d.money.pojo.MoneyHistoryView;
 import d.money.pojo.base.Node;
@@ -49,12 +50,13 @@ public class MoneyDetailController {
 		String currentPageStr = request.getParameter("");
 		
 		int currentPage = 0;
+		int perpage = 10;
 		if (StringUtil.isNotEmpty(currentPageStr)) {
 			currentPage = Integer.parseInt(currentPageStr);
 		}
 		
 		// 列表数据
-		List<Node>  nodes = moneyDetailService.getNodeDetail(userId, currentPage, 10);
+		List<Node>  nodes = moneyDetailService.getNodeDetail(userId, currentPage, perpage);
 		// 用户详细
 		User userinfo = moneyDetailService.getUserById(userId);
 		// 配置信息
@@ -94,6 +96,18 @@ public class MoneyDetailController {
 			
 			historyViews.add(historyView);
 		}
+        
+        int total = 0;
+        
+        // 分页请求数据URL地址
+        String url = "money/detail?";
+        
+        // 取得分页工具条
+        String pageHtml = PageUtil.getBackPageHtml(currentPage, perpage, total, url);
+        
+        request.setAttribute("moneyDetailList", null);
+        
+        request.setAttribute("pageHtml", pageHtml);
 		
 		request.setAttribute("historyViews", historyViews);
 		request.setAttribute("userinfo", userinfo);
