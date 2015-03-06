@@ -94,5 +94,13 @@ public class MoneyDetailServiceImpl implements MoneyDetailService {
 	public Map<String, Integer> getConfig(){
 		return null;
 	}
+
+	public int getNodeDetailCount(int id) {
+		
+		NodeExample example = new NodeExample();
+		example.createCriteria().andIdEqualTo(id);
+		
+		return nodeMapper.countByExample(example);
+	}
 	
 }

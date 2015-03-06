@@ -56,6 +56,8 @@ public class MoneyDetailController {
 		
 		// 列表数据
 		List<Node>  nodes = moneyDetailService.getNodeDetail(userId, currentPage, perpage);
+		// 总记录数
+        int total = moneyDetailService.getNodeDetailCount(userId);
 		// 用户详细
 		User userinfo = moneyDetailService.getUserById(userId);
 		// 配置信息
@@ -95,8 +97,6 @@ public class MoneyDetailController {
 			
 			historyViews.add(historyView);
 		}
-        
-        int total = 0;
         
         // 分页请求数据URL地址
         String url = "money/detail?";
