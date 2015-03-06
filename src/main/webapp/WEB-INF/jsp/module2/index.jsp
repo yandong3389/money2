@@ -12,12 +12,7 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/invalid.css"/>" type="text/css" media="screen" />
 <link rel="stylesheet" href="<c:url value="/resources/css/module2/org5.css"/>" type="text/css" media="screen" />
 <link rel="shortcut icon" href="resources/images/favicon.ico" />
-<script type="text/javascript" src="<c:url value="/resources/js/jquery-1.3.2.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/simpla.jquery.configuration.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/facebox.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/jquery.wysiwyg.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/jquery.datePicker.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/jquery.date.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/jquery-1.7.1.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/module2/index.js"/>"></script>
 </head>
 <body>
@@ -41,9 +36,9 @@
       </div>
       <!-- End .content-box-header -->
       <!-- 统计数据 -->
-      <div class="content-box-content" style="float: left;padding: 0 150px 150px 150px;">
+      <div class="content-box-content" style="float: left;padding: 50px 100px 100px 100px;">
       
-      <input id="nodeJson" value="${node}" />
+      <input id="nodeJson" type="hidden" value='${node}' />
       
       <div id="contain">
          <ul class="solo" id="xflow">

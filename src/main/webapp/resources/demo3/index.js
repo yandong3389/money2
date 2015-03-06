@@ -1,19 +1,13 @@
 $(function() {
 
-	// var jsonData = eval('(' + '{"children":[{"children":[{"children":[{"id":8,"level":4,"parentId":4},{"id":9,"level":4,"parentId":4}],"id":4,"level":3,"parentId":2},{"children":[{"id":10,"level":4,"parentId":5},{"id":11,"level":4,"parentId":5}],"id":5,"level":3,"parentId":2}],"id":2,"level":2,"parentId":1},{"children":[{"children":[{"id":12,"level":4,"parentId":6},{"id":13,"level":4,"parentId":6}],"id":6,"level":3,"parentId":3},{"children":[{"id":14,"level":4,"parentId":7},{"id":15,"level":4,"parentId":7}],"id":7,"level":3,"parentId":3}],"id":3,"level":2,"parentId":1}],"id":1,"level":1,"parentId":0}' + ')');
+	 var jsonData = eval('(' + '{"children":[{"children":[{"children":[{"id":8,"level":4,"parentId":4},{"id":9,"level":4,"parentId":4}],"id":4,"level":3,"parentId":2},{"children":[{"id":10,"level":4,"parentId":5},{"id":11,"level":4,"parentId":5}],"id":5,"level":3,"parentId":2}],"id":2,"level":2,"parentId":1},{"children":[{"children":[{"id":12,"level":4,"parentId":6},{"id":13,"level":4,"parentId":6}],"id":6,"level":3,"parentId":3},{"children":[{"id":14,"level":4,"parentId":7},{"id":15,"level":4,"parentId":7}],"id":7,"level":3,"parentId":3}],"id":3,"level":2,"parentId":1}],"id":1,"level":1,"parentId":0}' + ')');
 
-	var jsonData = eval('(' + $("#nodeJson").val() + ')');
 	
-	var name1 = jsonData.user.name;
-	var nowStr1 = new Date(jsonData.user.zcTime).format("yyyy年MM月dd日hh小时mm分ss秒"); 
-	var addr1 = jsonData.user.address;
 	
-	var userinfo1 = '姓名：' + name1 + '<br/>注册时间：' + nowStr1 + '<br/>地址：' + addr1;
-	
+	console.info(jsonData);
 	var html = '';
 	$("#xflow").html("");
-	$("#xflow").append('<li id="li_' + jsonData.id + '"><div class=\'root section\'><a userId="'+ jsonData.id +'" rel="tooltip" title="'+ userinfo1 +'" href=\'javascript:void(0);\'>' 
-			+ jsonData.id + '</a></div></li>');
+	$("#xflow").append('<li id="li_' + jsonData.id + '"><div class=\'root section\'><a href=\'javascript:void(0);\'>' + jsonData.id + '</a></div></li>');
 
 	if (jsonData.children[0] != undefined) {
 		showChild(jsonData.children[0], jsonData.id, true);
@@ -30,11 +24,11 @@ $(function() {
 
 		var user = node.user;
 
-		var name = user.name;
-		var nowStr = new Date(user.zcTime).format("yyyy年MM月dd日hh小时mm分ss秒"); 
-		var addr = user.address;
+		var name = '张三';
+		var date = '2015年02月05日 03:12:11';
+		var addr = '辽宁省大连市高新园区xxx号';
 
-		var userinfo = '姓名：' + name + '<br/>注册时间：' + nowStr + '<br/>地址：' + addr;
+		var userinfo = '姓名：' + name + '<br/>注册时间：' + date + '<br/>地址：' + addr;
 
 		var nodeHtml = '';
 
@@ -46,10 +40,10 @@ $(function() {
 
 		// 是否为左节点
 		if (isLeft) {
-			nodeHtml = "<li id='li_" + node.id + "'><div class='first' " + (hasChildren ? 'id="section"' : '') + "><a userId=\""+node.id+"\"  title=\""
+			nodeHtml = "<li id='li_" + node.id + "'><div class='first' " + (hasChildren ? 'id="section"' : '') + "><a title=\""
 					+ userinfo + "\" rel=\"tooltip\" href='javascript:void(0);'>" + node.id + "</a></div></li>";
 		} else {
-			nodeHtml = "<li id='li_" + node.id + "'><div class='last' " + (hasChildren ? 'id="section"' : '') + "><a userId=\""+node.id+"\"  title=\""
+			nodeHtml = "<li id='li_" + node.id + "'><div class='last' " + (hasChildren ? 'id="section"' : '') + "><a title=\""
 					+ userinfo + "\" rel=\"tooltip\" href='javascript:void(0);'>" + node.id + "</a></div></li>";
 		}
 		$("#ul_" + parentId).append(nodeHtml);
@@ -68,14 +62,6 @@ $(function() {
 	}
 	var targets = $('[rel~=tooltip]'), target = false, tooltip = false, title = false;
 
-	// 跳转页面
-	targets.live("click", function(){
-		
-		var userId = $(this).attr("userId");
-		
-		window.open('toMoneyDetail?userId='+ userId,'_blank')
-	});
-	
 	targets.live('mouseenter', function() {
 		target = $(this);
 		tip = target.attr('title');
@@ -144,26 +130,3 @@ $(function() {
 	});
 
 });
-
-Date.prototype.format = function(format){ 
-	var o = { 
-	"M+" : this.getMonth()+1, //month 
-	"d+" : this.getDate(), //day 
-	"h+" : this.getHours(), //hour 
-	"m+" : this.getMinutes(), //minute 
-	"s+" : this.getSeconds(), //second 
-	"q+" : Math.floor((this.getMonth()+3)/3), //quarter 
-	"S" : this.getMilliseconds() //millisecond 
-	} 
-
-	if(/(y+)/.test(format)) { 
-	format = format.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length)); 
-	} 
-
-	for(var k in o) { 
-	if(new RegExp("("+ k +")").test(format)) { 
-	format = format.replace(RegExp.$1, RegExp.$1.length==1 ? o[k] : ("00"+ o[k]).substr((""+ o[k]).length)); 
-	} 
-	} 
-	return format; 
-	} 

@@ -1,20 +1,22 @@
 package d.money.service;
 
 import java.util.List;
-import java.util.Map;
 
-import d.money.pojo.base.Node;
+import d.money.pojo.base.Args;
+import d.money.pojo.base.MoneyHistory;
 import d.money.pojo.base.User;
 
 public interface MoneyDetailService {
 
 	public List<d.money.common.utils.Node> getDefaultTree(int userId);
 	
-	public List<Node> getNodeDetail(int id, int currentPage, int perPage);
+	public List<MoneyHistory> getHistoryDetail(int id, int currentPage, int perPage);
 
-	public int getNodeDetailCount(int id);
+	public int getHistoryDetailCount(int id);
 	
 	public User getUserById(int id);
 
-	public Map<String, Integer> getConfig();
+	public Args getConfig();
+
+	public List<Integer> getData(int id);
 }

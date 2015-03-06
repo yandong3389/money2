@@ -2,9 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="d.money.mapper.base.NodeMapper" >
   <resultMap id="BaseResultMap" type="d.money.pojo.base.Node" >
-    <result column="id" property="id" jdbcType="INTEGER" />
+    <id column="id" property="id" jdbcType="INTEGER" />
     <result column="parent_id" property="parentId" jdbcType="INTEGER" />
     <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -65,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, parent_id, level
+    id, parent_id, level, create_date
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="d.money.pojo.base.NodeExample" >
     select
@@ -84,6 +85,16 @@
       limit #{mysqlOffset} , #{mysqlLength}
     </if>
   </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from node
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from node
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByExample" parameterType="d.money.pojo.base.NodeExample" >
     delete from node
     <if test="_parameter != null" >
@@ -91,10 +102,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="d.money.pojo.base.Node" >
-    insert into node (id, parent_id, level
-      )
-    values (#{id,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{level,jdbcType=INTEGER}
-      )
+    insert into node (id, parent_id, level, 
+      create_date)
+    values (#{id,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{level,jdbcType=INTEGER}, 
+      #{createDate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="d.money.pojo.base.Node" >
     insert into node
@@ -108,6 +119,9 @@
       <if test="level != null" >
         level,
       </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -118,6 +132,9 @@
       </if>
       <if test="level != null" >
         #{level,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -139,6 +156,9 @@
       <if test="record.level != null" >
         level = #{record.level,jdbcType=INTEGER},
       </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -148,9 +168,32 @@
     update node
     set id = #{record.id,jdbcType=INTEGER},
       parent_id = #{record.parentId,jdbcType=INTEGER},
-      level = #{record.level,jdbcType=INTEGER}
+      level = #{record.level,jdbcType=INTEGER},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="d.money.pojo.base.Node" >
+    update node
+    <set >
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="d.money.pojo.base.Node" >
+    update node
+    set parent_id = #{parentId,jdbcType=INTEGER},
+      level = #{level,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

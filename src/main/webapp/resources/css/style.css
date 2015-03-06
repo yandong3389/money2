@@ -254,7 +254,7 @@ a.remove-link:hover {
                 }
 /************ Lists ************/
 
-#main-content ul,
+/* #main-content ul, */
 #main-content ol {
                 padding: 10px 0;
                 }

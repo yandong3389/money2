@@ -1,5 +1,6 @@
 package d.money.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -8,10 +9,15 @@ import org.springframework.stereotype.Service;
 
 import d.money.common.utils.NodeUtil;
 import d.money.common.utils.PageUtil;
+import d.money.mapper.MoneyHistoryExtMapper;
 import d.money.mapper.NodeExtMapper;
+import d.money.mapper.base.ArgsMapper;
 import d.money.mapper.base.MoneyHistoryMapper;
 import d.money.mapper.base.NodeMapper;
 import d.money.mapper.base.UserMapper;
+import d.money.pojo.base.Args;
+import d.money.pojo.base.MoneyHistory;
+import d.money.pojo.base.MoneyHistoryExample;
 import d.money.pojo.base.Node;
 import d.money.pojo.base.NodeExample;
 import d.money.pojo.base.User;
@@ -29,6 +35,10 @@ public class MoneyDetailServiceImpl implements MoneyDetailService {
 	MoneyHistoryMapper moneyHistoryMapper;
 	@Autowired
 	UserMapper userMapper;
+	@Autowired
+	ArgsMapper argsMapper;
+	@Autowired
+	MoneyHistoryExtMapper moneyHistoryExtMapper;
 	
 	/**
 	 * 取得指定用户的所有子节点
@@ -40,6 +50,7 @@ public class MoneyDetailServiceImpl implements MoneyDetailService {
 		
 		List<Integer> nodeIdList = new NodeUtil().getChildNodes(allNodeList, userId, -1);
 		
+		nodeIdList.add(userId);
 		
 		NodeExample nodeExample = new NodeExample();
 		nodeExample.createCriteria().andIdIn(nodeIdList);
@@ -74,33 +85,51 @@ public class MoneyDetailServiceImpl implements MoneyDetailService {
 	 * @param perPage
 	 * @return
 	 */
-	public List<Node> getNodeDetail(int id, int currentPage, int perPage){
+	public List<MoneyHistory> getHistoryDetail(int id, int currentPage, int perPage){
 		
-		NodeExample example = new NodeExample();
+		MoneyHistoryExample example = new MoneyHistoryExample();
 		example.setMysqlLength(perPage);
 		example.setMysqlOffset(PageUtil.getStartRecord(currentPage, perPage));
 		example.createCriteria().andIdEqualTo(id);
 		example.setOrderByClause("create_date desc");
 		
-		List<Node> nodes = nodeMapper.selectByExample(example);
+		List<MoneyHistory> histories = moneyHistoryMapper.selectByExample(example);
 		
-		return nodes;
+		return histories;
+	}
+	
+	public List<Integer> getData(int userId){
+		
+		Args args = argsMapper.selectByExample(null).get(0);
+		
+		int type1 = moneyHistoryExtMapper.countByType1();
+		int type2 = moneyHistoryExtMapper.countByType2();
+		int type3 = moneyHistoryExtMapper.countByType3();
+		
+		
+		List<Integer> result = new ArrayList<Integer>();
+		
+		result.add(((int) (args.getBonus()/100*args.getTjBonusPercent()*type1)));
+		result.add(((int) (args.getBonus()/100*args.getZxBonusPercent()*type2)));
+		result.add(((int) (args.getBonus()/100*args.getPxBonusPercent()*type3)));
+		
+		return result;
 	}
 	
 	public User getUserById(int id) {
 		return userMapper.selectByPrimaryKey(id);
 	}
 
-	public Map<String, Integer> getConfig(){
-		return null;
+	public Args getConfig(){
+		return argsMapper.selectByExample(null).get(0);
 	}
 
-	public int getNodeDetailCount(int id) {
+	public int getHistoryDetailCount(int id) {
 		
-		NodeExample example = new NodeExample();
+		MoneyHistoryExample example = new MoneyHistoryExample();
 		example.createCriteria().andIdEqualTo(id);
 		
-		return nodeMapper.countByExample(example);
+		return moneyHistoryMapper.countByExample(example);
 	}
 	
 }

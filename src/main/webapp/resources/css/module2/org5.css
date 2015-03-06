@@ -7,25 +7,25 @@ ul#xflow {
     float: none;
     margin: 0 auto;
 }
-#contain ul {
+ul {
     clear: left;
     margin: 2em 0 0 0;
     padding: 0;
     background: #fff;
 }
-#contain ul ul {
+ul ul {
     border-top: 1px solid #000;
     width: auto;
 }
-#contain ul.solo {
+ul.solo {
     border-top: 0;
 }
-#contain li {
+li {
     float: left;
     list-style: none;
     position: relative;
 }
-#contain li li {
+li li {
     margin: -1px 0 0 0;
 }
 #xflow div{
@@ -57,7 +57,7 @@ ul#xflow {
 #xflow a {
     display: block;
     background: #fff;
-    border: 1px solid #000;
+    border: 3px solid #BCBCBC;
     padding: .25em .2em .2em .2em;
     color: #222;
     text-decoration: none;
@@ -83,3 +83,50 @@ ul#xflow {
     margin: 0;
     position: relative;
 }
+
+
+
+#tooltip
+{
+    text-align: center;
+    color: #fff;
+    background: #111;
+    position: absolute;
+    z-index: 100;
+    padding: 15px;
+}
+ 
+    #tooltip:after /* triangle decoration */
+    {
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-top: 10px solid #111;
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: -10px;
+        margin-left: -10px;
+    }
+ 
+        #tooltip.top:after
+        {
+            border-top-color: transparent;
+            border-bottom: 10px solid #111;
+            top: -20px;
+            bottom: auto;
+        }
+ 
+        #tooltip.left:after
+        {
+            left: 10px;
+            margin: 0;
+        }
+ 
+        #tooltip.right:after
+        {
+            right: 10px;
+            left: auto;
+            margin: 0;
+        }

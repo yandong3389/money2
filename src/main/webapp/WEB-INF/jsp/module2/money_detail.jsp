@@ -11,12 +11,9 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>" type="text/css" media="screen" />
 <link rel="stylesheet" href="<c:url value="/resources/css/invalid.css"/>" type="text/css" media="screen" />
 <link rel="shortcut icon" href="resources/images/favicon.ico" />
-<script type="text/javascript" src="<c:url value="/resources/js/jquery-1.3.2.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/jquery-1.7.1.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/simpla.jquery.configuration.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/facebox.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.wysiwyg.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/jquery.datePicker.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/jquery.date.js"/>"></script>
 
 </head>
 <body>
@@ -78,13 +75,6 @@
             <tfoot>
               <tr>
                 <td colspan="8">
-                  <div class="bulk-actions align-left">
-                    <select name="dropdown">
-                      <option value="option1">Choose an action...</option>
-                      <option value="option2">Edit</option>
-                      <option value="option3">Delete</option>
-                    </select>
-                    <a class="button" href="#">Apply to selected</a> </div>
                   <div class="pagination">${pageHtml}</div>
                   <!-- End .pagination -->
                   <div class="clear"></div>

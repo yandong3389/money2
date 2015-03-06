@@ -10,12 +10,6 @@
         <br />
         <a href="javascript:void();" target="_blank" title="View the Site">进入网站</a> | <a href="sysLogout" title="Sign Out">退出</a> </div>
       <ul id="main-nav">
-        <li> <a href="javascript:;" class="nav-top-item ${empty activeFlag || activeFlag == 'feedback' || activeFlag == 'backInfo' ? 'current' : ''}">用户数据一览</a>
-          <ul>
-            <li><a href="backInfo" ${empty activeFlag || activeFlag == 'backInfo' ? 'class="current"' : ''}>网站状态概况</a></li>
-            <li><a href="findFeedbackList" ${activeFlag == "feedback" ? 'class="current"' : ''}>用户反馈</a></li>
-          </ul>
-        </li>
       </ul>
       <!-- End #messages -->
     </div>

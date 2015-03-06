@@ -2,7 +2,6 @@ package d.money.web.action;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +17,8 @@ import com.alibaba.fastjson.JSONObject;
 import d.money.common.utils.PageUtil;
 import d.money.common.utils.StringUtil;
 import d.money.pojo.MoneyHistoryView;
-import d.money.pojo.base.Node;
+import d.money.pojo.base.Args;
+import d.money.pojo.base.MoneyHistory;
 import d.money.pojo.base.User;
 import d.money.service.MoneyDetailService;
 
@@ -51,7 +51,7 @@ public class MoneyDetailController {
 		
 		int userId = Integer.parseInt(request.getParameter("userId"));
 		
-		String currentPageStr = request.getParameter("");
+		String currentPageStr = request.getParameter("page");
 		
 		int currentPage = 0;
 		int perpage = 10;
@@ -60,42 +60,37 @@ public class MoneyDetailController {
 		}
 		
 		// 列表数据
-		List<Node>  nodes = moneyDetailService.getNodeDetail(userId, currentPage, perpage);
+		List<MoneyHistory>  histories = moneyDetailService.getHistoryDetail(userId, currentPage, perpage);
 		// 总记录数
-        int total = moneyDetailService.getNodeDetailCount(userId);
+        int total = moneyDetailService.getHistoryDetailCount(userId);
 		// 用户详细
 		User userinfo = moneyDetailService.getUserById(userId);
 		// 配置信息
-		Map<String, Integer> configData = moneyDetailService.getConfig();
+		Args configData = moneyDetailService.getConfig();
 		
 		// 统计
-		int data30 = 0;
-		int data20 = 0;
-		int data5 = 0;
+		List<Integer> data = moneyDetailService.getData(userId);
 		
 		List<MoneyHistoryView> historyViews = new ArrayList<MoneyHistoryView>();
 		
 		MoneyHistoryView historyView = null;
 		
-		for (Node node : nodes) {
+		for (MoneyHistory history : histories) {
 			
 			historyView = new MoneyHistoryView();
 			
-			BeanUtils.copyProperties(node, historyView);
+			BeanUtils.copyProperties(history, historyView);
 			
 			int money = 0;
 			
 			if (historyView.getType() == 1) {
-				money = configData.get("money30");
-				data30 += money;
+				money = (int) (configData.getBonus() / 100 * configData.getTjBonusPercent());
 			}
 			if (historyView.getType() == 2) {
-				money = configData.get("money20");
-				data20 += money;
+				money = (int) (configData.getBonus() / 100 * configData.getZxBonusPercent());
 			}
 			if (historyView.getType() == 3) {
-				money = configData.get("money5");
-				data5 += money;
+				money = (int) (configData.getBonus() / 100 * configData.getPxBonusPercent());
 			}
 			
 			historyView.setMoney(money);
@@ -104,7 +99,7 @@ public class MoneyDetailController {
 		}
         
         // 分页请求数据URL地址
-        String url = "money/detail?";
+        String url = "toMoneyDetail?userId="+userId;
         
         // 取得分页工具条
         String pageHtml = PageUtil.getBackPageHtml(currentPage, perpage, total, url);
@@ -115,10 +110,10 @@ public class MoneyDetailController {
 		
 		request.setAttribute("historyViews", historyViews);
 		request.setAttribute("userinfo", userinfo);
-		request.setAttribute("data30", data30);
-		request.setAttribute("data20", data20);
-		request.setAttribute("data5", data5);
+		request.setAttribute("data30", data.get(0));
+		request.setAttribute("data20", data.get(1));
+		request.setAttribute("data5", data.get(2));
 		
-		return new ModelAndView("user/money_detail");
+		return new ModelAndView("module2/money_detail");
 	}
 }
