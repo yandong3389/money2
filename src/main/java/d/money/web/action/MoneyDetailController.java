@@ -21,16 +21,15 @@ import d.money.pojo.base.User;
 import d.money.service.MoneyDetailService;
 
 @Controller
-@RequestMapping("/money")
 public class MoneyDetailController {
 
 	@Autowired
 	MoneyDetailService moneyDetailService;
 	
-	@RequestMapping("/center")
+	@RequestMapping("/userIndex")
 	public ModelAndView toNode(HttpServletRequest request, HttpServletResponse response) {
 		
-		// 当前登录用户ID
+		// TODO 当前登录用户ID
 		String uid = String.valueOf(request.getSession().getAttribute("userId"));
 		
 		// 取得当前用户下的所有节点数据(包含当前用户)
@@ -38,10 +37,10 @@ public class MoneyDetailController {
 		
 		request.setAttribute("nodes", nodes);
 		
-		return new ModelAndView("user/index");
+		return new ModelAndView("module2/index");
 	}
 	
-	@RequestMapping("/detail")
+	@RequestMapping("/toMoneyDetail")
 	public ModelAndView toMoneyDetail(HttpServletRequest request, HttpServletResponse response) {
 		
 		
@@ -57,6 +56,8 @@ public class MoneyDetailController {
 		
 		// 列表数据
 		List<Node>  nodes = moneyDetailService.getNodeDetail(userId, currentPage, perpage);
+		// 总记录数
+        int total = moneyDetailService.getNodeDetailCount(userId);
 		// 用户详细
 		User userinfo = moneyDetailService.getUserById(userId);
 		// 配置信息
@@ -96,8 +97,6 @@ public class MoneyDetailController {
 			
 			historyViews.add(historyView);
 		}
-        
-        int total = 0;
         
         // 分页请求数据URL地址
         String url = "money/detail?";

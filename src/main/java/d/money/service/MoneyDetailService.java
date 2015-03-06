@@ -12,6 +12,8 @@ public interface MoneyDetailService {
 	
 	public List<Node> getNodeDetail(int id, int currentPage, int perPage);
 
+	public int getNodeDetailCount(int id);
+	
 	public User getUserById(int id);
 
 	public Map<String, Integer> getConfig();

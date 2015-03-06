@@ -1,5 +1,5 @@
 div#contain {
-    width:1000em;
+/*     width:1000em; */
     background:#fff;
     font-family:verdan;
 }
@@ -7,29 +7,29 @@ ul#xflow {
     float: none;
     margin: 0 auto;
 }
-ul {
+#contain ul {
     clear: left;
     margin: 2em 0 0 0;
     padding: 0;
     background: #fff;
 }
-ul ul {
+#contain ul ul {
     border-top: 1px solid #000;
     width: auto;
 }
-ul.solo {
+#contain ul.solo {
     border-top: 0;
 }
-li {
+#contain li {
     float: left;
     list-style: none;
     position: relative;
 }
-li li {
+#contain li li {
     margin: -1px 0 0 0;
 }
 #xflow div{
-    background: url(../images/split.jpg) 50% repeat-y;
+    background: url(../../images/split.jpg) 50% repeat-y;
     padding: 2em 5px 0 5px;
     margin: 0 .3em -2em 0em;
 }
@@ -43,11 +43,11 @@ li li {
     padding-bottom: 2em;
 }
 #xflow div.first {
-    background: url(../images/left_split.png) 50% repeat-y;
+    background: url(../../images/left_split.png) 50% repeat-y;
     margin-left: 0;
 }
 #xflow div.last {
-    background: url(../images/right_split.png) 50% repeat-y;
+    background: url(../../images/right_split.png) 50% repeat-y;
     margin-right:0;
 }
 .none{border:0px;}
@@ -57,7 +57,7 @@ li li {
 #xflow a {
     display: block;
     background: #fff;
-    border: 3px solid #BCBCBC;
+    border: 1px solid #000;
     padding: .25em .2em .2em .2em;
     color: #222;
     text-decoration: none;
@@ -83,50 +83,3 @@ li li {
     margin: 0;
     position: relative;
 }
-
-
-
-#tooltip
-{
-    text-align: center;
-    color: #fff;
-    background: #111;
-    position: absolute;
-    z-index: 100;
-    padding: 15px;
-}
- 
-    #tooltip:after /* triangle decoration */
-    {
-        width: 0;
-        height: 0;
-        border-left: 10px solid transparent;
-        border-right: 10px solid transparent;
-        border-top: 10px solid #111;
-        content: '';
-        position: absolute;
-        left: 50%;
-        bottom: -10px;
-        margin-left: -10px;
-    }
- 
-        #tooltip.top:after
-        {
-            border-top-color: transparent;
-            border-bottom: 10px solid #111;
-            top: -20px;
-            bottom: auto;
-        }
- 
-        #tooltip.left:after
-        {
-            left: 10px;
-            margin: 0;
-        }
- 
-        #tooltip.right:after
-        {
-            right: 10px;
-            left: auto;
-            margin: 0;
-        }
