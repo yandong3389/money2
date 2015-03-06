@@ -33,9 +33,28 @@
     <div class="clear"></div>
     <!-- End .clear -->
     <div class="content-box">
+    
+    <b>用户信息数据</b>
+    
+    <div>
+    ${userinfo.id}
+    ${userinfo.name}
+    ${userinfo.identityCard}
+    ${userinfo.jsrId}
+    ${userinfo.jdrId}
+    ${userinfo.nhCard}
+    ${userinfo.tel}
+    ${userinfo.address}
+    ${userinfo.code}
+    ${userinfo.sex}
+    ${userinfo.hkTime}
+    ${userinfo.adminCode}
+    ${userinfo.comment}
+    </div>
+    
       <!-- Start Content Box -->
       <div class="content-box-header">
-        <h3>组织结构图</h3>
+        <h3>推荐奖金总额：${data30}；直系奖金总额：${data20}；旁系奖金总额：${data5}；</h3>
         <div class="clear"></div>
       </div>
       <!-- End .content-box-header -->
@@ -49,14 +68,11 @@
                 <th>
                   <input class="check-all" type="checkbox" />
                 </th>
-                <th>用户账号</th>
-                <th>邮箱</th>
-                <th>姓名</th>
-                <th>性别</th>
-                <th>注册时间</th>
-                <th>最后登录</th>
-                <th>IP地址</th>
-                <th>操作</th>
+                <th>序号</th>
+                <th>ID</th>
+                <th>奖金类型</th>
+                <th>获取金额</th>
+                <th>获取时间</th>
               </tr>
             </thead>
             <tfoot>
@@ -76,18 +92,20 @@
               </tr>
             </tfoot>
             <tbody>
-                <c:forEach items="${backUserInfoViews}" var="backUserInfo">
-	              <tr>
+                <c:forEach items="${historyViews}" var="view" varStatus="status">
+	              <tr> 
 	                <td>
 	                  <input type="checkbox" />
 	                </td>
-	                <td>${backUserInfo.userAccount}</td>
-	                <td>${backUserInfo.userMail}</td>
-	                <td>${backUserInfo.userName}</td>
-	                <td>${backUserInfo.userSex == "0" ? "女" : "男"}</td>
-	                <td><fmt:formatDate value="${backUserInfo.registerDate}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
-	                <td><fmt:formatDate value="${backUserInfo.lastLoginDate}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
-	                <td>${backUserInfo.ip}<br/>${backUserInfo.ipaddress}</td>
+	                <td>${status.count}</td>
+	                <td>${view.id}</td>
+	                <td>
+	                <c:if test="${view.type == 1}">推荐奖金</c:if>
+	                <c:if test="${view.type == 2}">直系奖金</c:if>
+	                <c:if test="${view.type == 3}">旁系奖金</c:if>
+	                </td>
+	                <td>${view.money}</td>
+	                <td><fmt:formatDate value="${view.createDate}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
 	                <td>
 	                </td>
 	              </tr>
@@ -96,58 +114,6 @@
           </table>
         </div>
         <!-- End #tab1 -->
-        <div class="tab-content" id="tab2">
-          <form action="#" method="post">
-            <fieldset>
-            <!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
-            <p>
-              <label>Small form input</label>
-              <input class="text-input small-input" type="text" id="small-input" name="small-input" />
-              <span class="input-notification success png_bg">Successful message</span>
-              <!-- Classes for input-notification: success, error, information, attention -->
-              <br />
-              <small>A small description of the field</small> </p>
-            <p>
-              <label>Medium form input</label>
-              <input class="text-input medium-input datepicker" type="text" id="medium-input" name="medium-input" />
-              <span class="input-notification error png_bg">Error message</span> </p>
-            <p>
-              <label>Large form input</label>
-              <input class="text-input large-input" type="text" id="large-input" name="large-input" />
-            </p>
-            <p>
-              <label>Checkboxes</label>
-              <input type="checkbox" name="checkbox1" />
-              This is a checkbox
-              <input type="checkbox" name="checkbox2" />
-              And this is another checkbox </p>
-            <p>
-              <label>Radio buttons</label>
-              <input type="radio" name="radio1" />
-              This is a radio button<br />
-              <input type="radio" name="radio2" />
-              This is another radio button </p>
-            <p>
-              <label>This is a drop down list</label>
-              <select name="dropdown" class="small-input">
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
-                <option value="option4">Option 4</option>
-              </select>
-            </p>
-            <p>
-              <label>Textarea with WYSIWYG</label>
-              <textarea class="text-input textarea wysiwyg" id="textarea" name="textfield" cols="79" rows="15"></textarea>
-            </p>
-            <p>
-              <input class="button" type="submit" value="Submit" />
-            </p>
-            </fieldset>
-            <div class="clear"></div>
-            <!-- End .clear -->
-          </form>
-        </div>
         <!-- End #tab2 -->
       </div>
       <!-- End .content-box-content -->
