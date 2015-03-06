@@ -20,6 +20,7 @@ public class Node {
 		this.parentId = parentId;
 		this.level = level;
 	}
+	public Node(){}
 	
 	public User getUser() {
 		return user;

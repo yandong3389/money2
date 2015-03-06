@@ -1084,6 +1084,66 @@ public class UserExample {
             addCriterion("comment not between", value1, value2, "comment");
             return (Criteria) this;
         }
+
+        public Criteria andZcTimeIsNull() {
+            addCriterion("zc_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andZcTimeIsNotNull() {
+            addCriterion("zc_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andZcTimeEqualTo(Date value) {
+            addCriterion("zc_time =", value, "zcTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andZcTimeNotEqualTo(Date value) {
+            addCriterion("zc_time <>", value, "zcTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andZcTimeGreaterThan(Date value) {
+            addCriterion("zc_time >", value, "zcTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andZcTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("zc_time >=", value, "zcTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andZcTimeLessThan(Date value) {
+            addCriterion("zc_time <", value, "zcTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andZcTimeLessThanOrEqualTo(Date value) {
+            addCriterion("zc_time <=", value, "zcTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andZcTimeIn(List<Date> values) {
+            addCriterion("zc_time in", values, "zcTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andZcTimeNotIn(List<Date> values) {
+            addCriterion("zc_time not in", values, "zcTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andZcTimeBetween(Date value1, Date value2) {
+            addCriterion("zc_time between", value1, value2, "zcTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andZcTimeNotBetween(Date value1, Date value2) {
+            addCriterion("zc_time not between", value1, value2, "zcTime");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

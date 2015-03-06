@@ -31,6 +31,8 @@ public class User {
 
     private String comment;
 
+    private Date zcTime;
+
     public Integer getId() {
         return id;
     }
@@ -143,6 +145,14 @@ public class User {
         this.comment = comment == null ? null : comment.trim();
     }
 
+    public Date getZcTime() {
+        return zcTime;
+    }
+
+    public void setZcTime(Date zcTime) {
+        this.zcTime = zcTime;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -168,7 +178,8 @@ public class User {
             && (this.getSex() == null ? other.getSex() == null : this.getSex().equals(other.getSex()))
             && (this.getHkTime() == null ? other.getHkTime() == null : this.getHkTime().equals(other.getHkTime()))
             && (this.getAdminCode() == null ? other.getAdminCode() == null : this.getAdminCode().equals(other.getAdminCode()))
-            && (this.getComment() == null ? other.getComment() == null : this.getComment().equals(other.getComment()));
+            && (this.getComment() == null ? other.getComment() == null : this.getComment().equals(other.getComment()))
+            && (this.getZcTime() == null ? other.getZcTime() == null : this.getZcTime().equals(other.getZcTime()));
     }
 
     @Override
@@ -189,6 +200,7 @@ public class User {
         result = prime * result + ((getHkTime() == null) ? 0 : getHkTime().hashCode());
         result = prime * result + ((getAdminCode() == null) ? 0 : getAdminCode().hashCode());
         result = prime * result + ((getComment() == null) ? 0 : getComment().hashCode());
+        result = prime * result + ((getZcTime() == null) ? 0 : getZcTime().hashCode());
         return result;
     }
 }
