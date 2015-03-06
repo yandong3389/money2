@@ -13,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSONObject;
+
 import d.money.common.utils.PageUtil;
 import d.money.common.utils.StringUtil;
 import d.money.pojo.MoneyHistoryView;
@@ -30,12 +32,15 @@ public class MoneyDetailController {
 	public ModelAndView toNode(HttpServletRequest request, HttpServletResponse response) {
 		
 		// TODO 当前登录用户ID
-		String uid = String.valueOf(request.getSession().getAttribute("userId"));
+		// int uid = Integer.valueOf(String.valueOf(request.getSession().getAttribute("userId")));
+		
+		// TODO 
+		int uid = 1;
 		
 		// 取得当前用户下的所有节点数据(包含当前用户)
-		List<d.money.common.utils.Node> nodes = null;
+		List<d.money.common.utils.Node> nodes = moneyDetailService.getDefaultTree(uid);
 		
-		request.setAttribute("nodes", nodes);
+		request.setAttribute("node", JSONObject.toJSONString(nodes.get(0)));
 		
 		return new ModelAndView("module2/index");
 	}

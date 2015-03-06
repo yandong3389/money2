@@ -1,41 +1,42 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="d.money.mapper.base.UserMapper">
-  <resultMap id="BaseResultMap" type="d.money.pojo.base.User">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="identity_card" jdbcType="VARCHAR" property="identityCard" />
-    <result column="jsr_id" jdbcType="VARCHAR" property="jsrId" />
-    <result column="jdr_id" jdbcType="VARCHAR" property="jdrId" />
-    <result column="nh_card" jdbcType="VARCHAR" property="nhCard" />
-    <result column="tel" jdbcType="VARCHAR" property="tel" />
-    <result column="address" jdbcType="VARCHAR" property="address" />
-    <result column="code" jdbcType="VARCHAR" property="code" />
-    <result column="sex" jdbcType="VARCHAR" property="sex" />
-    <result column="hk_time" jdbcType="TIMESTAMP" property="hkTime" />
-    <result column="admin_code" jdbcType="VARCHAR" property="adminCode" />
-    <result column="comment" jdbcType="VARCHAR" property="comment" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="d.money.mapper.base.UserMapper" >
+  <resultMap id="BaseResultMap" type="d.money.pojo.base.User" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="identity_card" property="identityCard" jdbcType="VARCHAR" />
+    <result column="jsr_id" property="jsrId" jdbcType="VARCHAR" />
+    <result column="jdr_id" property="jdrId" jdbcType="VARCHAR" />
+    <result column="nh_card" property="nhCard" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="hk_time" property="hkTime" jdbcType="TIMESTAMP" />
+    <result column="admin_code" property="adminCode" jdbcType="VARCHAR" />
+    <result column="comment" property="comment" jdbcType="VARCHAR" />
+    <result column="zc_time" property="zcTime" jdbcType="TIMESTAMP" />
   </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -46,25 +47,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -75,203 +76,214 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List">
+  <sql id="Base_Column_List" >
     id, password, name, identity_card, jsr_id, jdr_id, nh_card, tel, address, code, sex, 
-    hk_time, admin_code, comment
+    hk_time, admin_code, comment, zc_time
   </sql>
-  <select id="selectByExample" parameterType="d.money.pojo.base.UserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="d.money.pojo.base.UserExample" >
     select
-    <if test="distinct">
+    <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
     from user
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null">
+    <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
-    <if test="mysqlOffset != null and mysqlOffset&gt;=0">
+    <if test="mysqlOffset != null and mysqlOffset>=0" >
       limit #{mysqlOffset} , #{mysqlLength}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from user
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from user
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="d.money.pojo.base.UserExample">
+  <delete id="deleteByExample" parameterType="d.money.pojo.base.UserExample" >
     delete from user
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="d.money.pojo.base.User">
+  <insert id="insert" parameterType="d.money.pojo.base.User" >
     insert into user (id, password, name, 
       identity_card, jsr_id, jdr_id, 
       nh_card, tel, address, 
       code, sex, hk_time, 
-      admin_code, comment)
+      admin_code, comment, zc_time
+      )
     values (#{id,jdbcType=INTEGER}, #{password,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{identityCard,jdbcType=VARCHAR}, #{jsrId,jdbcType=VARCHAR}, #{jdrId,jdbcType=VARCHAR}, 
       #{nhCard,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
       #{code,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{hkTime,jdbcType=TIMESTAMP}, 
-      #{adminCode,jdbcType=VARCHAR}, #{comment,jdbcType=VARCHAR})
+      #{adminCode,jdbcType=VARCHAR}, #{comment,jdbcType=VARCHAR}, #{zcTime,jdbcType=TIMESTAMP}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="d.money.pojo.base.User">
+  <insert id="insertSelective" parameterType="d.money.pojo.base.User" >
     insert into user
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
         id,
       </if>
-      <if test="password != null">
+      <if test="password != null" >
         password,
       </if>
-      <if test="name != null">
+      <if test="name != null" >
         name,
       </if>
-      <if test="identityCard != null">
+      <if test="identityCard != null" >
         identity_card,
       </if>
-      <if test="jsrId != null">
+      <if test="jsrId != null" >
         jsr_id,
       </if>
-      <if test="jdrId != null">
+      <if test="jdrId != null" >
         jdr_id,
       </if>
-      <if test="nhCard != null">
+      <if test="nhCard != null" >
         nh_card,
       </if>
-      <if test="tel != null">
+      <if test="tel != null" >
         tel,
       </if>
-      <if test="address != null">
+      <if test="address != null" >
         address,
       </if>
-      <if test="code != null">
+      <if test="code != null" >
         code,
       </if>
-      <if test="sex != null">
+      <if test="sex != null" >
         sex,
       </if>
-      <if test="hkTime != null">
+      <if test="hkTime != null" >
         hk_time,
       </if>
-      <if test="adminCode != null">
+      <if test="adminCode != null" >
         admin_code,
       </if>
-      <if test="comment != null">
+      <if test="comment != null" >
         comment,
       </if>
+      <if test="zcTime != null" >
+        zc_time,
+      </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="password != null">
+      <if test="password != null" >
         #{password,jdbcType=VARCHAR},
       </if>
-      <if test="name != null">
+      <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="identityCard != null">
+      <if test="identityCard != null" >
         #{identityCard,jdbcType=VARCHAR},
       </if>
-      <if test="jsrId != null">
+      <if test="jsrId != null" >
         #{jsrId,jdbcType=VARCHAR},
       </if>
-      <if test="jdrId != null">
+      <if test="jdrId != null" >
         #{jdrId,jdbcType=VARCHAR},
       </if>
-      <if test="nhCard != null">
+      <if test="nhCard != null" >
         #{nhCard,jdbcType=VARCHAR},
       </if>
-      <if test="tel != null">
+      <if test="tel != null" >
         #{tel,jdbcType=VARCHAR},
       </if>
-      <if test="address != null">
+      <if test="address != null" >
         #{address,jdbcType=VARCHAR},
       </if>
-      <if test="code != null">
+      <if test="code != null" >
         #{code,jdbcType=VARCHAR},
       </if>
-      <if test="sex != null">
+      <if test="sex != null" >
         #{sex,jdbcType=VARCHAR},
       </if>
-      <if test="hkTime != null">
+      <if test="hkTime != null" >
         #{hkTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="adminCode != null">
+      <if test="adminCode != null" >
         #{adminCode,jdbcType=VARCHAR},
       </if>
-      <if test="comment != null">
+      <if test="comment != null" >
         #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="zcTime != null" >
+        #{zcTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="d.money.pojo.base.UserExample" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="d.money.pojo.base.UserExample" resultType="java.lang.Integer" >
     select count(*) from user
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+  <update id="updateByExampleSelective" parameterType="map" >
     update user
-    <set>
-      <if test="record.id != null">
+    <set >
+      <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.password != null">
+      <if test="record.password != null" >
         password = #{record.password,jdbcType=VARCHAR},
       </if>
-      <if test="record.name != null">
+      <if test="record.name != null" >
         name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.identityCard != null">
+      <if test="record.identityCard != null" >
         identity_card = #{record.identityCard,jdbcType=VARCHAR},
       </if>
-      <if test="record.jsrId != null">
+      <if test="record.jsrId != null" >
         jsr_id = #{record.jsrId,jdbcType=VARCHAR},
       </if>
-      <if test="record.jdrId != null">
+      <if test="record.jdrId != null" >
         jdr_id = #{record.jdrId,jdbcType=VARCHAR},
       </if>
-      <if test="record.nhCard != null">
+      <if test="record.nhCard != null" >
         nh_card = #{record.nhCard,jdbcType=VARCHAR},
       </if>
-      <if test="record.tel != null">
+      <if test="record.tel != null" >
         tel = #{record.tel,jdbcType=VARCHAR},
       </if>
-      <if test="record.address != null">
+      <if test="record.address != null" >
         address = #{record.address,jdbcType=VARCHAR},
       </if>
-      <if test="record.code != null">
+      <if test="record.code != null" >
         code = #{record.code,jdbcType=VARCHAR},
       </if>
-      <if test="record.sex != null">
+      <if test="record.sex != null" >
         sex = #{record.sex,jdbcType=VARCHAR},
       </if>
-      <if test="record.hkTime != null">
+      <if test="record.hkTime != null" >
         hk_time = #{record.hkTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.adminCode != null">
+      <if test="record.adminCode != null" >
         admin_code = #{record.adminCode,jdbcType=VARCHAR},
       </if>
-      <if test="record.comment != null">
+      <if test="record.comment != null" >
         comment = #{record.comment,jdbcType=VARCHAR},
       </if>
+      <if test="record.zcTime != null" >
+        zc_time = #{record.zcTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map">
+  <update id="updateByExample" parameterType="map" >
     update user
     set id = #{record.id,jdbcType=INTEGER},
       password = #{record.password,jdbcType=VARCHAR},
@@ -286,57 +298,61 @@
       sex = #{record.sex,jdbcType=VARCHAR},
       hk_time = #{record.hkTime,jdbcType=TIMESTAMP},
       admin_code = #{record.adminCode,jdbcType=VARCHAR},
-      comment = #{record.comment,jdbcType=VARCHAR}
-    <if test="_parameter != null">
+      comment = #{record.comment,jdbcType=VARCHAR},
+      zc_time = #{record.zcTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="d.money.pojo.base.User">
+  <update id="updateByPrimaryKeySelective" parameterType="d.money.pojo.base.User" >
     update user
-    <set>
-      <if test="password != null">
+    <set >
+      <if test="password != null" >
         password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="name != null">
+      <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="identityCard != null">
+      <if test="identityCard != null" >
         identity_card = #{identityCard,jdbcType=VARCHAR},
       </if>
-      <if test="jsrId != null">
+      <if test="jsrId != null" >
         jsr_id = #{jsrId,jdbcType=VARCHAR},
       </if>
-      <if test="jdrId != null">
+      <if test="jdrId != null" >
         jdr_id = #{jdrId,jdbcType=VARCHAR},
       </if>
-      <if test="nhCard != null">
+      <if test="nhCard != null" >
         nh_card = #{nhCard,jdbcType=VARCHAR},
       </if>
-      <if test="tel != null">
+      <if test="tel != null" >
         tel = #{tel,jdbcType=VARCHAR},
       </if>
-      <if test="address != null">
+      <if test="address != null" >
         address = #{address,jdbcType=VARCHAR},
       </if>
-      <if test="code != null">
+      <if test="code != null" >
         code = #{code,jdbcType=VARCHAR},
       </if>
-      <if test="sex != null">
+      <if test="sex != null" >
         sex = #{sex,jdbcType=VARCHAR},
       </if>
-      <if test="hkTime != null">
+      <if test="hkTime != null" >
         hk_time = #{hkTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="adminCode != null">
+      <if test="adminCode != null" >
         admin_code = #{adminCode,jdbcType=VARCHAR},
       </if>
-      <if test="comment != null">
+      <if test="comment != null" >
         comment = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="zcTime != null" >
+        zc_time = #{zcTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="d.money.pojo.base.User">
+  <update id="updateByPrimaryKey" parameterType="d.money.pojo.base.User" >
     update user
     set password = #{password,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
@@ -350,359 +366,8 @@
       sex = #{sex,jdbcType=VARCHAR},
       hk_time = #{hkTime,jdbcType=TIMESTAMP},
       admin_code = #{adminCode,jdbcType=VARCHAR},
-      comment = #{comment,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <resultMap id="BaseResultMap" type="d.money.pojo.base.User">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="identity_card" jdbcType="VARCHAR" property="identityCard" />
-    <result column="jsr_id" jdbcType="VARCHAR" property="jsrId" />
-    <result column="jdr_id" jdbcType="VARCHAR" property="jdrId" />
-    <result column="nh_card" jdbcType="VARCHAR" property="nhCard" />
-    <result column="tel" jdbcType="VARCHAR" property="tel" />
-    <result column="address" jdbcType="VARCHAR" property="address" />
-    <result column="code" jdbcType="VARCHAR" property="code" />
-    <result column="sex" jdbcType="VARCHAR" property="sex" />
-    <result column="hk_time" jdbcType="TIMESTAMP" property="hkTime" />
-    <result column="admin_code" jdbcType="VARCHAR" property="adminCode" />
-    <result column="comment" jdbcType="VARCHAR" property="comment" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    id, password, name, identity_card, jsr_id, jdr_id, nh_card, tel, address, code, sex, 
-    hk_time, admin_code, comment
-  </sql>
-  <select id="selectByExample" parameterType="d.money.pojo.base.UserExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from user
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-    <if test="mysqlOffset != null and mysqlOffset&gt;=0">
-      limit #{mysqlOffset} , #{mysqlLength}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from user
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from user
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="d.money.pojo.base.UserExample">
-    delete from user
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="d.money.pojo.base.User">
-    insert into user (id, password, name, 
-      identity_card, jsr_id, jdr_id, 
-      nh_card, tel, address, 
-      code, sex, hk_time, 
-      admin_code, comment)
-    values (#{id,jdbcType=INTEGER}, #{password,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{identityCard,jdbcType=VARCHAR}, #{jsrId,jdbcType=VARCHAR}, #{jdrId,jdbcType=VARCHAR}, 
-      #{nhCard,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
-      #{code,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{hkTime,jdbcType=TIMESTAMP}, 
-      #{adminCode,jdbcType=VARCHAR}, #{comment,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="d.money.pojo.base.User">
-    insert into user
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="password != null">
-        password,
-      </if>
-      <if test="name != null">
-        name,
-      </if>
-      <if test="identityCard != null">
-        identity_card,
-      </if>
-      <if test="jsrId != null">
-        jsr_id,
-      </if>
-      <if test="jdrId != null">
-        jdr_id,
-      </if>
-      <if test="nhCard != null">
-        nh_card,
-      </if>
-      <if test="tel != null">
-        tel,
-      </if>
-      <if test="address != null">
-        address,
-      </if>
-      <if test="code != null">
-        code,
-      </if>
-      <if test="sex != null">
-        sex,
-      </if>
-      <if test="hkTime != null">
-        hk_time,
-      </if>
-      <if test="adminCode != null">
-        admin_code,
-      </if>
-      <if test="comment != null">
-        comment,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="identityCard != null">
-        #{identityCard,jdbcType=VARCHAR},
-      </if>
-      <if test="jsrId != null">
-        #{jsrId,jdbcType=VARCHAR},
-      </if>
-      <if test="jdrId != null">
-        #{jdrId,jdbcType=VARCHAR},
-      </if>
-      <if test="nhCard != null">
-        #{nhCard,jdbcType=VARCHAR},
-      </if>
-      <if test="tel != null">
-        #{tel,jdbcType=VARCHAR},
-      </if>
-      <if test="address != null">
-        #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="code != null">
-        #{code,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null">
-        #{sex,jdbcType=VARCHAR},
-      </if>
-      <if test="hkTime != null">
-        #{hkTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="adminCode != null">
-        #{adminCode,jdbcType=VARCHAR},
-      </if>
-      <if test="comment != null">
-        #{comment,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="d.money.pojo.base.UserExample" resultType="java.lang.Integer">
-    select count(*) from user
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update user
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.password != null">
-        password = #{record.password,jdbcType=VARCHAR},
-      </if>
-      <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
-      </if>
-      <if test="record.identityCard != null">
-        identity_card = #{record.identityCard,jdbcType=VARCHAR},
-      </if>
-      <if test="record.jsrId != null">
-        jsr_id = #{record.jsrId,jdbcType=VARCHAR},
-      </if>
-      <if test="record.jdrId != null">
-        jdr_id = #{record.jdrId,jdbcType=VARCHAR},
-      </if>
-      <if test="record.nhCard != null">
-        nh_card = #{record.nhCard,jdbcType=VARCHAR},
-      </if>
-      <if test="record.tel != null">
-        tel = #{record.tel,jdbcType=VARCHAR},
-      </if>
-      <if test="record.address != null">
-        address = #{record.address,jdbcType=VARCHAR},
-      </if>
-      <if test="record.code != null">
-        code = #{record.code,jdbcType=VARCHAR},
-      </if>
-      <if test="record.sex != null">
-        sex = #{record.sex,jdbcType=VARCHAR},
-      </if>
-      <if test="record.hkTime != null">
-        hk_time = #{record.hkTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.adminCode != null">
-        admin_code = #{record.adminCode,jdbcType=VARCHAR},
-      </if>
-      <if test="record.comment != null">
-        comment = #{record.comment,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update user
-    set id = #{record.id,jdbcType=INTEGER},
-      password = #{record.password,jdbcType=VARCHAR},
-      name = #{record.name,jdbcType=VARCHAR},
-      identity_card = #{record.identityCard,jdbcType=VARCHAR},
-      jsr_id = #{record.jsrId,jdbcType=VARCHAR},
-      jdr_id = #{record.jdrId,jdbcType=VARCHAR},
-      nh_card = #{record.nhCard,jdbcType=VARCHAR},
-      tel = #{record.tel,jdbcType=VARCHAR},
-      address = #{record.address,jdbcType=VARCHAR},
-      code = #{record.code,jdbcType=VARCHAR},
-      sex = #{record.sex,jdbcType=VARCHAR},
-      hk_time = #{record.hkTime,jdbcType=TIMESTAMP},
-      admin_code = #{record.adminCode,jdbcType=VARCHAR},
-      comment = #{record.comment,jdbcType=VARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="d.money.pojo.base.User">
-    update user
-    <set>
-      <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="identityCard != null">
-        identity_card = #{identityCard,jdbcType=VARCHAR},
-      </if>
-      <if test="jsrId != null">
-        jsr_id = #{jsrId,jdbcType=VARCHAR},
-      </if>
-      <if test="jdrId != null">
-        jdr_id = #{jdrId,jdbcType=VARCHAR},
-      </if>
-      <if test="nhCard != null">
-        nh_card = #{nhCard,jdbcType=VARCHAR},
-      </if>
-      <if test="tel != null">
-        tel = #{tel,jdbcType=VARCHAR},
-      </if>
-      <if test="address != null">
-        address = #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="code != null">
-        code = #{code,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null">
-        sex = #{sex,jdbcType=VARCHAR},
-      </if>
-      <if test="hkTime != null">
-        hk_time = #{hkTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="adminCode != null">
-        admin_code = #{adminCode,jdbcType=VARCHAR},
-      </if>
-      <if test="comment != null">
-        comment = #{comment,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="d.money.pojo.base.User">
-    update user
-    set password = #{password,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      identity_card = #{identityCard,jdbcType=VARCHAR},
-      jsr_id = #{jsrId,jdbcType=VARCHAR},
-      jdr_id = #{jdrId,jdbcType=VARCHAR},
-      nh_card = #{nhCard,jdbcType=VARCHAR},
-      tel = #{tel,jdbcType=VARCHAR},
-      address = #{address,jdbcType=VARCHAR},
-      code = #{code,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=VARCHAR},
-      hk_time = #{hkTime,jdbcType=TIMESTAMP},
-      admin_code = #{adminCode,jdbcType=VARCHAR},
-      comment = #{comment,jdbcType=VARCHAR}
+      comment = #{comment,jdbcType=VARCHAR},
+      zc_time = #{zcTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

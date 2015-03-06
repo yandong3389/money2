@@ -2,6 +2,10 @@ $(function() {
 
 	var jsonData = eval('(' + '{"children":[{"children":[{"children":[{"id":8,"level":4,"parentId":4},{"id":9,"level":4,"parentId":4}],"id":4,"level":3,"parentId":2},{"children":[{"id":10,"level":4,"parentId":5},{"id":11,"level":4,"parentId":5}],"id":5,"level":3,"parentId":2}],"id":2,"level":2,"parentId":1},{"children":[{"children":[{"id":12,"level":4,"parentId":6},{"id":13,"level":4,"parentId":6}],"id":6,"level":3,"parentId":3},{"children":[{"id":14,"level":4,"parentId":7},{"id":15,"level":4,"parentId":7}],"id":7,"level":3,"parentId":3}],"id":3,"level":2,"parentId":1}],"id":1,"level":1,"parentId":0}' + ')');
 
+	jsonData = eval('(' + $("#nodeJson").val() + ')');
+	
+	
+	console.info(jsonData);
 	var html = '';
 	$("#xflow").html("");
 	$("#xflow").append('<li id="li_' + jsonData.id + '"><div class=\'root section\'><a href=\'javascript:void(0);\'>' + jsonData.id + '</a></div></li>');

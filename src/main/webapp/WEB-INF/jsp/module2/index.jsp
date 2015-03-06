@@ -43,6 +43,8 @@
       <!-- 统计数据 -->
       <div class="content-box-content" style="float: left;padding: 0 150px 150px 150px;">
       
+      <input id="nodeJson" value="${node}" />
+      
       <div id="contain">
          <ul class="solo" id="xflow">
          </ul>
