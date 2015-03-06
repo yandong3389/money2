@@ -74,6 +74,12 @@ public class AdminLoginController {
 		return "money/adminmain3";
 	}
 
+	@RequestMapping("main4")
+	public String skipMain4(HttpServletRequest request,
+			HttpServletResponse response) {
+		return "money/adminmain4";
+	}
+
 	@RequestMapping("saveArgs")
 	public String saveArgs(Args args, HttpServletRequest request,
 			HttpServletResponse response) {

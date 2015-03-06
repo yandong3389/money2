@@ -32,8 +32,8 @@
           <ul>
             <li><a href="/admin/main1">注册用户审核</a></li>
             <li><a href="/admin/main2">推荐系统图</a></li>
-            <li><a href="/admin/main3" class="current">奖金比例配置</a></li>
-            <li><a href="/admin/main4">奖金发放</a></li>
+            <li><a href="/admin/main3">奖金比例配置</a></li>
+            <li><a href="/admin/main4" class="current">奖金发放</a></li>
           </ul>
         </li>
       </ul>
