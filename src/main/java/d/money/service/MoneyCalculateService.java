@@ -7,6 +7,13 @@ import d.money.common.utils.Node;
 public interface MoneyCalculateService {
 	
 	/**
+	 * 插入node数据
+	 * @param userId 当前新增加的用户ID
+	 * @param parentId 当前新增加的用户的接点人ID
+	 */
+	public void insertNode(int userId, int parentId);
+	
+	/**
 	 * 更新奖金数据,记录奖金获取历史
 	 * @param nodeId 本次追加节点ID
 	 */

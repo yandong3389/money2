@@ -1,5 +1,6 @@
 package d.money.web.action;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,7 @@ import d.money.pojo.MoneyHistoryView;
 import d.money.pojo.base.Args;
 import d.money.pojo.base.MoneyHistory;
 import d.money.pojo.base.User;
+import d.money.pojo.base.WeekEnd;
 import d.money.service.MoneyDetailService;
 
 @Controller
@@ -116,4 +118,50 @@ public class AdminMoneyDetailController {
 		
 		return new ModelAndView("money/adminmain22");
 	}
+	
+	@RequestMapping("/toMoneyWeek")
+	public ModelAndView toMoneyWeek(HttpServletRequest request, HttpServletResponse response) {
+		
+		String currentPageStr = request.getParameter("page");
+		
+		int currentPage = 1;
+		int perpage = 10;
+		if (StringUtil.isNotEmpty(currentPageStr)) {
+			currentPage = Integer.parseInt(currentPageStr);
+		}
+		
+		int total = moneyDetailService.getWeekEndsCount();
+		
+		List<WeekEnd> weekEnds = moneyDetailService.getWeekEnds(currentPage, perpage);
+		
+        // 分页请求数据URL地址
+        String url = "toMoneyWeek?";
+        
+        // 取得分页工具条
+        String pageHtml = PageUtil.getBackPageHtml(currentPage, perpage, total, url);
+        
+        request.setAttribute("moneyDetailList", null);
+        
+        request.setAttribute("pageHtml", pageHtml);
+		
+		request.setAttribute("weekEnds", weekEnds);
+		
+		return new ModelAndView("money/adminmain4");
+	}
+	
+	@RequestMapping("/updateWeekFlag")
+	public void updateWeekFlag(HttpServletRequest request, HttpServletResponse response) {
+		
+		int pkId = Integer.valueOf(String.valueOf(request.getParameter("pkId")));
+		
+		int result = moneyDetailService.updateWeekFlag(pkId);
+		
+		try {
+			response.getWriter().print(result);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }
