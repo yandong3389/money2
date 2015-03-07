@@ -159,8 +159,6 @@
     <!-- End .content-box -->
     <div class="clear"></div>
 
-    <%@include file="/common/footer.jsp"%>
-
     <!-- End #footer -->
   </div>
   <!-- End #main-content -->

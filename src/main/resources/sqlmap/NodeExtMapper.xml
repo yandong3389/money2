@@ -6,6 +6,23 @@
     <result column="parent_id" property="parentId" jdbcType="INTEGER" />
     <result column="level" property="level" jdbcType="INTEGER" />
   </resultMap>
+  <resultMap id="BaseUserMap" type="d.money.pojo.base.User" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="identity_card" property="identityCard" jdbcType="VARCHAR" />
+    <result column="jsr_id" property="jsrId" jdbcType="VARCHAR" />
+    <result column="jdr_id" property="jdrId" jdbcType="VARCHAR" />
+    <result column="nh_card" property="nhCard" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="hk_time" property="hkTime" jdbcType="TIMESTAMP" />
+    <result column="admin_code" property="adminCode" jdbcType="VARCHAR" />
+    <result column="comment" property="comment" jdbcType="VARCHAR" />
+    <result column="zc_time" property="zcTime" jdbcType="TIMESTAMP" />
+  </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -89,5 +106,8 @@
     <include refid="Base_Column_List" />
     from node
     where pkid = #{pkid,jdbcType=INTEGER}
+  </select>
+  <select id="selectUserByzctime" resultMap="BaseUserMap">
+  	select * from user where WEEKOFYEAR(zc_time) = WEEKOFYEAR(now())
   </select>
 </mapper>
