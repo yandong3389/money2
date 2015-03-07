@@ -82,12 +82,6 @@ public class MoneyCalculateServiceImpl implements MoneyCalculateService {
 		}
 	}
 	
-	
-	
-	
-	
-	
-	
 	/**
 	 * 获取旁系节点集合
 	 * @param node
