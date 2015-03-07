@@ -26,9 +26,30 @@ public class MoneyCalculateServiceImpl implements MoneyCalculateService {
 	@Autowired
 	MoneyHistoryMapper moneyHistoryMapper;
 
+	
+	/**
+	 * 插入node数据
+	 * @param userId 当前新增加的用户ID
+	 * @param parentId 当前新增加的用户的接点人ID
+	 */
+	public void insertNode(int userId, int parentId){
+		
+		// 取得接点人节点
+		d.money.pojo.base.Node parentNode = nodeMapper.selectByPrimaryKey(parentId);
+		
+		d.money.pojo.base.Node node = new d.money.pojo.base.Node();
+		node.setCreateDate(new Date());
+		node.setId(userId);
+		node.setParentId(parentId);
+		// 设置级别为接点人的下一级
+		node.setLevel((parentNode.getLevel()+1));
+		
+		nodeMapper.insert(node);
+	}
+	
 	/**
 	 * 更新奖金数据,记录奖金获取历史
-	 * @param nodeId 本次追加节点ID
+	 * @param nodeId 本次追加节点ID(当前新增加的用户ID)
 	 */
 	public void updateMoney (int nodeId) {
 		
