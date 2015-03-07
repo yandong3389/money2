@@ -2,13 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="d.money.mapper.MoneyHistoryExtMapper" >
   
-  <select id="countByType1" resultType="java.lang.Integer" >
-    select count(*) from money_history where type=1
-  </select>
-  <select id="countByType2" resultType="java.lang.Integer" >
-    select count(*) from money_history where type=2
-  </select>
-  <select id="countByType3" resultType="java.lang.Integer" >
-    select count(*) from money_history where type=3
+  <select id="countByType" resultType="java.lang.Integer" parameterType="map">
+    select count(*) from money_history where type=#{type} and id=#{userId}
   </select>
 </mapper>

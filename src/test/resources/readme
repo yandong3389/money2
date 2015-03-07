@@ -1,0 +1,2 @@
+alter table user modify id integer default '10000';
+alter table user modify id integer auto_increment ;

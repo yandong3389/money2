@@ -1,9 +1,9 @@
 package d.money.mapper;
 
+import java.util.Map;
+
 
 public interface MoneyHistoryExtMapper {
 
-	int countByType1();
-	int countByType2();
-	int countByType3();
+	int countByType(Map<String, Integer> map);
 }

@@ -1,6 +1,7 @@
 package d.money.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +19,6 @@ import d.money.mapper.base.UserMapper;
 import d.money.pojo.base.Args;
 import d.money.pojo.base.MoneyHistory;
 import d.money.pojo.base.MoneyHistoryExample;
-import d.money.pojo.base.Node;
 import d.money.pojo.base.NodeExample;
 import d.money.pojo.base.User;
 import d.money.pojo.base.UserExample;
@@ -100,12 +100,23 @@ public class MoneyDetailServiceImpl implements MoneyDetailService {
 	
 	public List<Integer> getData(int userId){
 		
+		// 取得默认一条配置数据
 		Args args = argsMapper.selectByExample(null).get(0);
 		
-		int type1 = moneyHistoryExtMapper.countByType1();
-		int type2 = moneyHistoryExtMapper.countByType2();
-		int type3 = moneyHistoryExtMapper.countByType3();
+		Map<String, Integer> param1 = new HashMap<String, Integer>();
+		param1.put("userId", userId);
+		param1.put("type", 1);
+		Map<String, Integer> param2 = new HashMap<String, Integer>();
+		param2.put("userId", userId);
+		param2.put("type", 2);
+		Map<String, Integer> param3 = new HashMap<String, Integer>();
+		param3.put("userId", userId);
+		param3.put("type", 3);
 		
+		// 奖金类型1：推荐奖金、2：直系奖金、3：旁系奖金
+		int type1 = moneyHistoryExtMapper.countByType(param1);
+		int type2 = moneyHistoryExtMapper.countByType(param2);
+		int type3 = moneyHistoryExtMapper.countByType(param3);
 		
 		List<Integer> result = new ArrayList<Integer>();
 		

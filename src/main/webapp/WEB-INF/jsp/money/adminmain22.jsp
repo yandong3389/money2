@@ -18,8 +18,27 @@
 </head>
 <body>
 <div id="body-wrapper">
-
-  <%@include file="/common/left.jsp"%>
+  <div id="sidebar">
+    <div id="sidebar-wrapper">
+      <h1 id="sidebar-title"><a href="#">Simpla Admin</a></h1>
+      <a href="javascript:void(0);"><img id="logo" src="<%=request.getContextPath() %>/resources/images/logo.png" alt="Simpla Admin logo" /></a>
+      <div id="profile-links"> 您好, <a href="#" title="Edit your profile">${sessionScope.username}</a><br />
+        <br />
+        <a href="#" title="View the Site">进入网站</a> | <a href="#" title="Sign Out">退出</a> 
+      </div>
+      <ul id="main-nav">
+        <!-- Accordion Menu -->
+        <li> <a href="javascript:void(0);" class="nav-top-item">管理员配置</a>
+          <ul>
+            <li><a href="/admin/main1">注册用户审核</a></li>
+            <li><a href="/userIndexAdmin" class="current">推荐系统图</a></li>
+            <li><a href="/admin/main3">奖金比例配置</a></li>
+            <li><a href="/admin/main4">奖金发放</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
   <!-- End #sidebar -->
   <div id="main-content">
     <!-- Main Content Section with everything -->
@@ -44,29 +63,29 @@
             <table>
             	<tbody>
             	<tr>
-            	<td><label>用户ID：${userinfo.id}</label></td>
-            	<td><label>用户姓名：${userinfo.name}</label></td>
-            	<td><label>身份证：${userinfo.identityCard}</label></td>
-            	</tr>
-            	<tr class="">
-            	<td><label>介绍人：${userinfo.jsrId}</label></td>
-            	<td><label>接点人：${userinfo.jdrId}</label></td>
-            	<td><label>农行卡号：${userinfo.nhCard}</label></td>
+            	<td>用户ID：${userinfo.id}</td>
+            	<td>用户姓名：${userinfo.name}</td>
+            	<td>性别：${userinfo.sex}</td>
             	</tr>
             	<tr>
-            		<td><label>电话：${userinfo.tel}</label></td>
-            		<td><label>地址：${userinfo.address}</label></td>
-            		<td><label>邮编：${userinfo.code}</label></td>
+            	<td>介绍人：${userinfo.jsrId}</td>
+            	<td>接点人：${userinfo.jdrId}</td>
+            	<td></td>
             	</tr>
             	<tr>
-            		<td><label>性别：${userinfo.sex}</label></td>
-            		<td><label>汇款时间：${userinfo.hkTime}</label></td>
-            		<td><label>管理密码：${userinfo.adminCode}</label></td>
+            	<td>农行卡号：${userinfo.nhCard}</td>
+            	<td>汇款时间：<fmt:formatDate value="${userinfo.hkTime}" pattern="yyyy年MM月dd日 HH:mm:ss" /></td>
+            	<td>身份证：${userinfo.identityCard}</td>
             	</tr>
             	<tr>
-            		<td><label>注册时间：${userinfo.zcTime}</label></td>
-            		<td><label>备注：${userinfo.comment}</label></td>
-            		<td></td>
+            	<td>电话：${userinfo.tel}</td>
+            	<td>邮编：${userinfo.code}</td>
+            	<td>地址：${userinfo.address}</td>
+            	</tr>
+            	<tr>
+            	<td>管理密码：${userinfo.adminCode}</td>
+            	<td>注册时间：<fmt:formatDate value="${userinfo.zcTime}" pattern="yyyy年MM月dd日 HH:mm:ss" /></td>
+            	<td>备注：${userinfo.comment}</td>
             	</tr>
             </tbody></table>
             </fieldset>
