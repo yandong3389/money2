@@ -13,19 +13,38 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/module2/org5.css"/>" type="text/css" media="screen" />
 <link rel="shortcut icon" href="resources/images/favicon.ico" />
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-1.7.1.min.js"/>"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/simpla.jquery.configuration.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/facebox.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.wysiwyg.js"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/module2/index.js"/>"></script>
 </head>
 <body>
 <div id="body-wrapper">
-
-  <%@include file="/common/left.jsp"%>
+	<div id="sidebar">
+    <div id="sidebar-wrapper">
+      <!-- Sidebar with logo and menu -->
+      <h1 id="sidebar-title"><a href="#">Simpla Admin</a></h1>
+      <!-- Logo (221px wide) -->
+      <a href="javascript:window.location.reload();"><img id="logo" src="resources/images/common/logo.png" alt="Simpla Admin logo" /></a>
+      <div id="profile-links"> 您好, <a href="javascript:;" title="Edit your profile">${sessionScope.username}</a><br />
+        <br />
+        <a href="sysLogout" title="Sign Out">退出</a> </div>
+      <ul id="main-nav">
+        <li> <a href="javascript:void(0);" class="nav-top-item">个人信息</a>
+          <ul>
+            <li><a href="/userIndex" class="current">推荐系统图</a></li>
+            <li><a href="/userModify">个人信息修改</a></li>
+          </ul>
+        </li>
+      </ul>
+      <!-- End #messages -->
+    </div>
+  </div>
   <!-- End #sidebar -->
   <div id="main-content">
     <!-- Main Content Section with everything -->
     <!-- Page Head -->
-    <h2>欢迎登录网站后台管理</h2>
-    <p id="page-intro">你想做些什么？</p>
-    <!-- End .shortcut-buttons-set -->
+    <h2>欢迎登录用户管理界面</h2>
     <div class="clear"></div>
     <!-- End .clear -->
     <div class="content-box"  style="float: left">
