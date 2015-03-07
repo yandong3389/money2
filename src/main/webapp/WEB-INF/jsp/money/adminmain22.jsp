@@ -10,10 +10,11 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/reset.css"/>" type="text/css" media="screen" />
 <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>" type="text/css" media="screen" />
 <link rel="stylesheet" href="<c:url value="/resources/css/invalid.css"/>" type="text/css" media="screen" />
-<link rel="stylesheet" href="<c:url value="/resources/css/module2/org5.css"/>" type="text/css" media="screen" />
 <link rel="shortcut icon" href="resources/images/favicon.ico" />
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-1.7.1.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/money/index.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/simpla.jquery.configuration.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/jquery.wysiwyg.js"/>"></script>
+
 </head>
 <body>
 <div id="body-wrapper">
@@ -47,22 +48,82 @@
     <!-- End .shortcut-buttons-set -->
     <div class="clear"></div>
     <!-- End .clear -->
-    <div class="content-box"  style="float: left">
+    <div class="content-box">
+    
+    <b>用户信息数据</b>
+    
+    <div>
+    ${userinfo.id}
+    ${userinfo.name}
+    ${userinfo.identityCard}
+    ${userinfo.jsrId}
+    ${userinfo.jdrId}
+    ${userinfo.nhCard}
+    ${userinfo.tel}
+    ${userinfo.address}
+    ${userinfo.code}
+    ${userinfo.sex}
+    ${userinfo.hkTime}
+    ${userinfo.adminCode}
+    ${userinfo.comment}
+    </div>
+    
       <!-- Start Content Box -->
       <div class="content-box-header">
-        <h3>组织结构图</h3>
+        <h3>推荐奖金总额：${data30}；直系奖金总额：${data20}；旁系奖金总额：${data5}；</h3>
         <div class="clear"></div>
       </div>
       <!-- End .content-box-header -->
       <!-- 统计数据 -->
-      <div class="content-box-content" style="float: left;padding: 50px 100px 100px 100px;">
-      
-      <input id="nodeJson" type="hidden" value='${node}' />
-      
-      <div id="contain">
-         <ul class="solo" id="xflow">
-         </ul>
-      </div>
+      <div class="content-box-content">
+        <div class="tab-content default-tab" id="tab1">
+          <!-- This is the target div. id must match the href of this div's tab -->
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  <input class="check-all" type="checkbox" />
+                </th>
+                <th>序号</th>
+                <th>ID</th>
+                <th>奖金类型</th>
+                <th>获取金额</th>
+                <th>获取时间</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <td colspan="8">
+                  <div class="pagination">${pageHtml}</div>
+                  <!-- End .pagination -->
+                  <div class="clear"></div>
+                </td>
+              </tr>
+            </tfoot>
+            <tbody>
+                <c:forEach items="${historyViews}" var="view" varStatus="status">
+	              <tr> 
+	                <td>
+	                  <input type="checkbox" />
+	                </td>
+	                <td>${status.count}</td>
+	                <td>${view.id}</td>
+	                <td>
+	                <c:if test="${view.type == 1}">推荐奖金</c:if>
+	                <c:if test="${view.type == 2}">直系奖金</c:if>
+	                <c:if test="${view.type == 3}">旁系奖金</c:if>
+	                </td>
+	                <td>${view.money}</td>
+	                <td><fmt:formatDate value="${view.createDate}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+	                <td>
+	                </td>
+	              </tr>
+                </c:forEach>
+            </tbody>
+          </table>
+        </div>
+        <!-- End #tab1 -->
+        <!-- End #tab2 -->
       </div>
       <!-- End .content-box-content -->
     </div>
