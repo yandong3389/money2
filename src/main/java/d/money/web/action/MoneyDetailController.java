@@ -53,7 +53,7 @@ public class MoneyDetailController {
 		
 		String currentPageStr = request.getParameter("page");
 		
-		int currentPage = 0;
+		int currentPage = 1;
 		int perpage = 10;
 		if (StringUtil.isNotEmpty(currentPageStr)) {
 			currentPage = Integer.parseInt(currentPageStr);
