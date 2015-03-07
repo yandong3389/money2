@@ -26,7 +26,7 @@ body{font:normal 15px/1.5 Arial, Helvetica, Free Sans, sans-serif;color: #222;ba
     <form id="my-form" method="post" action="/user/regsubmit">
       <table style="width:100%">
       	<tr>
-      		<td><div><label>姓名:</label><input id="username" name="username" type="text"/></div></td>
+      		<td><div><label>姓名:</label><input id="name" name="name" type="text"/></div></td>
       		<td><div><label>身份证号:</label><input id="identityCard" name="identityCard" type="text"/></div></td>
       	</tr>
       	<tr>
@@ -74,9 +74,9 @@ var options = {
 	},
 	inputs: {
 		'password': {
-			filters: 'required',
+			filters: 'required'
 		},
-		'username': {
+		'name': {
 			filters: 'required'
 		},
 		'identityCard': {
@@ -106,7 +106,7 @@ $('#reset').click(function(){
 $myform.focusFirst();
 
 var msg = $("#msg").val();
-if(msg!=""&&msg==null){
+if(msg!=""&&msg!=null){
 	alert(msg);
 }
 </script>

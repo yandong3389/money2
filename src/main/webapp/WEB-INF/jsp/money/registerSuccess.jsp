@@ -25,14 +25,13 @@ body{font:normal 15px/1.5 Arial, Helvetica, Free Sans, sans-serif;color: #222;ba
       <table style="width:100%">
       	<tr>
       		<td align="center">
-      			<div style="padding-left: 260px;"><label>注册成功:</label><input id="inviteCode" name="inviteCode" type="text"/></div>
+      			<div style="padding-left: 160px;"><label style="" >注册成功、请谨记你的登陆ID号:</label><input style="color:red;font-size: 24px" type="text" value="${id}" disabled="disabled" /></div>
       		</td>
       	</tr>
       </table>
       <div><hr/></div>
       <div style="float:right">
-        <button type="button" id="inviteConfirm" style="width:100px">确认</button>
-        <button id="reset" type="button" style="width:100px">重置</button>
+        <button type="button" id="returnLogin" style="width:100px">返回登陆</button>
       </div>
     </form>
     <!-- End Form -->

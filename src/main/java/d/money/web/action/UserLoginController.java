@@ -1,6 +1,7 @@
 package d.money.web.action;
 
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -85,6 +86,10 @@ public class UserLoginController {
 	 */
 	@RequestMapping("/regUser")
 	public String regUser(User user, HttpServletRequest request) {
+		String code = request.getParameter("code");
+		if("".equals(code)||code==null){
+			return "money/registerInvite";
+		}
 		return "money/register";
 	}
 
@@ -96,11 +101,26 @@ public class UserLoginController {
 	 */
 	@RequestMapping("/regsubmit")
 	public String userRegSubmit(User user, HttpServletRequest request) {
+		String name = user.getName();
+		UserExample example = new UserExample();
+		example.createCriteria().andNameEqualTo(name);
+
+		List<User> list = userservice.selectByExample(example);
+		if (list.size() > 0) {
+			request.setAttribute("msg", "此姓名已注册，请换另一个名字，例张三1、张三2");
+			return "money/register";
+		}
+
+		user.setPassword(MD5Util.MD5(user.getPassword()));
+		user.setZcTime(new Date());
 		int i = userservice.insert(user);
 		if (i == 0) {
 			request.setAttribute("msg", "注册出错，请从新注册");
 			return "money/register";
 		} else {
+			List<User> list1 = userservice.selectByExample(example);
+			String id = String.valueOf(list1.get(0).getId());
+			request.setAttribute("id", id);
 			return "money/registerSuccess";
 		}
 	}

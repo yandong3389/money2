@@ -63,7 +63,7 @@ $(function(){
 	          },
 	          success:function(responseText){
 	        	  if(responseText == "success"){
-	        		  window.location.href="/user/regUser";
+	        		  window.location.href="/user/regUser?code="+code;
 	        	  }else{
 	        		  alert("请输入正确的邀请码");
 	        	  }
@@ -72,5 +72,9 @@ $(function(){
 	            alert(e);
 	          }
         });
+	});
+	
+	$("#returnLogin").click(function(){
+		window.location.href="/";
 	});
 });
