@@ -29,26 +29,55 @@
     <!-- End .shortcut-buttons-set -->
     <div class="clear"></div>
     <!-- End .clear -->
+    
     <div class="content-box">
-    
-    <b>用户信息数据</b>
-    
-    <div>
-    ${userinfo.id}
-    ${userinfo.name}
-    ${userinfo.identityCard}
-    ${userinfo.jsrId}
-    ${userinfo.jdrId}
-    ${userinfo.nhCard}
-    ${userinfo.tel}
-    ${userinfo.address}
-    ${userinfo.code}
-    ${userinfo.sex}
-    ${userinfo.hkTime}
-    ${userinfo.adminCode}
-    ${userinfo.comment}
+      <!-- Start Content Box -->
+      <div class="content-box-header">
+        <h3 style="cursor: s-resize;">用户信息数据</h3>
+        <div class="clear"></div>
+      </div>
+      <!-- End .content-box-header -->
+      <div class="content-box-content">
+        <div class="tab-content default-tab" id="tab1" style="display: block;">
+          <form id="form1" action="" method="post">
+            <fieldset>
+            <table>
+            	<tbody>
+            	<tr>
+            	<td><label>用户ID：${userinfo.id}</label></td>
+            	<td><label>用户姓名：${userinfo.name}</label></td>
+            	<td><label>身份证：${userinfo.identityCard}</label></td>
+            	</tr>
+            	<tr class="">
+            	<td><label>介绍人：${userinfo.jsrId}</label></td>
+            	<td><label>接点人：${userinfo.jdrId}</label></td>
+            	<td><label>农行卡号：${userinfo.nhCard}</label></td>
+            	</tr>
+            	<tr>
+            		<td><label>电话：${userinfo.tel}</label></td>
+            		<td><label>地址：${userinfo.address}</label></td>
+            		<td><label>邮编：${userinfo.code}</label></td>
+            	</tr>
+            	<tr>
+            		<td><label>性别：${userinfo.sex}</label></td>
+            		<td><label>汇款时间：${userinfo.hkTime}</label></td>
+            		<td><label>管理密码：${userinfo.adminCode}</label></td>
+            	</tr>
+            	<tr>
+            		<td><label>注册时间：${userinfo.zcTime}</label></td>
+            		<td><label>备注：${userinfo.comment}</label></td>
+            		<td></td>
+            	</tr>
+            </tbody></table>
+            </fieldset>
+            <div class="clear"></div>
+            <!-- End .clear -->
+          </form>
+        </div>
+      </div>
     </div>
     
+    <div class="content-box">
       <!-- Start Content Box -->
       <div class="content-box-header">
         <h3>推荐奖金总额：${data30}；直系奖金总额：${data20}；旁系奖金总额：${data5}；</h3>
