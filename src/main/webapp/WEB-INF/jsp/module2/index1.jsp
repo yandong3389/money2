@@ -27,7 +27,7 @@
       <a href="javascript:window.location.reload();"><img id="logo" src="resources/images/common/logo.png" alt="Simpla Admin logo" /></a>
       <div id="profile-links"> 您好, <a href="javascript:;" title="Edit your profile">${sessionScope.username}</a><br />
         <br />
-        <a href="sysLogout" title="Sign Out">退出</a> </div>
+        <a href="/user/userlogout" title="Sign Out">退出</a> </div>
       <ul id="main-nav">
         <li> <a href="javascript:void(0);" class="nav-top-item">个人信息</a>
           <ul>

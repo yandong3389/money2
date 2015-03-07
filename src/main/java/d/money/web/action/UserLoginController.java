@@ -2,6 +2,7 @@ package d.money.web.action;
 
 import java.io.PrintWriter;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -134,5 +135,15 @@ public class UserLoginController {
 
 			return "money/registerSuccess";
 		}
+	}
+
+	@SuppressWarnings("rawtypes")
+	@RequestMapping("/userlogout")
+	public String loginout(HttpServletRequest request) {
+		Enumeration em = request.getSession().getAttributeNames();
+		while (em.hasMoreElements()) {
+			request.getSession().removeAttribute(em.nextElement().toString());
+		}
+		return "redirect:/";
 	}
 }

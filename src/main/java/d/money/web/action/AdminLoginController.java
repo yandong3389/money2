@@ -1,5 +1,6 @@
 package d.money.web.action;
 
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -106,5 +107,15 @@ public class AdminLoginController {
 			HttpServletResponse response) {
 		adminservice.updateByPrimaryKey(args);
 		return "money/adminmain3";
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@RequestMapping("/adminlogout")
+	public String loginout(HttpServletRequest request) {
+		Enumeration em = request.getSession().getAttributeNames();
+		while (em.hasMoreElements()) {
+			request.getSession().removeAttribute(em.nextElement().toString());
+		}
+		return "redirect:/admin/login";
 	}
 }
