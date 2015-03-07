@@ -6,8 +6,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +17,6 @@ import d.money.pojo.base.User;
 import d.money.pojo.base.UserExample;
 import d.money.service.AdminService;
 import d.money.service.UserService;
-import d.money.service.impl.AdminServiceImpl;
 
 @Controller
 @RequestMapping("/user")
@@ -91,8 +88,20 @@ public class UserLoginController {
 		return "money/register";
 	}
 
+	/**
+	 * 
+	 * @param user
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("/regsubmit")
-	public String userRegSubmit() {
-		return "money/registerSuccess";
+	public String userRegSubmit(User user, HttpServletRequest request) {
+		int i = userservice.insert(user);
+		if (i == 0) {
+			request.setAttribute("msg", "注册出错，请从新注册");
+			return "money/register";
+		} else {
+			return "money/registerSuccess";
+		}
 	}
 }
