@@ -25,12 +25,15 @@ public class UserServiceImpl implements UserService {
 		logger.debug("selectByExample....start...userselectByExample");
 		return userMapper.countByExample(example);
 	}
-	public User selectByPrimaryKey(int userId){
+
+	public User selectByPrimaryKey(int userId) {
 		return userMapper.selectByPrimaryKey(userId);
 	}
-	public int updateByExampleSelective(User user, UserExample example){
+
+	public int updateByExampleSelective(User user, UserExample example) {
 		return userMapper.updateByExampleSelective(user, example);
 	}
+
 	@Override
 	public List<User> selectByExample(UserExample example) {
 		logger.debug("selectByExample....start...userselectByExample");
@@ -47,5 +50,11 @@ public class UserServiceImpl implements UserService {
 	public int deleteByPrimaryKey(Integer id) {
 		logger.debug("deleteByPrimaryKey....start...user");
 		return userMapper.deleteByPrimaryKey(id);
+	}
+
+	@Override
+	public int updateByPrimaryKeySelective(User record) {
+		logger.debug("deleteByPrimaryKey....start...user");
+		return userMapper.updateByPrimaryKeySelective(record);
 	}
 }

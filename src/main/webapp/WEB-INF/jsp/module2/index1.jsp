@@ -16,6 +16,7 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/simpla.jquery.configuration.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/facebox.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.wysiwyg.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/login.js"></script>
 </head>
 <body>
 <div id="body-wrapper">
@@ -52,6 +53,7 @@
         	<tbody>
         	<tr style="background: #ffffff">
         	<td><label>用户ID</label>
+        		<input type="hidden" name="userId" value="${userinfo.id}" />
                 <input class="text-input medium-input" style="background: #f3f3f3" type="text" id="id" name="id" value="${userinfo.id}" disabled="disabled" /></td>
         	<td><label>用户姓名</label>
                 <input class="text-input medium-input" style="background: #f3f3f3" type="text" id="name" name="name" value="${userinfo.name}" disabled="disabled" /></td>
@@ -83,9 +85,9 @@
         	</tr>
         	<tr style="background: #ffffff">
         	<td><label>密码</label>
-        		<input class="text-input medium-input" type="text" id="password" name="password" value="" /></td>
+        		<input class="text-input medium-input" type="text" id="password1" name="newPass" value="" /></td>
         	<td><label>确认密码</label>
-        		<input class="text-input medium-input" type="text" id="password2" name="password" value="" /></td>
+        		<input class="text-input medium-input" type="text" id="password2" name="newPass" value="" /></td>
         	<td><label>注册时间</label>
         		<input class="text-input medium-input" style="background: #f3f3f3" type="text" id="zcTime" name="zcTime" value="<fmt:formatDate value="${userinfo.zcTime}" pattern="yyyy年MM月dd日 HH:mm:ss" />" disabled="disabled" /></td>
         	</tr>
@@ -96,7 +98,7 @@
         	<tr>
           		<td></td><td></td><td><div class="bulk-actions align-right">
           		  <input type="hidden" value="" name="id" id="id" />
-              		<input class="button" type="button" value="保     存" id="argsSave" style="width:100px;" />
+              		<input class="button" type="button" value="保     存" id="userModify" style="width:100px;" />
           		</div></td>
           	</tr>
         </tbody></table>

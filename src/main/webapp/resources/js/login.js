@@ -77,4 +77,17 @@ $(function(){
 	$("#returnLogin").click(function(){
 		window.location.href="/";
 	});
+	
+	// 用户修改
+	$("#userModify").click(function(){
+		var pass1 = $("#password1").val();
+		var pass2 = $("#password2").val();
+		if(pass1!=pass2){
+			alert("两次密码不一致");
+			return false;
+		}
+		var form1 = document.getElementById("form1");
+		form1.action = "/userSave";
+		form1.submit();
+	});
 });

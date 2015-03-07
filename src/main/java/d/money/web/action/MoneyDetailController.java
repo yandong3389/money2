@@ -6,7 +6,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.ibatis.annotations.ResultMap;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSONObject;
 
 import d.money.common.utils.CollectionUtils;
+import d.money.common.utils.MD5Util;
 import d.money.common.utils.PageUtil;
 import d.money.common.utils.StringUtil;
 import d.money.pojo.MoneyHistoryView;
@@ -61,6 +61,24 @@ public class MoneyDetailController {
 		example.createCriteria().andIdEqualTo(uid);
 		List<User> user = userservice.selectByExample(example);
 		request.setAttribute("userinfo", user.get(0));
+		return "module2/index1";
+	}
+
+	@RequestMapping("/userSave")
+	public String saveUser(User user, HttpServletRequest request) {
+		String newPass = request.getParameter("newPass");
+		
+		int uid = Integer.parseInt(request.getParameter("userId"));
+		user.setId(uid);
+		if(!"".equals(newPass)&&null!=newPass){
+			user.setPassword(MD5Util.MD5(newPass));
+		}
+		userservice.updateByPrimaryKeySelective(user);
+		
+		UserExample example = new UserExample();
+		example.createCriteria().andIdEqualTo(uid);
+		List<User> userinfo = userservice.selectByExample(example);
+		request.setAttribute("userinfo", userinfo.get(0));
 		return "module2/index1";
 	}
 
