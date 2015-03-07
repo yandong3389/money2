@@ -1,5 +1,9 @@
 package d.money;
 
+import java.util.Calendar;
+import java.util.Date;
+
+import d.money.common.utils.DateUtil;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -50,5 +54,13 @@ public class AppTest
         langDemo.dateFormatUtilsDemo();
         langDemo.validateDemo();
         langDemo.wordUtilsDemo();
+        
+        
+    	Date nowDate = new Date();
+    	
+    	Date backDate = DateUtil.rollDate(nowDate, Calendar.DATE, -7);
+    	
+    	System.out.println("结算时间为：" + DateUtil.formatDate(backDate, "yyyy-MM-dd HH:mm:ss") +"至"
+    	             + DateUtil.formatDate(nowDate, "yyyy-MM-dd HH:mm:ss"));
     }
 }

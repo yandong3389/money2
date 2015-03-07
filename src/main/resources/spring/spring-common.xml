@@ -89,5 +89,6 @@
 	
 	<!-- 数据库连接池 -->
 	<import resource="classpath:/spring/spring-pool.xml" />
-	
+    <!-- 任务调度配置 -->
+    <import resource="classpath:/spring/spring-quartz.xml" /> 
 </beans>
