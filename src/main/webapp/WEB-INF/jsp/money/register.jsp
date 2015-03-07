@@ -55,7 +55,7 @@ body{font:normal 15px/1.5 Arial, Helvetica, Free Sans, sans-serif;color: #222;ba
       </table>
       <div><hr/></div>
       <div style="float:right">
-        <button type="submit" id="confirm" style="width:100px">确认注册</button>
+        <button type="button" id="confirm" style="width:100px">确认注册</button>
         <button id="reset" type="button" style="width:100px">重置</button>
       </div>
     </form>
