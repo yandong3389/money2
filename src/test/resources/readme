@@ -1,2 +1,8 @@
 alter table user modify id integer default '10000';
 alter table user modify id integer auto_increment ;
+
+INSERT INTO `node` VALUES ('10000', '0', '1', '2015-03-07 21:59:28');
+INSERT INTO `user` VALUES ('10000', '96E79218965EB72C92A549DD5A330112', 'admin', '210726199910100709', '0', '0', '111', '111', '111', '11', '男', '2015-03-06 19:10:31', '1', '1', '2015-01-26 19:10:31');
+
+INSERT INTO `admin` VALUES ('1', 'admin1', 'E00CF25AD42683B3DF678C61F42C6BDA', '管理员1', 'admin1', '');
+INSERT INTO `admin` VALUES ('2', 'admin2', 'C84258E9C39059A89AB77D846DDAB909', '管理员2', 'admin2', '');

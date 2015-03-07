@@ -45,12 +45,6 @@
          </ul>
       </div>
       
-      
-      
-      
-      
-      
-      
       </div>
       <!-- End .content-box-content -->
     </div>

@@ -56,6 +56,10 @@ public class MoneyDetailServiceImpl implements MoneyDetailService {
 		// 取得所有节点数据
 		List<d.money.common.utils.Node> allNodeList = nodeExtMapper.selectByExample(null);
 		
+		if (CollectionUtils.isEmpty(allNodeList)) {
+			return null;
+		}
+		
 		List<Integer> nodeIdList = new NodeUtil().getChildNodes(allNodeList, userId, -1);
 		
 		nodeIdList.add(userId);

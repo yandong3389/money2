@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
 
+import d.money.common.utils.CollectionUtils;
 import d.money.common.utils.PageUtil;
 import d.money.common.utils.StringUtil;
 import d.money.pojo.MoneyHistoryView;
@@ -37,7 +38,9 @@ public class MoneyDetailController {
 		// 取得当前用户下的所有节点数据(包含当前用户)
 		List<d.money.common.utils.Node> nodes = moneyDetailService.getDefaultTree(uid);
 		
-		request.setAttribute("node", JSONObject.toJSONString(nodes.get(0)));
+		if (CollectionUtils.isNotEmpty(nodes)) {
+			request.setAttribute("node", JSONObject.toJSONString(nodes.get(0)));
+		}
 		
 		return new ModelAndView("module2/index");
 	}

@@ -15,13 +15,16 @@ $(function() {
 	$("#xflow").append('<li id="li_' + jsonData.id + '"><div class=\'root section\'><a userId="'+ jsonData.id +'" rel="tooltip" title="'+ userinfo1 +'" href=\'javascript:void(0);\'>' 
 			+ jsonData.id + '</a></div></li>');
 
-	if (jsonData.children[0] != undefined) {
-		showChild(jsonData.children[0], jsonData.id, true);
+	if (jsonData.children != undefined) {
+		
+		if (jsonData.children[0] != undefined) {
+			showChild(jsonData.children[0], jsonData.id, true);
+		}
+		if (jsonData.children[1] != undefined) {
+			showChild(jsonData.children[1], jsonData.id, false);
+		}
 	}
-	if (jsonData.children[1] != undefined) {
-		showChild(jsonData.children[1], jsonData.id, false);
-	}
-
+	
 	function showChild(node, parentId, isLeft) {
 
 		if ($("ul[id='ul_" + parentId + "']").length == 0) {
@@ -66,6 +69,7 @@ $(function() {
 		}
 
 	}
+	
 	var targets = $('[rel~=tooltip]'), target = false, tooltip = false, title = false;
 
 	// 跳转页面
