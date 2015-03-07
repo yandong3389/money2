@@ -66,16 +66,19 @@ public class AdminUserInfoController {
 		
 		return new ModelAndView("money/adminmain55");
 	}
+	
 	@RequestMapping("/updateUserInfo")
-	public ModelAndView updateUserInfo(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView updateUserInfo(User user, HttpServletRequest request, HttpServletResponse response) {
 		
-		int userId = Integer.valueOf(String.valueOf(request.getParameter("userId")));
+		int uid = Integer.parseInt(request.getParameter("userId"));
+		user.setId(uid);
+		userService.updateByPrimaryKeySelective(user);
 		
-		// 取得用户信息
-		User user = userService.selectByPrimaryKey(userId);
-		
+		UserExample example = new UserExample();
+		example.createCriteria().andIdEqualTo(uid);
+		List<User> userinfo = userService.selectByExample(example);
+		request.setAttribute("userinfo", userinfo.get(0));
 		
 		return new ModelAndView("money/adminmain55");
 	}
-	
 }

@@ -54,6 +54,7 @@
         	<tbody>
         	<tr style="background: #ffffff">
         	<td><label>用户ID</label>
+        	<input type="hidden" value="${user.id}" name="userId" />
                 <input class="text-input medium-input" style="background: #f3f3f3" type="text" id="id" name="id" value="${user.id}" disabled="disabled" /></td>
         	<td><label>用户姓名</label>
                 <input class="text-input medium-input" style="background: #f3f3f3" type="text" id="name" name="name" value="${user.name}" disabled="disabled" /></td>
@@ -88,7 +89,7 @@
         		<input class="text-input medium-input" style="background: #f3f3f3" type="text" id="zcTime" name="zcTime" value="<fmt:formatDate value="${user.zcTime}" pattern="yyyy年MM月dd日 HH:mm:ss" />" disabled="disabled" />
         		</td>
         	<td><label>区域管理员密码</label>
-        		<input class="text-input medium-input" type="text" id="admin_code" name="admin_code" value="${user.adminCode}" />
+        		<input class="text-input medium-input" type="text" id="adminCode" name="adminCode" value="${user.adminCode}" />
         		</td>
         	<td><label>备注</label>
         		<input class="text-input medium-input" type="text" id="comment" name="comment" value="${user.comment}" /></td>
