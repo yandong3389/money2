@@ -19,9 +19,31 @@ $(function(){
 			alert("用户名或密码不能为空");
 			return false;
 		}
-		var form1 = document.getElementById("form1");
-		form1.action="/user/login";
-		form1.submit();
+		if(isNaN(username)){
+			alert("用户名是数字！");
+			return false;
+		}
+		$.ajax({
+          url:"/user/login",
+          type:"post",
+          dataType:"text",
+          data:{
+        	 username:username,
+        	 password:password
+          },
+          success:function(responseText){
+        	  if(responseText == "success"){
+        		  var form1 = document.getElementById("form1");
+        		  form1.action="/userIndex";
+        		  form1.submit();
+        	  }else{
+        		  alert("用户名或密码错误!");
+        	  }
+          },
+          error:function(e){
+            alert(e);
+          }
+      });
 	});
 	
 	// 修改参数

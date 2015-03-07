@@ -23,12 +23,12 @@ import d.money.pojo.base.User;
 import d.money.service.MoneyDetailService;
 
 @Controller
-public class MoneyDetailController {
+public class AdminMoneyDetailController {
 
 	@Autowired
 	MoneyDetailService moneyDetailService;
 	
-	@RequestMapping("/userIndex")
+	@RequestMapping("/userIndexAdmin")
 	public ModelAndView toNode(HttpServletRequest request, HttpServletResponse response) {
 		
 		// TODO 当前登录用户ID
@@ -42,10 +42,10 @@ public class MoneyDetailController {
 		
 		request.setAttribute("node", JSONObject.toJSONString(nodes.get(0)));
 		
-		return new ModelAndView("module2/index");
+		return new ModelAndView("money/adminmain2");
 	}
 	
-	@RequestMapping("/toMoneyDetail")
+	@RequestMapping("/toMoneyDetailAdmin")
 	public ModelAndView toMoneyDetail(HttpServletRequest request, HttpServletResponse response) {
 		
 		
@@ -114,6 +114,6 @@ public class MoneyDetailController {
 		request.setAttribute("data20", data.get(1));
 		request.setAttribute("data5", data.get(2));
 		
-		return new ModelAndView("module2/money_detail");
+		return new ModelAndView("money/adminmain22");
 	}
 }

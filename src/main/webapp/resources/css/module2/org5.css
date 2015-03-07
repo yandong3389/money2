@@ -7,28 +7,28 @@ ul#xflow {
     float: none;
     margin: 0 auto;
 }
-ul {
+#contain ul {
     clear: left;
     margin: 2em 0 0 0;
     padding: 0;
     background: #fff;
 }
-ul ul {
+#contain ul ul {
     border-top: 1px solid #000;
     width: auto;
 }
-ul.solo {
+#contain ul.solo {
     border-top: 0;
 }
-li {
+#contain li {
     float: left;
     list-style: none;
     position: relative;
 }
-li li {
+#contain li li {
     margin: -1px 0 0 0;
 }
-#xflow div{
+#contain div{
     background: url(../../images/split.jpg) 50% repeat-y;
     padding: 2em 5px 0 5px;
     margin: 0 .3em -2em 0em;

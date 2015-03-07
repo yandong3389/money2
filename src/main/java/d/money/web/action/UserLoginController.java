@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import d.money.common.utils.MD5Util;
 import d.money.pojo.base.Admin;
 import d.money.pojo.base.AdminExample;
+import d.money.pojo.base.User;
+import d.money.pojo.base.UserExample;
 import d.money.service.AdminService;
+import d.money.service.UserService;
 import d.money.service.impl.AdminServiceImpl;
 
 @Controller
@@ -23,24 +26,30 @@ import d.money.service.impl.AdminServiceImpl;
 public class UserLoginController {
 
 	@Autowired
+	UserService userservice;
+	@Autowired
 	AdminService adminservice;
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(AdminServiceImpl.class);
-
 	@RequestMapping("/login")
-	public String toAdminLogin(HttpServletRequest request) {
+	public void toAdminLogin(HttpServletRequest request, PrintWriter pw) {
 		String id = request.getParameter("username");
 		String password = MD5Util.MD5(request.getParameter("password"));
 
-		logger.debug(id);
-		logger.debug(password);
+		UserExample example = new UserExample();
+		example.createCriteria().andIdEqualTo(Integer.valueOf(id))
+				.andPasswordEqualTo(password);
 
-		return "money/user1";
+		List<User> list = userservice.selectByExample(example);
+		if (list.size() > 0) {
+			pw.print("success");
+		} else {
+			pw.print("error");
+		}
 	}
 
 	/**
 	 * 跳转至注册邀请页面
+	 * 
 	 * @param request
 	 * @param response
 	 * @return
@@ -53,9 +62,10 @@ public class UserLoginController {
 
 	/**
 	 * 确认邀请码
+	 * 
 	 * @param request
 	 * @param pw
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	@RequestMapping("/confirmUser")
 	public void confirmUser(HttpServletRequest request, PrintWriter pw) {
@@ -77,7 +87,7 @@ public class UserLoginController {
 	 * @return
 	 */
 	@RequestMapping("/regUser")
-	public String regUser(HttpServletRequest request) {
+	public String regUser(User user, HttpServletRequest request) {
 		return "money/register";
 	}
 
