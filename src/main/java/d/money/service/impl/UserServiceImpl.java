@@ -26,4 +26,10 @@ public class UserServiceImpl implements UserService {
 		logger.debug("selectByExample....start...userselectByExample");
 		return userMapper.selectByExample(example);
 	}
+
+	@Override
+	public int insert(User record) {
+		logger.debug("selectByExample....start...userInsert");
+		return userMapper.insert(record);
+	}
 }

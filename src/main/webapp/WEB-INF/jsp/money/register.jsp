@@ -19,10 +19,11 @@ body{font:normal 15px/1.5 Arial, Helvetica, Free Sans, sans-serif;color: #222;ba
 </style>
 </head>
 <body>
+<input type="hidden" value="${msg}" id="msg" />
 <div class="row">
   <div class="eightcol last">
     <!-- Begin Form -->
-    <form id="my-form" method="post" action="">
+    <form id="my-form" method="post" action="/user/regsubmit">
       <table style="width:100%">
       	<tr>
       		<td><div><label>姓名:</label><input id="username" name="username" type="text"/></div></td>
@@ -55,7 +56,7 @@ body{font:normal 15px/1.5 Arial, Helvetica, Free Sans, sans-serif;color: #222;ba
       </table>
       <div><hr/></div>
       <div style="float:right">
-        <button type="button" id="confirm" style="width:100px">确认注册</button>
+        <button type="submit" id="confirm" style="width:100px">确认注册</button>
         <button id="reset" type="button" style="width:100px">重置</button>
       </div>
     </form>
@@ -65,6 +66,7 @@ body{font:normal 15px/1.5 Arial, Helvetica, Free Sans, sans-serif;color: #222;ba
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery-1.8.2.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.idealforms.js"></script>
+<script src="<%=request.getContextPath() %>/resources/js/login.js" type="text/javascript"></script>
 <script type="text/javascript">
 var options = {
 	onFail: function(){
@@ -102,6 +104,11 @@ $('#reset').click(function(){
 	$myform.reset().fresh().focusFirst()
 });
 $myform.focusFirst();
+
+var msg = $("#msg").val();
+if(msg!=""&&msg==null){
+	alert(msg);
+}
 </script>
 <div style="text-align:center;">
 </div>
