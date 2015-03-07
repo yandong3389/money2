@@ -50,7 +50,7 @@ public class AdminLoginController {
 
 		if (list.size() > 0) {
 			request.getSession()
-					.setAttribute("username", list.get(0).getId());
+					.setAttribute("username", list.get(0).getName());
 			request.getSession().setAttribute("isAdmin", true);
 
 			List<User> userlist = nodeExtMapper.selectUserByzctime();
