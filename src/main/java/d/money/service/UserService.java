@@ -9,4 +9,6 @@ public interface UserService {
 	public List<User> selectByExample(UserExample example);
 
 	public int insert(User record);
+	
+	public int deleteByPrimaryKey(Integer id);
 }

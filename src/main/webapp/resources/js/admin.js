@@ -57,4 +57,15 @@ $(function(){
 		form1.action="/admin/saveArgs";
 		form1.submit();
 	});
+	
+	$("#deleteUser").click(function(){
+		var check = $('input[type="checkbox"][name="check"]:checked');
+		if(check.length==0){
+			alert("请选择数据");
+			return false;
+		}
+		var fomr1 = document.getElementById("form1");
+		form1.action="/admin/deleteUser";
+		form1.submit();
+	});
 });

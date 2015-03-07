@@ -1,5 +1,6 @@
 <%@ page language="java" pageEncoding="utf-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -44,9 +45,56 @@
   	<div class="content-box">
   		<!-- Start Content Box -->
       <div class="content-box-header">
-        <h3>截止</h3>
+        <h3>截止本周所注册人员</h3>
         <div class="clear"></div>
       </div>
+      <div class="tab-content default-tab" id="tab1">
+          <!-- This is the target div. id must match the href of this div's tab -->
+          <form id="form1" action="" method="post">
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  <input class="check-all" type="checkbox" />
+                </th>
+                <th>用户Id</th>
+                <th>姓名</th>
+                <th>身份证号</th>
+                <th>推荐人Id</th>
+                <th>接点人Id</th>
+                <th>tel</th>
+                <th>zcTime</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <td colspan="8">
+                  <div class="bulk-actions align-right">
+                    <a class="button" id="deleteUser" >&nbsp;&nbsp;&nbsp;&nbsp;删&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;除&nbsp;&nbsp;&nbsp;&nbsp;</a> </div>
+                  <!-- End .pagination -->
+                  <div class="clear"></div>
+                </td>
+              </tr>
+            </tfoot>
+            <tbody>
+                <c:forEach items="${userlist}" var="view" varStatus="status">
+	              <tr> 
+	                <td>
+	                  <input type="checkbox" name="check" value="${view.id}" />
+	                </td>
+	                <td>${view.id}</td>
+	                <td>${view.name}</td>
+	                <td>${view.identityCard}</td>
+	                <td>${view.jsrId}</td>
+	                <td>${view.jdrId}</td>
+	                <td>${view.tel}</td>
+	                <td><fmt:formatDate value="${view.zcTime}" pattern="yyyy年MM月dd日 HH:mm:ss" /></td>
+	              </tr>
+                </c:forEach>
+            </tbody>
+          </table>
+          </form>
+        </div>
   	</div>
   </div>
  </div>

@@ -32,4 +32,10 @@ public class UserServiceImpl implements UserService {
 		logger.debug("selectByExample....start...userInsert");
 		return userMapper.insert(record);
 	}
+
+	@Override
+	public int deleteByPrimaryKey(Integer id) {
+		logger.debug("deleteByPrimaryKey....start...user");
+		return userMapper.deleteByPrimaryKey(id);
+	}
 }

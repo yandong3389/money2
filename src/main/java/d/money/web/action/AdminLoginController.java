@@ -10,11 +10,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import d.money.common.utils.MD5Util;
+import d.money.mapper.NodeExtMapper;
 import d.money.pojo.base.Admin;
 import d.money.pojo.base.AdminExample;
 import d.money.pojo.base.Args;
 import d.money.pojo.base.ArgsExample;
+import d.money.pojo.base.User;
 import d.money.service.AdminService;
+import d.money.service.UserService;
 
 @Controller
 @RequestMapping("/admin")
@@ -22,6 +25,10 @@ public class AdminLoginController {
 
 	@Autowired
 	AdminService adminservice;
+	@Autowired
+	UserService userservice;
+	@Autowired
+	NodeExtMapper nodeExtMapper;
 
 	@RequestMapping("/login")
 	public String toAdminLogin(HttpServletRequest request) {
@@ -46,6 +53,10 @@ public class AdminLoginController {
 					.setAttribute("username", list.get(0).getName());
 			request.getSession().setAttribute("password", password);
 			request.getSession().setAttribute("isAdmin", true);
+
+			List<User> userlist = nodeExtMapper.selectUserByzctime();
+			request.setAttribute("userlist", userlist);
+
 			return "money/adminmain1";
 		} else {
 			request.setAttribute("message", "用户名或密码错误");
@@ -54,8 +65,19 @@ public class AdminLoginController {
 	}
 
 	@RequestMapping("main1")
-	public String skipMain1() {
+	public String skipMain1(HttpServletRequest request) {
+		List<User> list = nodeExtMapper.selectUserByzctime();
+		request.setAttribute("userlist", list);
 		return "money/adminmain1";
+	}
+
+	@RequestMapping("deleteUser")
+	public String deleteUser(HttpServletRequest request) {
+		String[] check = request.getParameterValues("check");
+		for (int i = 0; i < check.length; i++) {
+			userservice.deleteByPrimaryKey(Integer.valueOf(check[i]));
+		}
+		return this.skipMain1(request);
 	}
 
 	@RequestMapping("main2")

@@ -14,5 +14,4 @@ public interface AdminService {
 	public List<Args> selectByExmple(ArgsExample example);
 	
 	public int updateByPrimaryKey(Args args);
-
 }
