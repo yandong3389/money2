@@ -20,7 +20,7 @@
   <div id="sidebar">
     <div id="sidebar-wrapper">
       <h1 id="sidebar-title"><a href="#">Simpla Admin</a></h1>
-      <a href="http://www.865171.cn"><img id="logo" src="<%=request.getContextPath() %>/resources/images/logo.png" alt="Simpla Admin logo" /></a>
+      <a href="javascript:void(0);"><img id="logo" src="<%=request.getContextPath() %>/resources/images/logo.png" alt="Simpla Admin logo" /></a>
       <div id="profile-links"> 您好, <a href="#" title="Edit your profile">${sessionScope.username}</a><br />
         <br />
         <a href="#" title="View the Site">进入网站</a> | <a href="#" title="Sign Out">退出</a> 
