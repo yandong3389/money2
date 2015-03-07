@@ -17,6 +17,7 @@ import d.money.pojo.base.AdminExample;
 import d.money.pojo.base.User;
 import d.money.pojo.base.UserExample;
 import d.money.service.AdminService;
+import d.money.service.MoneyCalculateService;
 import d.money.service.UserService;
 
 @Controller
@@ -27,6 +28,8 @@ public class UserLoginController {
 	UserService userservice;
 	@Autowired
 	AdminService adminservice;
+	@Autowired
+	MoneyCalculateService moneyservice;
 
 	@RequestMapping("/login")
 	public void toAdminLogin(HttpServletRequest request, PrintWriter pw) {
@@ -39,6 +42,8 @@ public class UserLoginController {
 
 		List<User> list = userservice.selectByExample(example);
 		if (list.size() > 0) {
+			request.getSession().setAttribute("username", id);
+			request.getSession().setAttribute("isAdmin", false);
 			pw.print("success");
 		} else {
 			pw.print("error");
@@ -87,7 +92,7 @@ public class UserLoginController {
 	@RequestMapping("/regUser")
 	public String regUser(User user, HttpServletRequest request) {
 		String code = request.getParameter("code");
-		if("".equals(code)||code==null){
+		if ("".equals(code) || code == null) {
 			return "money/registerInvite";
 		}
 		return "money/register";
@@ -121,6 +126,10 @@ public class UserLoginController {
 			List<User> list1 = userservice.selectByExample(example);
 			String id = String.valueOf(list1.get(0).getId());
 			request.setAttribute("id", id);
+
+			// 计算奖金，节点
+			// moneyservice.insertNode(id, 10000);
+
 			return "money/registerSuccess";
 		}
 	}
