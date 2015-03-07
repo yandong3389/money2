@@ -89,7 +89,7 @@
 	                </td>
 	                <td>${status.count}</td>
 	                <td>${week.userId}</td>
-	                <td>${week.userId}</td>
+	                <td>${week.name}</td>
 	                <td>${week.money}</td>
 	                <td>
 	                <c:if test="${week.flag == 1}">无奖金</c:if>

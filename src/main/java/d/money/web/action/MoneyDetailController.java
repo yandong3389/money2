@@ -31,11 +31,8 @@ public class MoneyDetailController {
 	@RequestMapping("/userIndex")
 	public ModelAndView toNode(HttpServletRequest request, HttpServletResponse response) {
 		
-		// TODO 当前登录用户ID
-		// int uid = Integer.valueOf(String.valueOf(request.getSession().getAttribute("userId")));
-		
-		// TODO 
-		int uid = 1;
+		// 当前登录用户ID
+		int uid = Integer.valueOf(String.valueOf(request.getSession().getAttribute("username")));
 		
 		// 取得当前用户下的所有节点数据(包含当前用户)
 		List<d.money.common.utils.Node> nodes = moneyDetailService.getDefaultTree(uid);

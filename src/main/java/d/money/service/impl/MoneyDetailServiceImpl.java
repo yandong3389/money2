@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ import d.money.mapper.base.MoneyHistoryMapper;
 import d.money.mapper.base.NodeMapper;
 import d.money.mapper.base.UserMapper;
 import d.money.mapper.base.WeekEndMapper;
+import d.money.pojo.WeekEndView;
 import d.money.pojo.base.Args;
 import d.money.pojo.base.MoneyHistory;
 import d.money.pojo.base.MoneyHistoryExample;
@@ -183,7 +185,7 @@ public class MoneyDetailServiceImpl implements MoneyDetailService {
 	 * 最后一期奖金结算数据
 	 * @return
 	 */
-	public List<WeekEnd> getWeekEnds(int currentPage, int perPage){
+	public List<WeekEndView> getWeekEnds(int currentPage, int perPage){
 		
         // 默认期数为1
         int weekCount = 1;
@@ -208,7 +210,23 @@ public class MoneyDetailServiceImpl implements MoneyDetailService {
         weekEndExample.setMysqlOffset(PageUtil.getStartRecord(currentPage, perPage));
 		
         // 取得最后一期奖金结算数据
-		return weekEndMapper.selectByExample(weekEndExample);
+		List<WeekEnd> result = weekEndMapper.selectByExample(weekEndExample);
+		
+		List<WeekEndView> weekEndViews = new ArrayList<WeekEndView>();
+		
+		WeekEndView weekEndView = null;
+		
+		for (WeekEnd weekEnd : result) {
+			
+			weekEndView = new WeekEndView();
+			
+			BeanUtils.copyProperties(weekEnd, weekEndView);
+			
+			weekEndView.setName(userMapper.selectByPrimaryKey(weekEndView.getUserId()).getName());
+			
+			weekEndViews.add(weekEndView);
+		}
+		return weekEndViews;
 	}
 	
 	/**

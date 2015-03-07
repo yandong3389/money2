@@ -18,10 +18,10 @@ import com.alibaba.fastjson.JSONObject;
 import d.money.common.utils.PageUtil;
 import d.money.common.utils.StringUtil;
 import d.money.pojo.MoneyHistoryView;
+import d.money.pojo.WeekEndView;
 import d.money.pojo.base.Args;
 import d.money.pojo.base.MoneyHistory;
 import d.money.pojo.base.User;
-import d.money.pojo.base.WeekEnd;
 import d.money.service.MoneyDetailService;
 
 @Controller
@@ -33,11 +33,8 @@ public class AdminMoneyDetailController {
 	@RequestMapping("/userIndexAdmin")
 	public ModelAndView toNode(HttpServletRequest request, HttpServletResponse response) {
 		
-		// TODO 当前登录用户ID
-		// int uid = Integer.valueOf(String.valueOf(request.getSession().getAttribute("userId")));
-		
-		// TODO 
-		int uid = 1;
+		// 第一人 
+		int uid = 10000;
 		
 		// 取得当前用户下的所有节点数据(包含当前用户)
 		List<d.money.common.utils.Node> nodes = moneyDetailService.getDefaultTree(uid);
@@ -132,7 +129,7 @@ public class AdminMoneyDetailController {
 		
 		int total = moneyDetailService.getWeekEndsCount();
 		
-		List<WeekEnd> weekEnds = moneyDetailService.getWeekEnds(currentPage, perpage);
+		List<WeekEndView> weekEnds = moneyDetailService.getWeekEnds(currentPage, perpage);
 		
         // 分页请求数据URL地址
         String url = "toMoneyWeek?";
