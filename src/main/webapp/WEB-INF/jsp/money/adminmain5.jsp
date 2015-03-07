@@ -13,7 +13,7 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/simpla.jquery.configuration.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/facebox.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.wysiwyg.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/money/adminmain4.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/money/adminmain5.js"></script>
 </head>
 <body>
 <div id="body-wrapper">
@@ -32,8 +32,8 @@
             <li><a href="/admin/main1">注册用户审核</a></li>
             <li><a href="/userIndexAdmin">推荐系统图</a></li>
             <li><a href="/admin/main3">奖金比例配置</a></li>
-            <li><a href="/toMoneyWeek" class="current">奖金发放</a></li>
-            <li><a href="/toUserList">用户信息</a></li>
+            <li><a href="/toMoneyWeek">奖金发放</a></li>
+            <li><a href="/toUserList" class="current">用户信息</a></li>
           </ul>
         </li>
       </ul>
@@ -66,8 +66,8 @@
                 <th>序号</th>
                 <th>用户ID</th>
                 <th>姓名</th>
-                <th>奖金金额</th>
-                <th>发放状态</th>
+                <th>地址</th>
+                <th>注册时间</th>
                 <th>操作</th>
               </tr>
             </thead>
@@ -81,27 +81,15 @@
               </tr>
             </tfoot>
             <tbody>
-                <c:forEach items="${weekEnds}" var="week" varStatus="status">
-	              <tr <c:if test="${week.flag == 1}">style="background-color: white;border-bottom: 1px solid #E2E2E2;"</c:if>
-	                <c:if test="${week.flag == 2}">style="background-color: rgb(255, 27, 27);border-bottom: 1px solid #E2E2E2;"</c:if>
-	                <c:if test="${week.flag == 3}">style="background-color: rgb(0, 238, 0);border-bottom: 1px solid #E2E2E2;"</c:if>> 
-	                <td>
-	                  <input type="checkbox" />
-	                </td>
+                <c:forEach items="${users}" var="user" varStatus="status">
+	              <tr> 
+	                <td><input type="checkbox" /></td>
 	                <td>${status.count}</td>
-	                <td>${week.userId}</td>
-	                <td>${week.name}</td>
-	                <td>${week.money}</td>
-	                <td>
-	                <c:if test="${week.flag == 1}">无奖金</c:if>
-	                <c:if test="${week.flag == 2}">有奖金，未发放</c:if>
-	                <c:if test="${week.flag == 3}">有奖金，已发放</c:if>
-	                </td>
-	                <td>
-	                   <c:if test="${week.flag == 2}">
-	                       <a class="button" href="javascript:void(0)" pkid="${week.pkId}" name="weekBtn">点击发放</a>
-	                   </c:if>
-	                </td>
+	                <td>${user.id}</td>
+	                <td>${user.name}</td>
+	                <td>${user.address}</td>
+	                <td><fmt:formatDate value="${user.zcTime}" pattern="yyyy年MM月dd日 HH:mm:ss" /></td>
+	                <td><a class="button" href="javascript:void(0)" pkid="${user.id}" name="updateBtn">修改用户资料</a></td>
 	              </tr>
                 </c:forEach>
             </tbody>

@@ -77,7 +77,7 @@ $(function() {
 		
 		var userId = $(this).attr("userId");
 		
-		window.open('toMoneyDetail?userId='+ userId,'_blank')
+		window.open('toMoneyDetail?userId='+ userId,'_blank');
 	});
 	
 	targets.live('mouseenter', function() {

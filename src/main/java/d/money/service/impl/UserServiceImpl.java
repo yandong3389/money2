@@ -21,6 +21,16 @@ public class UserServiceImpl implements UserService {
 	private static final Logger logger = LoggerFactory
 			.getLogger(AdminServiceImpl.class);
 
+	public int countByExample(UserExample example) {
+		logger.debug("selectByExample....start...userselectByExample");
+		return userMapper.countByExample(example);
+	}
+	public User selectByPrimaryKey(int userId){
+		return userMapper.selectByPrimaryKey(userId);
+	}
+	public int updateByExampleSelective(User user, UserExample example){
+		return userMapper.updateByExampleSelective(user, example);
+	}
 	@Override
 	public List<User> selectByExample(UserExample example) {
 		logger.debug("selectByExample....start...userselectByExample");

@@ -23,7 +23,7 @@
       <a href="javascript:void(0);"><img id="logo" src="<%=request.getContextPath() %>/resources/images/logo.png" alt="Simpla Admin logo" /></a>
       <div id="profile-links"> 您好, <a href="#" title="Edit your profile">${sessionScope.username}</a><br />
         <br />
-        <a href="#" title="View the Site">进入网站</a> | <a href="#" title="Sign Out">退出</a> 
+        <a href="/admin/adminlogout" title="Sign Out">退出</a> 
       </div>
       <ul id="main-nav">
         <!-- Accordion Menu -->
@@ -33,6 +33,7 @@
             <li><a href="/userIndexAdmin" class="current">推荐系统图</a></li>
             <li><a href="/admin/main3">奖金比例配置</a></li>
             <li><a href="/toMoneyWeek">奖金发放</a></li>
+            <li><a href="/toUserList">用户信息</a></li>
           </ul>
         </li>
       </ul>
