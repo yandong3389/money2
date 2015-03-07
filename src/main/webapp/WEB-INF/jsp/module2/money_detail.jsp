@@ -29,20 +29,6 @@
     <!-- End .shortcut-buttons-set -->
     <div class="clear"></div>
     <!-- End .clear -->
-<%--         用户ID：${userinfo.id}<br/> --%>
-<%--     用户姓名：${userinfo.name}<br/> --%>
-<%--     身份证：${userinfo.identityCard}<br/> --%>
-<%-- 介绍人：${userinfo.jsrId}<br/> --%>
-<%-- 接点人：${userinfo.jdrId}<br/> --%>
-<%-- 农行卡号：${userinfo.nhCard}<br/> --%>
-<%-- 电话：${userinfo.tel}<br/> --%>
-<%-- 地址：${userinfo.address}<br/> --%>
-<%-- 邮编：${userinfo.code}<br/> --%>
-<%-- 性别：${userinfo.sex}<br/> --%>
-<%-- 汇款时间：${userinfo.hkTime}<br/> --%>
-<%-- 管理密码：${userinfo.adminCode}<br/> --%>
-<%-- 备注：${userinfo.comment}<br/> --%>
-<%-- 注册时间：${userinfo.zcTime}<br/> --%>
     
     <div class="content-box">
       <!-- Start Content Box -->
@@ -67,14 +53,6 @@
             	<td><label>接点人：${userinfo.jdrId}</label></td>
             	<td><label>农行卡号：${userinfo.nhCard}</label></td>
             	</tr>
-            	<%-- 电话：${userinfo.tel}<br/> --%>
-<%-- 地址：${userinfo.address}<br/> --%>
-<%-- 邮编：${userinfo.code}<br/> --%>
-<%-- 性别：${userinfo.sex}<br/> --%>
-<%-- 汇款时间：${userinfo.hkTime}<br/> --%>
-<%-- 管理密码：${userinfo.adminCode}<br/> --%>
-<%-- 备注：${userinfo.comment}<br/> --%>
-<%-- 注册时间：${userinfo.zcTime}<br/> --%>
             	<tr>
             		<td><label>电话：${userinfo.tel}</label></td>
             		<td><label>地址：${userinfo.address}</label></td>
