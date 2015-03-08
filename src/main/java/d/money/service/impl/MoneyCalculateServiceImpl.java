@@ -112,9 +112,12 @@ public class MoneyCalculateServiceImpl implements MoneyCalculateService {
 
 		List<Node> nodes = new ArrayList<Node>();
 
-		while (node.getParentId() != 0) {
-			nodes.add(node.getParentNode());
-			node = node.getParentNode();
+		if (node != null) {
+			
+			while (node.getParentId() != 0) {
+				nodes.add(node.getParentNode());
+				node = node.getParentNode();
+			}
 		}
 
 		return nodes;
