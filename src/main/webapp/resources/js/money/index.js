@@ -22,6 +22,8 @@ $(function() {
 		}
 		if (jsonData.children[1] != undefined) {
 			showChild(jsonData.children[1], jsonData.id, false);
+		} else {
+			$("#ul_" + jsonData.id).append('<li name="empty" style="width: 8em;"></li>');
 		}
 	}
 	
@@ -65,6 +67,10 @@ $(function() {
 			}
 			if (node.children[1] != undefined) {
 				showChild(node.children[1], node.id, false);
+			} else {
+				// 占位
+				// <li id="li_10006" style="width: 4em;"></li>
+				$("#ul_" + node.id).append('<li name="empty" style="width: 8em;"></li>');
 			}
 		}
 
