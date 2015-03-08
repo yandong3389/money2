@@ -73,8 +73,10 @@ public class MoneyDetailController {
 		if(!"".equals(newPass)&&null!=newPass){
 			user.setPassword(MD5Util.MD5(newPass));
 		}
-		userservice.updateByPrimaryKeySelective(user);
-		
+		int i = userservice.updateByPrimaryKeySelective(user);
+		if(i>0){
+			request.setAttribute("msg", "保存成功");
+		}
 		UserExample example = new UserExample();
 		example.createCriteria().andIdEqualTo(uid);
 		List<User> userinfo = userservice.selectByExample(example);

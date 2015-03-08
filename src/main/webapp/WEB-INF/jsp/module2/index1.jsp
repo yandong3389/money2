@@ -109,6 +109,7 @@
     </div>
   </div>
   </div>
+  <input type="hidden" id="msg" value="${msg }" />
   <!-- End #main-content -->
 </div>
 </body>

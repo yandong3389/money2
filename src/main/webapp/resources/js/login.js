@@ -12,6 +12,13 @@
  */
 
 $(function(){
+	
+	var msg = $("#msg").val();
+	if(msg!=null&&msg!=""){
+		alert(msg);
+		return false;
+	}
+	
 	$("#login").click(function() {
 		var username = $("#username").val();
 		var password = $("#password").val();

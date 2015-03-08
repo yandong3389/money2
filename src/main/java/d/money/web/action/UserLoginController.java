@@ -13,8 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import d.money.common.utils.MD5Util;
-import d.money.pojo.base.Admin;
-import d.money.pojo.base.AdminExample;
 import d.money.pojo.base.User;
 import d.money.pojo.base.UserExample;
 import d.money.service.AdminService;
