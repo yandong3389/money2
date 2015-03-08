@@ -63,7 +63,7 @@ $(function() {
 			if (node.children[0] != undefined) {
 				showChild(node.children[0], node.id, true);
 			}
-			if (jsonData.children[1] != undefined) {
+			if (node.children[1] != undefined) {
 				showChild(node.children[1], node.id, false);
 			}
 		}

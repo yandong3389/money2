@@ -74,7 +74,8 @@ public class MoneyCalculateServiceImpl implements MoneyCalculateService {
 		// 1:推荐、2:直系、3:旁系
 		history30.setType(1);
 		history30.setCreateDate(new Date());
-
+		moneyHistoryMapper.insert(history30);
+		
 		// 如果有直系节点
 		if (node20 != null) {
 			
