@@ -19,7 +19,7 @@ body{font:normal 15px/1.5 Arial, Helvetica, Free Sans, sans-serif;color: #222;ba
 </style>
 </head>
 <body>
-<input type="hidden" value="${msg}" id="msg" />
+<input type="hidden" value="${msg}" id="errMsg" />
 <div class="row">
   <div class="eightcol last">
     <!-- Begin Form -->
@@ -105,7 +105,7 @@ $('#reset').click(function(){
 });
 $myform.focusFirst();
 
-var msg = $("#msg").val();
+var msg = $("#errMsg").val();
 if(msg!=""&&msg!=null){
 	alert(msg);
 }

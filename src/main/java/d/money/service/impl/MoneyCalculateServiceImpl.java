@@ -14,6 +14,7 @@ import d.money.mapper.NodeExtMapper;
 import d.money.mapper.base.MoneyHistoryMapper;
 import d.money.mapper.base.NodeMapper;
 import d.money.pojo.base.MoneyHistory;
+import d.money.pojo.base.NodeExample;
 import d.money.service.MoneyCalculateService;
 
 @Service
@@ -26,6 +27,9 @@ public class MoneyCalculateServiceImpl implements MoneyCalculateService {
 	@Autowired
 	MoneyHistoryMapper moneyHistoryMapper;
 
+	public int countByExample(NodeExample example) {
+		return nodeMapper.countByExample(example);
+	}
 	
 	/**
 	 * 插入node数据
@@ -50,8 +54,9 @@ public class MoneyCalculateServiceImpl implements MoneyCalculateService {
 	/**
 	 * 更新奖金数据,记录奖金获取历史
 	 * @param nodeId 本次追加节点ID(当前新增加的用户ID)
+	 * @param 介绍人ID(30%获取人)
 	 */
-	public void updateMoney (int nodeId) {
+	public void updateMoney (int nodeId, int jsrId) {
 		
 		// 取得所有节点数据
 		List<Node> allNodeList = nodeExtMapper.selectByExample(null);
@@ -60,7 +65,7 @@ public class MoneyCalculateServiceImpl implements MoneyCalculateService {
 		NodeUtil.convertParent(allNodeList);
 		
 		// 推荐人
-		int node30Id = NodeUtil.getNodeById(allNodeList, nodeId).getParentId();
+//		int node30Id = NodeUtil.getNodeById(allNodeList, nodeId).getParentId();
 		
 		// 直系人
 		Node node20 = this.get20Node(allNodeList, nodeId);
@@ -70,7 +75,7 @@ public class MoneyCalculateServiceImpl implements MoneyCalculateService {
 		
 		// 插入推荐奖金数据
 		MoneyHistory history30 = new MoneyHistory();
-		history30.setId(node30Id);
+		history30.setId(jsrId);
 		// 1:推荐、2:直系、3:旁系
 		history30.setType(1);
 		history30.setCreateDate(new Date());

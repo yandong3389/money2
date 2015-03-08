@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import d.money.common.utils.MD5Util;
+import d.money.pojo.base.NodeExample;
 import d.money.pojo.base.User;
 import d.money.pojo.base.UserExample;
 import d.money.service.AdminService;
@@ -115,7 +116,19 @@ public class UserLoginController {
 			request.setAttribute("msg", "此姓名已注册，请换另一个名字，例张三1、张三2");
 			return "money/register";
 		}
-
+		
+		// 如果该接点人下已经存在两个节点，不能再指定其为接点人！ 
+		NodeExample exampleNodeExample = new NodeExample();
+		exampleNodeExample.createCriteria().andParentIdEqualTo(Integer.parseInt(user.getJdrId()));
+		
+		// 取得该 接点人下的节点个数
+		int parentNodeCount = moneyservice.countByExample(exampleNodeExample);
+		
+		if (parentNodeCount >= 2) {
+			request.setAttribute("msg", "该接点人下已经存在两个节点，不能再指定其为接点人！");
+			return "money/register";
+		}
+		
 		user.setPassword(MD5Util.MD5(user.getPassword()));
 		user.setZcTime(new Date());
 		int i = userservice.insert(user);
@@ -130,7 +143,7 @@ public class UserLoginController {
 			// 计算奖金，节点
 			moneyservice.insertNode(Integer.valueOf(id),
 					Integer.valueOf(list1.get(0).getJdrId()));
-			moneyservice.updateMoney(Integer.valueOf(id));
+			moneyservice.updateMoney(Integer.valueOf(id), Integer.valueOf(user.getJsrId()));
 
 			return "money/registerSuccess";
 		}
