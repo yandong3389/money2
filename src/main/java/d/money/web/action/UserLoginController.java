@@ -74,9 +74,10 @@ public class UserLoginController {
 	@RequestMapping("/confirmUser")
 	public void confirmUser(HttpServletRequest request, PrintWriter pw) {
 		String inviteCode = request.getParameter("code");
-		AdminExample example = new AdminExample();
-		example.createCriteria().andSigninCodeEqualTo(inviteCode);
-		List<Admin> list = adminservice.selectByExample(example);
+		UserExample example = new UserExample();
+
+		example.createCriteria().andAdminCodeEqualTo(inviteCode);
+		List<User> list = userservice.selectByExample(example);
 		if (list.size() > 0) {
 			pw.print("success");
 		} else {
