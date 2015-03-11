@@ -31,7 +31,7 @@ body{font:normal 15px/1.5 Arial, Helvetica, Free Sans, sans-serif;color: #222;ba
       	</tr>
       	<tr>
       		<td><div><label>密码:</label><input id="pass" name="password" type="password"/></div></td>
-      		<td><div><label>汇款时间:</label><input id="hkTime" name="hkTime" class="datepicker" data-ideal="date" type="text" placeholder="秒/分/时/月/日/年"/></div></td>
+      		<td><div><label>汇款时间:</label><input id="hkTime" name="hkTime" class="datepicker" data-ideal="date" type="text" placeholder="月/日/年"/></div></td>
       	</tr>
       	<tr>
       		<td><div><label>介绍人Id:</label><input id="jsrId" name="jsrId" type="text"/></div></td>
@@ -39,7 +39,7 @@ body{font:normal 15px/1.5 Arial, Helvetica, Free Sans, sans-serif;color: #222;ba
       	</tr>
       	<tr>
       		<td><div><label>农行卡号:</label><input id="nhCard" name="nhCard" type="text"/></div></td>
-      		<td><div><label>邮编:</label><input id="code" name="code" type="text"/></div></td>
+      		<td><div><label>邮编:</label><input id="code" name="code" type="text" maxlength="6"/></div></td>
       	</tr>
       	<tr>
       		<td><div><label>电话号:</label><input id="tel" name="tel" type="text"/></div></td>

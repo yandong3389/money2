@@ -92,9 +92,10 @@
 			<mvc:mapping path="/welcome*" />
 			<mvc:mapping path="/treeMenu*" />
 			<mvc:mapping path="/role**/**" />
-			<mvc:mapping path="/user**/**" />
+<!-- 			<mvc:mapping path="/user**/**" /> -->
+			<mvc:mapping path="/user*" />
 			<mvc:mapping path="/module**/**" />
-			<mvc:mapping path="/**/**" />
+<!-- 			<mvc:mapping path="/**/**" /> -->
 			<bean class="d.money.web.interceptor.AuthenticatorInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>

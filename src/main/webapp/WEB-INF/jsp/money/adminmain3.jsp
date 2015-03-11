@@ -85,8 +85,8 @@
                 </td>
                 <td><input type="text" value="${args.bonus}" id="t_bonus" disabled="disabled" style="width:80px;border:0;background: #f3f3f3;" /></td>
                 <td><input type="text" value="${args.tjBonusPercent}" id="t_tjBonusPercent" disabled="disabled" style="width:80px;border:0;background: #f3f3f3;" /></td>
-                <td><input type="text" value="${args.zxBonusPercent}" id="t_pxBonusPercent" disabled="disabled" style="width:80px;border:0;background: #f3f3f3;" /></td>
-                <td><input type="text" value="${args.pxBonusPercent}" id="t_zxBonusPercent" disabled="disabled" style="width:80px;border:0;background: #f3f3f3;" /></td>
+                <td><input type="text" value="${args.zxBonusPercent}" id="t_zxBonusPercent" disabled="disabled" style="width:80px;border:0;background: #f3f3f3;" /></td>
+                <td><input type="text" value="${args.pxBonusPercent}" id="t_pxBonusPercent" disabled="disabled" style="width:80px;border:0;background: #f3f3f3;" /></td>
                 <td>
                 	<input type="text" value="${args.comment}" id="t_comment" disabled="disabled" style="width:180px;border:0;background: #f3f3f3;" />
                 </td>
