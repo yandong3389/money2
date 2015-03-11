@@ -35,6 +35,6 @@ public interface MoneyCalculateService {
 	 * @param id 本次追加节点ID
 	 * @return
 	 */
-	public Node get20Node(List<Node> dataList, int id);
+	public List<Node> get20Node(List<Node> dataList, int id);
 
 }
