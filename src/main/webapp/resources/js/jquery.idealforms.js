@@ -1231,6 +1231,7 @@ $.extend( IdealForms.prototype, {
         }
       },
       submit: function( e ) {
+    	  debugger;
         if ( !self.isValid() ) {
           e.preventDefault()
           o.onFail()
@@ -1335,6 +1336,7 @@ $.extend( IdealForms.prototype, {
 
       $datepicker.each(function() {
         var userInput = o.inputs[ this.name ]
+        debugger;
         var data = userInput && userInput.data && userInput.data.date
         var format = data ? data.replace( 'yyyy', 'yy' ) : 'mm/dd/yy'
 
