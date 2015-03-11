@@ -94,6 +94,7 @@
 			<mvc:mapping path="/role**/**" />
 <!-- 			<mvc:mapping path="/user**/**" /> -->
 			<mvc:mapping path="/user*" />
+			<mvc:mapping path="/admin/*" />
 			<mvc:mapping path="/module**/**" />
 <!-- 			<mvc:mapping path="/**/**" /> -->
 			<bean class="d.money.web.interceptor.AuthenticatorInterceptor"></bean>

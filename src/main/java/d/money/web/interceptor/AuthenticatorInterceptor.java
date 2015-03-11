@@ -37,14 +37,18 @@ public class AuthenticatorInterceptor implements HandlerInterceptor {
 		// request.getServerName());
 		//
 		// System.out.println("preHandle3.................");
+		String url = request.getRequestURL().toString();
+		if (url.contains("login")||(url.contains("signup"))) {
+			return true;
+		}
+		System.out.println(url);
+
 		String username = (String) request.getSession()
 				.getAttribute("username");
 		if ("".equals(username) || null == username) {
 			response.sendRedirect("/");
 			return false;
 		}
-		String url = request.getRequestURL().toString();
-		System.out.println(url);
 		return true;
 	}
 
