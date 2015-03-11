@@ -68,10 +68,10 @@ public class MoneyCalculateServiceImpl implements MoneyCalculateService {
 //		int node30Id = NodeUtil.getNodeById(allNodeList, nodeId).getParentId();
 		
 		// 直系人
-		Node node20 = this.get20Node(allNodeList, nodeId);
+		List<Node> node20List = this.get20Node(allNodeList, nodeId);
 
-		// 旁系人
-		List<Node> node5List = this.get5NodeList(node20);
+		// 旁系人(从最近的直系人开始往上算旁系)
+		List<Node> node5List = this.get5NodeList(node20List.get(0));
 		
 		// 插入推荐奖金数据
 		MoneyHistory history30 = new MoneyHistory();
@@ -82,15 +82,18 @@ public class MoneyCalculateServiceImpl implements MoneyCalculateService {
 		moneyHistoryMapper.insert(history30);
 		
 		// 如果有直系节点
-		if (node20 != null) {
+		if (CollectionUtils.isNotEmpty(node20List)) {
 			
-			// 插入直系奖金数据
-			MoneyHistory history20 = new MoneyHistory();
-			history20.setId(node20.getId());
-			// 1:推荐、2:直系、3:旁系
-			history20.setType(2);
-			history20.setCreateDate(new Date());
-			moneyHistoryMapper.insert(history20);
+			for (Node node : node20List) {
+				
+				// 插入直系奖金数据
+				MoneyHistory history20 = new MoneyHistory();
+				history20.setId(node.getId());
+				// 1:推荐、2:直系、3:旁系
+				history20.setType(2);
+				history20.setCreateDate(new Date());
+				moneyHistoryMapper.insert(history20);
+			}
 		}
 		
 		// 有旁系节点
@@ -135,11 +138,15 @@ public class MoneyCalculateServiceImpl implements MoneyCalculateService {
 	 * @param id 本次追加节点ID
 	 * @return
 	 */
-	public Node get20Node(List<Node> dataList, int id) {
+	public List<Node> get20Node(List<Node> dataList, int id) {
 
 		Node thisNode = NodeUtil.getNodeById(dataList, id);
 
-		return get20Node(dataList, thisNode, thisNode.getLevel());
+		List<Node> result = new ArrayList<Node>();
+		
+		get20Node(dataList, thisNode, thisNode.getLevel(), result);
+		
+		return result;
 	}
 
 	/**
@@ -149,13 +156,13 @@ public class MoneyCalculateServiceImpl implements MoneyCalculateService {
 	 * @param level
 	 * @return
 	 */
-	private Node get20Node(List<Node> dataList, Node node, int level) {
+	private void get20Node(List<Node> dataList, Node node, int level, List<Node> result) {
 
 		Node parentNode = node.getParentNode();
 
 		// 无节点符合要求
 		if (parentNode == null || node.getParentId() == 0) {
-			return null;
+			return;
 		}
 
 		List<Node> nodeChildren = parentNode.getChildren();
@@ -171,15 +178,15 @@ public class MoneyCalculateServiceImpl implements MoneyCalculateService {
 					&& childNodesCount0 <= childNodesCount1 && childNodesCount1 > 0)
 					|| (nodeChildren.get(1).getId() == node.getId()
 							&& childNodesCount1 <= childNodesCount0 && childNodesCount0 > 0)) {
-				return node.getParentNode();
+				result.add(node.getParentNode());
+				get20Node(dataList, node.getParentNode(), level, result);
 			} else {
-				return get20Node(dataList, node.getParentNode(), level);
+				get20Node(dataList, node.getParentNode(), level, result);
 			}
 
 		} else if (nodeChildren.size() == 1) {
-			return get20Node(dataList, node.getParentNode(), level);
+			get20Node(dataList, node.getParentNode(), level, result);
 		}
-		return null;
 	}
 
 }

@@ -214,13 +214,29 @@ public class AppTest2 extends TestCase {
 				dataList2, dataList3, dataList4, dataList5, dataList6,
 				dataList7, dataList8, dataList9, dataList10, dataList11,
 				dataList12, dataList13, dataList14);
+//		List<List<Node>> testList = Arrays.asList(dataList6);
 
 		for (List<Node> list : testList) {
 
 			int nodeId = list.size();
-			Node node = impl.get20Node(list, nodeId);
-			System.out.println(nodeId + " = "
-					+ (node == null ? "无节点符合要求！" : node.getId()));
+			List<Node> node20List = impl.get20Node(list, nodeId);
+			
+			Node node = null;
+
+			if (CollectionUtils.isNotEmpty(node20List)) {
+				
+				node = node20List.get(0);
+				
+				System.out.print(nodeId + " = ");
+				for (Node temp : node20List) {
+					System.out.print(temp.getId()+"、");
+				}
+				System.out.println();
+				
+			} else {
+				
+				System.out.println(nodeId + " = 无节点符合要求！");
+			}
 			
 			if (node != null) {
 				
