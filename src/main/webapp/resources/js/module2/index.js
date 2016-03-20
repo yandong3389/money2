@@ -15,19 +15,127 @@ $(function() {
 	$("#xflow").append('<li id="li_' + jsonData.id + '"><div class=\'root section\'><a userId="'+ jsonData.id +'" rel="tooltip" title="'+ userinfo1 +'" href=\'javascript:void(0);\'>' 
 			+ jsonData.id + '</a></div></li>');
 
+	
 	if (jsonData.children != undefined) {
 		
-		if (jsonData.children[0] != undefined) {
-			showChild(jsonData.children[0], jsonData.id, true);
-		}
-		if (jsonData.children[1] != undefined) {
-			showChild(jsonData.children[1], jsonData.id, false);
-		} else {
-			$("#ul_" + jsonData.id).append('<li name="empty" style="width: 8em;"></li>');
-		}
+		preShowChild(jsonData);
+		
+		return;
+//		
+//		// 子节点数量
+//		var length = jsonData.children.length;
+//		
+//		// 只有一个，只显示左侧(或只显示中间)
+//		if (length == 1) {
+//			
+//			if (jsonData.children[0] != undefined) {
+//				showChild(jsonData.children[0], jsonData.id, "first");
+//			}
+//			// 占位
+//			$("#ul_" + jsonData.id).append('<li name="empty" style="width: 8em;"></li>');
+//		} else if (length == 2) {
+//		
+//			// 两个,一左一右
+//			if (jsonData.children[0] != undefined) {
+//				showChild(jsonData.children[0], jsonData.id, "first");
+//			}
+//			
+//			if (jsonData.children[1] != undefined) {
+//				showChild(jsonData.children[1], jsonData.id, "last");
+//			}
+//		} else if (length == 3) {
+//		
+//			// 三个，一左一中一右
+//			if (jsonData.children[0] != undefined) {
+//				showChild(jsonData.children[0], jsonData.id, "first");
+//			}
+//			if (jsonData.children[1] != undefined) {
+//				showChild(jsonData.children[1], jsonData.id, "center");
+//			}
+//			if (jsonData.children[2] != undefined) {
+//				showChild(jsonData.children[2], jsonData.id, "last");
+//			}
+//		} else {
+//			// 四个，一左两中一右
+//			if (jsonData.children[0] != undefined) {
+//				showChild(jsonData.children[0], jsonData.id, "first");
+//			}
+//			if (jsonData.children[1] != undefined) {
+//				showChild(jsonData.children[1], jsonData.id, "center");
+//			}
+//			if (jsonData.children[2] != undefined) {
+//				showChild(jsonData.children[2], jsonData.id, "center");
+//			}
+//			if (jsonData.children[3] != undefined) {
+//				showChild(jsonData.children[3], jsonData.id, "last");
+//			}
+//		}
+		
+//		if (jsonData.children[0] != undefined) {
+//			showChild(jsonData.children[0], jsonData.id, true);
+//		}
+//		
+//		if (jsonData.children[1] != undefined) {
+//			showChild(jsonData.children[1], jsonData.id, false);
+//		} else {
+//			$("#ul_" + jsonData.id).append('<li name="empty" style="width: 8em;"></li>');
+//		}
 	}
 	
-	function showChild(node, parentId, isLeft) {
+	function preShowChild(node){
+		
+		// 子节点数量
+		var length = node.children.length;
+		
+		// 只有一个，只显示左侧(或只显示中间)
+		if (length == 1) {
+			
+			if (node.children[0] != undefined) {
+				showChild(node.children[0], node.id, "first");
+			}
+			// 占位
+			$("#ul_" + node.id).append('<li name="empty" style="width: 8em;"></li>');
+		} else if (length == 2) {
+		
+			// 两个,一左一右
+			if (node.children[0] != undefined) {
+				showChild(node.children[0], node.id, "first");
+			}
+			
+			if (node.children[1] != undefined) {
+				showChild(node.children[1], node.id, "last");
+			}
+		} else if (length == 3) {
+		
+			// 三个，一左一中一右
+			if (node.children[0] != undefined) {
+				showChild(node.children[0], node.id, "first");
+			}
+			if (node.children[1] != undefined) {
+				showChild(node.children[1], node.id, "center");
+			}
+			if (node.children[2] != undefined) {
+				showChild(node.children[2], node.id, "last");
+			}
+		} else {
+			// 四个，一左两中一右
+			if (node.children[0] != undefined) {
+				showChild(node.children[0], node.id, "first");
+			}
+			if (node.children[1] != undefined) {
+				showChild(node.children[1], node.id, "center");
+			}
+			if (node.children[2] != undefined) {
+				showChild(node.children[2], node.id, "center");
+			}
+			if (node.children[3] != undefined) {
+				showChild(node.children[3], node.id, "last");
+			}
+		}
+		
+	}
+	
+	function showChild(node, parentId, className) {
 
 		if ($("ul[id='ul_" + parentId + "']").length == 0) {
 			$("li[id='li_" + parentId + "']").append("<ul id='ul_" + parentId + "'></ul>");
@@ -50,28 +158,79 @@ $(function() {
 		}
 
 		// 是否为左节点
-		if (isLeft) {
-			nodeHtml = "<li id='li_" + node.id + "'><div class='first' " + (hasChildren ? 'id="section"' : '') + "><a userId=\""+node.id+"\"  title=\""
+//		if (isLeft) {
+//			nodeHtml = "<li id='li_" + node.id + "'><div class='first' " + (hasChildren ? 'id="section"' : '') + "><a userId=\""+node.id+"\"  title=\""
+//					+ userinfo + "\" rel=\"tooltip\" href='javascript:void(0);'>" + node.id + "</a></div></li>";
+//		} else {
+			nodeHtml = "<li id='li_" + node.id + "'><div class='"+ className +"' " + (hasChildren ? 'id="section"' : '') + "><a userId=\""+node.id+"\"  title=\""
 					+ userinfo + "\" rel=\"tooltip\" href='javascript:void(0);'>" + node.id + "</a></div></li>";
-		} else {
-			nodeHtml = "<li id='li_" + node.id + "'><div class='last' " + (hasChildren ? 'id="section"' : '') + "><a userId=\""+node.id+"\"  title=\""
-					+ userinfo + "\" rel=\"tooltip\" href='javascript:void(0);'>" + node.id + "</a></div></li>";
-		}
+//		}
 		$("#ul_" + parentId).append(nodeHtml);
 		console.info("追加节点：" + nodeHtml);
 
 		if (hasChildren) {
-
-			if (node.children[0] != undefined) {
-				showChild(node.children[0], node.id, true);
-			}
-			if (node.children[1] != undefined) {
-				showChild(node.children[1], node.id, false);
-			} else {
-				// 占位
-				// <li id="li_10006" style="width: 4em;"></li>
-				$("#ul_" + node.id).append('<li name="empty" style="width: 8em;"></li>');
-			}
+			
+			preShowChild(node);
+//			// 子节点数量
+//			var length = node.children.length;
+//			
+//			// 只有一个，只显示左侧(或只显示中间)
+//			if (length == 1) {
+//				
+//				if (node.children[0] != undefined) {
+//					showChild(node.children[0], node.id, "first");
+//				}
+//				// 占位
+//				$("#ul_" + node.id).append('<li name="empty" style="width: 8em;"></li>');
+//			} else if (length == 2) {
+//			
+//				// 两个,一左一右
+//				if (node.children[0] != undefined) {
+//					showChild(node.children[0], node.id, "first");
+//				}
+//				
+//				if (node.children[1] != undefined) {
+//					showChild(node.children[1], node.id, "last");
+//				}
+//			} else if (length == 3) {
+//			
+//				// 三个，一左一中一右
+//				if (node.children[0] != undefined) {
+//					showChild(node.children[0], node.id, "first");
+//				}
+//				if (node.children[1] != undefined) {
+//					showChild(node.children[1], node.id, "center");
+//				}
+//				if (node.children[2] != undefined) {
+//					showChild(node.children[2], node.id, "last");
+//				}
+//			} else {
+//				// 四个，一左两中一右
+//				if (node.children[0] != undefined) {
+//					showChild(node.children[0], node.id, "first");
+//				}
+//				if (node.children[1] != undefined) {
+//					showChild(node.children[1], node.id, "center");
+//				}
+//				if (node.children[2] != undefined) {
+//					showChild(node.children[2], node.id, "center");
+//				}
+//				if (node.children[3] != undefined) {
+//					showChild(node.children[3], node.id, "last");
+//				}
+//			}
+			
+			
+//			if (node.children[0] != undefined) {
+//				showChild(node.children[0], node.id, true);
+//			}
+//			if (node.children[1] != undefined) {
+//				showChild(node.children[1], node.id, false);
+//			} else {
+//				// 占位
+//				// <li id="li_10006" style="width: 4em;"></li>
+//				$("#ul_" + node.id).append('<li name="empty" style="width: 8em;"></li>');
+//			}
 		}
 
 	}

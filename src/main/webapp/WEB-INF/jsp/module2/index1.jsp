@@ -7,16 +7,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>网站后台管理</title>
-<link rel="stylesheet" href="<c:url value="/resources/css/reset.css"/>" type="text/css" media="screen" />
-<link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>" type="text/css" media="screen" />
-<link rel="stylesheet" href="<c:url value="/resources/css/invalid.css"/>" type="text/css" media="screen" />
-<link rel="stylesheet" href="<c:url value="/resources/css/module2/org5.css"/>" type="text/css" media="screen" />
+<link rel="stylesheet" href="resources/css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="resources/css/style.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="resources/css/invalid.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="resources/css/module2/org5.css" type="text/css" media="screen" />
 <link rel="shortcut icon" href="resources/images/favicon.ico" />
-<script type="text/javascript" src="<c:url value="/resources/js/jquery-1.7.1.min.js"/>"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/simpla.jquery.configuration.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/facebox.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.wysiwyg.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/login.js"></script>
+<script type="text/javascript" src="resources/js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="resources/js/simpla.jquery.configuration.js"></script>
+<script type="text/javascript" src="resources/js/facebox.js"></script>
+<script type="text/javascript" src="resources/js/jquery.wysiwyg.js"></script>
+<script type="text/javascript" src="resources/js/login.js"></script>
 </head>
 <body>
 <div id="body-wrapper">

@@ -46,6 +46,10 @@ ul#xflow {
     background: url(../../images/left_split.png) 50% repeat-y;
     margin-left: 0;
 }
+#xflow div.center {
+    background: url(../../images/center_split.png) 50% repeat-y;
+    margin-right:0;
+}
 #xflow div.last {
     background: url(../../images/right_split.png) 50% repeat-y;
     margin-right:0;
