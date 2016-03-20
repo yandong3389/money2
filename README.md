@@ -3,7 +3,7 @@
 
 
 # 项目地址
-https://github.com/yandong3389/money.git
+https://github.com/yandong3389/money2.git
 
 
 # 关于框架
