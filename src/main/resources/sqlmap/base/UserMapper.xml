@@ -17,6 +17,10 @@
     <result column="admin_code" property="adminCode" jdbcType="VARCHAR" />
     <result column="comment" property="comment" jdbcType="VARCHAR" />
     <result column="zc_time" property="zcTime" jdbcType="TIMESTAMP" />
+    <result column="approve_flag" property="approveFlag" jdbcType="VARCHAR" />
+    <result column="approve_date" property="approveDate" jdbcType="TIMESTAMP" />
+    <result column="user_money" property="userMoney" jdbcType="INTEGER" />
+    <result column="proxy_flag" property="proxyFlag" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -78,7 +82,7 @@
   </sql>
   <sql id="Base_Column_List" >
     id, password, name, identity_card, jsr_id, jdr_id, nh_card, tel, address, code, sex, 
-    hk_time, admin_code, comment, zc_time
+    hk_time, admin_code, comment, zc_time, approve_flag, approve_date, user_money, proxy_flag
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="d.money.pojo.base.UserExample" >
     select
@@ -118,14 +122,16 @@
       identity_card, jsr_id, jdr_id, 
       nh_card, tel, address, 
       code, sex, hk_time, 
-      admin_code, comment, zc_time
-      )
+      admin_code, comment, zc_time, 
+      approve_flag, approve_date, user_money, 
+      proxy_flag)
     values (#{id,jdbcType=INTEGER}, #{password,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{identityCard,jdbcType=VARCHAR}, #{jsrId,jdbcType=VARCHAR}, #{jdrId,jdbcType=VARCHAR}, 
       #{nhCard,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
       #{code,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{hkTime,jdbcType=TIMESTAMP}, 
-      #{adminCode,jdbcType=VARCHAR}, #{comment,jdbcType=VARCHAR}, #{zcTime,jdbcType=TIMESTAMP}
-      )
+      #{adminCode,jdbcType=VARCHAR}, #{comment,jdbcType=VARCHAR}, #{zcTime,jdbcType=TIMESTAMP}, 
+      #{approveFlag,jdbcType=VARCHAR}, #{approveDate,jdbcType=TIMESTAMP}, #{userMoney,jdbcType=INTEGER}, 
+      #{proxyFlag,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="d.money.pojo.base.User" >
     insert into user
@@ -175,6 +181,18 @@
       <if test="zcTime != null" >
         zc_time,
       </if>
+      <if test="approveFlag != null" >
+        approve_flag,
+      </if>
+      <if test="approveDate != null" >
+        approve_date,
+      </if>
+      <if test="userMoney != null" >
+        user_money,
+      </if>
+      <if test="proxyFlag != null" >
+        proxy_flag,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -221,6 +239,18 @@
       </if>
       <if test="zcTime != null" >
         #{zcTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approveFlag != null" >
+        #{approveFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="approveDate != null" >
+        #{approveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userMoney != null" >
+        #{userMoney,jdbcType=INTEGER},
+      </if>
+      <if test="proxyFlag != null" >
+        #{proxyFlag,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -278,6 +308,18 @@
       <if test="record.zcTime != null" >
         zc_time = #{record.zcTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.approveFlag != null" >
+        approve_flag = #{record.approveFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approveDate != null" >
+        approve_date = #{record.approveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userMoney != null" >
+        user_money = #{record.userMoney,jdbcType=INTEGER},
+      </if>
+      <if test="record.proxyFlag != null" >
+        proxy_flag = #{record.proxyFlag,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -299,7 +341,11 @@
       hk_time = #{record.hkTime,jdbcType=TIMESTAMP},
       admin_code = #{record.adminCode,jdbcType=VARCHAR},
       comment = #{record.comment,jdbcType=VARCHAR},
-      zc_time = #{record.zcTime,jdbcType=TIMESTAMP}
+      zc_time = #{record.zcTime,jdbcType=TIMESTAMP},
+      approve_flag = #{record.approveFlag,jdbcType=VARCHAR},
+      approve_date = #{record.approveDate,jdbcType=TIMESTAMP},
+      user_money = #{record.userMoney,jdbcType=INTEGER},
+      proxy_flag = #{record.proxyFlag,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -349,6 +395,18 @@
       <if test="zcTime != null" >
         zc_time = #{zcTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="approveFlag != null" >
+        approve_flag = #{approveFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="approveDate != null" >
+        approve_date = #{approveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userMoney != null" >
+        user_money = #{userMoney,jdbcType=INTEGER},
+      </if>
+      <if test="proxyFlag != null" >
+        proxy_flag = #{proxyFlag,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -367,7 +425,11 @@
       hk_time = #{hkTime,jdbcType=TIMESTAMP},
       admin_code = #{adminCode,jdbcType=VARCHAR},
       comment = #{comment,jdbcType=VARCHAR},
-      zc_time = #{zcTime,jdbcType=TIMESTAMP}
+      zc_time = #{zcTime,jdbcType=TIMESTAMP},
+      approve_flag = #{approveFlag,jdbcType=VARCHAR},
+      approve_date = #{approveDate,jdbcType=TIMESTAMP},
+      user_money = #{userMoney,jdbcType=INTEGER},
+      proxy_flag = #{proxyFlag,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

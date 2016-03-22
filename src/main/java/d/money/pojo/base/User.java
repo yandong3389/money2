@@ -33,6 +33,14 @@ public class User {
 
     private Date zcTime;
 
+    private String approveFlag;
+
+    private Date approveDate;
+
+    private Integer userMoney;
+
+    private String proxyFlag;
+
     public Integer getId() {
         return id;
     }
@@ -153,6 +161,38 @@ public class User {
         this.zcTime = zcTime;
     }
 
+    public String getApproveFlag() {
+        return approveFlag;
+    }
+
+    public void setApproveFlag(String approveFlag) {
+        this.approveFlag = approveFlag == null ? null : approveFlag.trim();
+    }
+
+    public Date getApproveDate() {
+        return approveDate;
+    }
+
+    public void setApproveDate(Date approveDate) {
+        this.approveDate = approveDate;
+    }
+
+    public Integer getUserMoney() {
+        return userMoney;
+    }
+
+    public void setUserMoney(Integer userMoney) {
+        this.userMoney = userMoney;
+    }
+
+    public String getProxyFlag() {
+        return proxyFlag;
+    }
+
+    public void setProxyFlag(String proxyFlag) {
+        this.proxyFlag = proxyFlag == null ? null : proxyFlag.trim();
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -179,7 +219,11 @@ public class User {
             && (this.getHkTime() == null ? other.getHkTime() == null : this.getHkTime().equals(other.getHkTime()))
             && (this.getAdminCode() == null ? other.getAdminCode() == null : this.getAdminCode().equals(other.getAdminCode()))
             && (this.getComment() == null ? other.getComment() == null : this.getComment().equals(other.getComment()))
-            && (this.getZcTime() == null ? other.getZcTime() == null : this.getZcTime().equals(other.getZcTime()));
+            && (this.getZcTime() == null ? other.getZcTime() == null : this.getZcTime().equals(other.getZcTime()))
+            && (this.getApproveFlag() == null ? other.getApproveFlag() == null : this.getApproveFlag().equals(other.getApproveFlag()))
+            && (this.getApproveDate() == null ? other.getApproveDate() == null : this.getApproveDate().equals(other.getApproveDate()))
+            && (this.getUserMoney() == null ? other.getUserMoney() == null : this.getUserMoney().equals(other.getUserMoney()))
+            && (this.getProxyFlag() == null ? other.getProxyFlag() == null : this.getProxyFlag().equals(other.getProxyFlag()));
     }
 
     @Override
@@ -201,6 +245,10 @@ public class User {
         result = prime * result + ((getAdminCode() == null) ? 0 : getAdminCode().hashCode());
         result = prime * result + ((getComment() == null) ? 0 : getComment().hashCode());
         result = prime * result + ((getZcTime() == null) ? 0 : getZcTime().hashCode());
+        result = prime * result + ((getApproveFlag() == null) ? 0 : getApproveFlag().hashCode());
+        result = prime * result + ((getApproveDate() == null) ? 0 : getApproveDate().hashCode());
+        result = prime * result + ((getUserMoney() == null) ? 0 : getUserMoney().hashCode());
+        result = prime * result + ((getProxyFlag() == null) ? 0 : getProxyFlag().hashCode());
         return result;
     }
 }

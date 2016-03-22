@@ -1144,6 +1144,266 @@ public class UserExample {
             addCriterion("zc_time not between", value1, value2, "zcTime");
             return (Criteria) this;
         }
+
+        public Criteria andApproveFlagIsNull() {
+            addCriterion("approve_flag is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproveFlagIsNotNull() {
+            addCriterion("approve_flag is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproveFlagEqualTo(String value) {
+            addCriterion("approve_flag =", value, "approveFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproveFlagNotEqualTo(String value) {
+            addCriterion("approve_flag <>", value, "approveFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproveFlagGreaterThan(String value) {
+            addCriterion("approve_flag >", value, "approveFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproveFlagGreaterThanOrEqualTo(String value) {
+            addCriterion("approve_flag >=", value, "approveFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproveFlagLessThan(String value) {
+            addCriterion("approve_flag <", value, "approveFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproveFlagLessThanOrEqualTo(String value) {
+            addCriterion("approve_flag <=", value, "approveFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproveFlagLike(String value) {
+            addCriterion("approve_flag like", value, "approveFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproveFlagNotLike(String value) {
+            addCriterion("approve_flag not like", value, "approveFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproveFlagIn(List<String> values) {
+            addCriterion("approve_flag in", values, "approveFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproveFlagNotIn(List<String> values) {
+            addCriterion("approve_flag not in", values, "approveFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproveFlagBetween(String value1, String value2) {
+            addCriterion("approve_flag between", value1, value2, "approveFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproveFlagNotBetween(String value1, String value2) {
+            addCriterion("approve_flag not between", value1, value2, "approveFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproveDateIsNull() {
+            addCriterion("approve_date is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproveDateIsNotNull() {
+            addCriterion("approve_date is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproveDateEqualTo(Date value) {
+            addCriterion("approve_date =", value, "approveDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproveDateNotEqualTo(Date value) {
+            addCriterion("approve_date <>", value, "approveDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproveDateGreaterThan(Date value) {
+            addCriterion("approve_date >", value, "approveDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproveDateGreaterThanOrEqualTo(Date value) {
+            addCriterion("approve_date >=", value, "approveDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproveDateLessThan(Date value) {
+            addCriterion("approve_date <", value, "approveDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproveDateLessThanOrEqualTo(Date value) {
+            addCriterion("approve_date <=", value, "approveDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproveDateIn(List<Date> values) {
+            addCriterion("approve_date in", values, "approveDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproveDateNotIn(List<Date> values) {
+            addCriterion("approve_date not in", values, "approveDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproveDateBetween(Date value1, Date value2) {
+            addCriterion("approve_date between", value1, value2, "approveDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproveDateNotBetween(Date value1, Date value2) {
+            addCriterion("approve_date not between", value1, value2, "approveDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserMoneyIsNull() {
+            addCriterion("user_money is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserMoneyIsNotNull() {
+            addCriterion("user_money is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserMoneyEqualTo(Integer value) {
+            addCriterion("user_money =", value, "userMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserMoneyNotEqualTo(Integer value) {
+            addCriterion("user_money <>", value, "userMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserMoneyGreaterThan(Integer value) {
+            addCriterion("user_money >", value, "userMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserMoneyGreaterThanOrEqualTo(Integer value) {
+            addCriterion("user_money >=", value, "userMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserMoneyLessThan(Integer value) {
+            addCriterion("user_money <", value, "userMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserMoneyLessThanOrEqualTo(Integer value) {
+            addCriterion("user_money <=", value, "userMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserMoneyIn(List<Integer> values) {
+            addCriterion("user_money in", values, "userMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserMoneyNotIn(List<Integer> values) {
+            addCriterion("user_money not in", values, "userMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserMoneyBetween(Integer value1, Integer value2) {
+            addCriterion("user_money between", value1, value2, "userMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserMoneyNotBetween(Integer value1, Integer value2) {
+            addCriterion("user_money not between", value1, value2, "userMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andProxyFlagIsNull() {
+            addCriterion("proxy_flag is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProxyFlagIsNotNull() {
+            addCriterion("proxy_flag is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProxyFlagEqualTo(String value) {
+            addCriterion("proxy_flag =", value, "proxyFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andProxyFlagNotEqualTo(String value) {
+            addCriterion("proxy_flag <>", value, "proxyFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andProxyFlagGreaterThan(String value) {
+            addCriterion("proxy_flag >", value, "proxyFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andProxyFlagGreaterThanOrEqualTo(String value) {
+            addCriterion("proxy_flag >=", value, "proxyFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andProxyFlagLessThan(String value) {
+            addCriterion("proxy_flag <", value, "proxyFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andProxyFlagLessThanOrEqualTo(String value) {
+            addCriterion("proxy_flag <=", value, "proxyFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andProxyFlagLike(String value) {
+            addCriterion("proxy_flag like", value, "proxyFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andProxyFlagNotLike(String value) {
+            addCriterion("proxy_flag not like", value, "proxyFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andProxyFlagIn(List<String> values) {
+            addCriterion("proxy_flag in", values, "proxyFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andProxyFlagNotIn(List<String> values) {
+            addCriterion("proxy_flag not in", values, "proxyFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andProxyFlagBetween(String value1, String value2) {
+            addCriterion("proxy_flag between", value1, value2, "proxyFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andProxyFlagNotBetween(String value1, String value2) {
+            addCriterion("proxy_flag not between", value1, value2, "proxyFlag");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

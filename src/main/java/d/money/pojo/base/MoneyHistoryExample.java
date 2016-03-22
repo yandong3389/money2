@@ -245,6 +245,126 @@ public class MoneyHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andAwardMoneyIsNull() {
+            addCriterion("award_money is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAwardMoneyIsNotNull() {
+            addCriterion("award_money is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAwardMoneyEqualTo(Integer value) {
+            addCriterion("award_money =", value, "awardMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andAwardMoneyNotEqualTo(Integer value) {
+            addCriterion("award_money <>", value, "awardMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andAwardMoneyGreaterThan(Integer value) {
+            addCriterion("award_money >", value, "awardMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andAwardMoneyGreaterThanOrEqualTo(Integer value) {
+            addCriterion("award_money >=", value, "awardMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andAwardMoneyLessThan(Integer value) {
+            addCriterion("award_money <", value, "awardMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andAwardMoneyLessThanOrEqualTo(Integer value) {
+            addCriterion("award_money <=", value, "awardMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andAwardMoneyIn(List<Integer> values) {
+            addCriterion("award_money in", values, "awardMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andAwardMoneyNotIn(List<Integer> values) {
+            addCriterion("award_money not in", values, "awardMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andAwardMoneyBetween(Integer value1, Integer value2) {
+            addCriterion("award_money between", value1, value2, "awardMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andAwardMoneyNotBetween(Integer value1, Integer value2) {
+            addCriterion("award_money not between", value1, value2, "awardMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkUserIdIsNull() {
+            addCriterion("link_user_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkUserIdIsNotNull() {
+            addCriterion("link_user_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkUserIdEqualTo(Integer value) {
+            addCriterion("link_user_id =", value, "linkUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkUserIdNotEqualTo(Integer value) {
+            addCriterion("link_user_id <>", value, "linkUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkUserIdGreaterThan(Integer value) {
+            addCriterion("link_user_id >", value, "linkUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkUserIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("link_user_id >=", value, "linkUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkUserIdLessThan(Integer value) {
+            addCriterion("link_user_id <", value, "linkUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkUserIdLessThanOrEqualTo(Integer value) {
+            addCriterion("link_user_id <=", value, "linkUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkUserIdIn(List<Integer> values) {
+            addCriterion("link_user_id in", values, "linkUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkUserIdNotIn(List<Integer> values) {
+            addCriterion("link_user_id not in", values, "linkUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkUserIdBetween(Integer value1, Integer value2) {
+            addCriterion("link_user_id between", value1, value2, "linkUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkUserIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("link_user_id not between", value1, value2, "linkUserId");
+            return (Criteria) this;
+        }
+
         public Criteria andTypeIsNull() {
             addCriterion("type is null");
             return (Criteria) this;

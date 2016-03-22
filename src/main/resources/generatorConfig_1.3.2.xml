@@ -46,11 +46,12 @@
 <!--       <table tableName="user_info" domainObjectName="userInfo" enableCountByExample="true" enableSelectByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"></table> -->
 
         <!-- 数据库表名列表 -->
-	<table tableName="user_info" />
-	<table tableName="sm_function_info" />
+<!-- 	<table tableName="user_info" /> -->
+<!-- 	<table tableName="sm_function_info" /> -->
+<!-- 	<table tableName="money_history" /> -->
 	<table tableName="user" />
-	<table tableName="admin" />
-	<table tableName="args" />
+<!-- 	<table tableName="admin" /> -->
+<!-- 	<table tableName="args" /> -->
 	
 	</context>
 </generatorConfiguration>
