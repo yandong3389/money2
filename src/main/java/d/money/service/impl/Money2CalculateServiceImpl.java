@@ -14,16 +14,12 @@ import d.money.common.utils.StringUtil;
 import d.money.mapper.NodeExtMapper;
 import d.money.mapper.base.MoneyHistoryMapper;
 import d.money.mapper.base.NodeMapper;
-import d.money.mapper.base.UserInfoMapper;
 import d.money.mapper.base.UserMapper;
 import d.money.pojo.base.MoneyHistory;
 import d.money.pojo.base.NodeExample;
 import d.money.pojo.base.User;
 import d.money.pojo.base.UserExample;
-import d.money.pojo.base.UserInfo;
-import d.money.pojo.base.UserInfoExample;
 import d.money.service.Money2CalculateService;
-import d.money.service.MoneyCalculateService;
 
 @Service
 public class Money2CalculateServiceImpl implements Money2CalculateService {
@@ -40,6 +36,47 @@ public class Money2CalculateServiceImpl implements Money2CalculateService {
 	public int countByExample(NodeExample example) {
 		return nodeMapper.countByExample(example);
 	}
+	
+	
+	public String selectProxyByUserId(int userId) {
+		
+		User user = userMapper.selectByPrimaryKey(userId);
+		
+		int money = 0;
+		int proxyCount = 0;
+		int clientCount = 0;
+		
+		
+		// 
+		String proxyFlag = user.getProxyFlag();
+		
+		if ("0".equals(proxyFlag)||StringUtil.isEmpty(proxyFlag)) {
+			
+			
+			int userMoney = user.getUserMoney();
+
+			
+			UserExample userExample = new UserExample();
+			userExample.createCriteria().andJsrIdEqualTo(String.valueOf(userId));
+			
+			int userClientCount = userMapper.countByExample(userExample);
+			
+			int userProxyCount = 0; 
+			
+		}
+		if ("1".equals(proxyFlag)) {
+			
+		}
+		if ("2".equals(proxyFlag)) {
+			
+		}
+		if ("3".equals(proxyFlag)) {
+			
+		}
+		
+		return null;
+	}
+	
 	
 	/**
 	 * 插入node数据
@@ -237,17 +274,8 @@ public class Money2CalculateServiceImpl implements Money2CalculateService {
             moneyHistoryMapper.insert(history2);
         }
         
-        
-        
         // TODO ****************************给所有上级重新计算代理级别（非代理可能升县代、县代可能市代、市代可能升省代）****************************
-        // TODO 自动根据业绩升级还是人为设置？
-        for (Node node : parentNodeList) {
-            
-            // 投资金额？、县代x个？、客户x个，是指推荐还是接点？
-            
-            
-            
-        }
+        // TODO 需要个人用户在资料详情页面进行【申请x代】（符合条件的情况下）
 	}
 	
 	private void getChildsUserIdList(Node node, List<Integer> result){
