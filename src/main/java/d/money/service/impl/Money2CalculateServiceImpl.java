@@ -37,46 +37,109 @@ public class Money2CalculateServiceImpl implements Money2CalculateService {
 		return nodeMapper.countByExample(example);
 	}
 	
-	
+	/**
+	 * 计算某人符合几级代理的升级条件
+	 * @param userId
+	 * @return int 如果返回0，表示不满足升级条件，非0，表示满足升到x级的代理条件
+	 */
 	public String selectProxyByUserId(int userId) {
 		
+		// 当前用户信息对象
 		User user = userMapper.selectByPrimaryKey(userId);
 		
-		int money = 0;
-		int proxyCount = 0;
-		int clientCount = 0;
-		
-		
-		// 
+		// TODO 用户当前代理级别 ,改用int 存储代理级别，默认0
 		String proxyFlag = user.getProxyFlag();
 		
+		// TODO 取得升级要求
+		int money = 0;
+		int clientCount = 0;
+		int proxyCount = 0;
+		
+		// 当前用户投资额
+		int userMoney = user.getUserMoney();
+		
+		// 投资金额不足
+		if (userMoney < money) {
+			// 不能升级
+			return "0";
+		}
+		
+		UserExample userExample = new UserExample();
+		userExample.createCriteria().andJsrIdEqualTo(String.valueOf(userId));
+		
+		// TODO 当前用户推荐客户数（客户和代理感觉有重复，如果是代理了还计不计算客户数量？排除掉代理的推荐下线？）
+		int userClientCount = userMapper.countByExample(userExample);
+		
+		// 客户数量不足
+		if (clientCount < userClientCount) {
+			// 不能升级
+			return "0";
+		}
+		
+		// TODO 要求有10个县代，那我下边有9个县代，1个市代，算不算合格？
+		List<User> usersTemp = userMapper.selectByExample(userExample);
+		
+		// 当前用户县代理数
+		int xianProxyCount = 0;
+		// 当前用户市代理数
+		int shiProxyCount = 0;
+		// 当前用户省代理数
+		int shengProxyCount = 0;
+		
+		for (User user2 : usersTemp) {
+			
+			if ("1".equals(user2.getProxyFlag())) {
+				xianProxyCount ++;
+			}
+			if ("2".equals(user2.getProxyFlag())) {
+				shiProxyCount ++;
+			}
+			if ("3".equals(user2.getProxyFlag())) {
+				shengProxyCount ++;
+			}
+		}
+		
+		// TODO 符合要求的代理个数
+		int nowProxyCount = 0;
+		
+		// 非代理
 		if ("0".equals(proxyFlag)||StringUtil.isEmpty(proxyFlag)) {
 			
-			
-			int userMoney = user.getUserMoney();
-
-			
-			UserExample userExample = new UserExample();
-			userExample.createCriteria().andJsrIdEqualTo(String.valueOf(userId));
-			
-			int userClientCount = userMapper.countByExample(userExample);
-			
-			int userProxyCount = 0; 
-			
+			// 升县代不验证代理级别个数
+			// 可以升级到1级（县代）
+			return "1";
 		}
+		// 某人下边的代理按推荐路线进行计算
 		if ("1".equals(proxyFlag)) {
 			
+			// 当前县代升市代
+			nowProxyCount = xianProxyCount + shiProxyCount + shengProxyCount;
+			
+			// 下级代理个数不够
+			if (nowProxyCount >= proxyCount) {
+				// 可以升级到2级（市代）
+				return "2";
+			}
 		}
 		if ("2".equals(proxyFlag)) {
 			
+			// 当前市代升省代
+			nowProxyCount = shiProxyCount + shengProxyCount;
+			
+			// 下级代理个数不够
+			if (nowProxyCount >= proxyCount) {
+				// 可以升级到3级（省代）
+				return "3";
+			}
 		}
 		if ("3".equals(proxyFlag)) {
 			
+			// 当前省代，顶级不处理
 		}
 		
-		return null;
+		// 不能升级
+		return "0";
 	}
-	
 	
 	/**
 	 * 插入node数据
