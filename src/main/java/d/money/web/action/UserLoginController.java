@@ -140,11 +140,6 @@ public class UserLoginController {
 			String id = String.valueOf(list1.get(0).getId());
 			request.setAttribute("id", id);
 
-			// 计算奖金，节点
-			moneyservice.insertNode(Integer.valueOf(id),
-					Integer.valueOf(list1.get(0).getJdrId()));
-			moneyservice.updateMoney(Integer.valueOf(id), Integer.valueOf(user.getJsrId()));
-
 			return "money/registerSuccess";
 		}
 	}

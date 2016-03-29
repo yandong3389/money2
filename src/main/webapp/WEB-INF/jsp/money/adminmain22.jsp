@@ -100,7 +100,7 @@
     <div class="content-box">
       <!-- Start Content Box -->
       <div class="content-box-header">
-        <h3>推荐奖金总额：${data30}；直系奖金总额：${data20}；旁系奖金总额：${data5}；</h3>
+        <h3>级差奖金总额：${data30}；隔代奖金总额：${data20}；代理奖金总额：${data5}；</h3>
         <div class="clear"></div>
       </div>
       <!-- End .content-box-header -->
@@ -139,9 +139,9 @@
 	                <td>${status.count}</td>
 	                <td>${view.id}</td>
 	                <td>
-	                <c:if test="${view.type == 1}">推荐奖金</c:if>
-	                <c:if test="${view.type == 2}">直系奖金</c:if>
-	                <c:if test="${view.type == 3}">旁系奖金</c:if>
+	                <c:if test="${view.type == 1}">级差奖金</c:if>
+	                <c:if test="${view.type == 2}">隔代奖金</c:if>
+	                <c:if test="${view.type == 3}">代理奖金</c:if>
 	                </td>
 	                <td>${view.money}</td>
 	                <td><fmt:formatDate value="${view.createDate}" pattern="yyyy-MM-dd HH:mm:ss" /></td>

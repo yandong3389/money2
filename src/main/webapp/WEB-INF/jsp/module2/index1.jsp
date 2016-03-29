@@ -44,7 +44,7 @@
   <div id="main-content">
   <div class="content-box">
     <div class="content-box-header">
-	  <h2>个人基本信息修改</h2>
+	  <h3>个人基本信息修改</h3>
     </div>
     <div class="tab-content default-tab" id="tab1" style="display: block;">
       <form id="form1" action="" method="post">
@@ -92,14 +92,32 @@
         		<input class="text-input medium-input" style="background: #f3f3f3" type="text" id="zcTime" name="zcTime" value="<fmt:formatDate value="${userinfo.zcTime}" pattern="yyyy年MM月dd日 HH:mm:ss" />" disabled="disabled" /></td>
         	</tr>
         	<tr>
-        		<td cowspan="5"><label>备注</label>
+        		<td colspan="5"><label>备注</label>
         		<input class="text-input large-input" type="text" id="comment" name="comment" value="${userinfo.comment}" /></td>
         	</tr>
         	<tr>
-          		<td></td><td></td><td><div class="bulk-actions align-right">
+          		<td></td>
+          		<td></td>
+          		<td><div class="bulk-actions align-right">
           		  <input type="hidden" value="" name="id" id="id" />
               		<input class="button" type="button" value="保     存" id="userModify" style="width:100px;" />
           		</div></td>
+          	</tr>
+        	<tr class="alt-row" style="border-top: 1px solid #ffffff;">
+          		<td colspan="2"><span style="font-size: 14px;font-weight: bold;color:red;">投资金额：${result.userMoney}元；&nbsp;&nbsp;客户数量：${result.userClientCount}个；&nbsp;&nbsp;下级省代：${result.shengProxyCount}个；&nbsp;&nbsp;下级市代：${result.shiProxyCount}个；&nbsp;&nbsp;下级县代：${result.xianProxyCount}个；</span></td>
+          		<td>
+          		<div class="bulk-actions align-right">
+          		<span style="font-size: 14px;font-weight: bold;color:red;">当前代理等级：
+	          		<c:if test="${userinfo.proxyFlag == '0'}">非代理</c:if>
+	          		<c:if test="${userinfo.proxyFlag == '1'}">县代</c:if>
+	          		<c:if test="${userinfo.proxyFlag == '2'}">市代</c:if>
+	          		<c:if test="${userinfo.proxyFlag == '3'}">省代</c:if>
+          		</span>
+          		<c:if test="${result.upProxyLevelFlag != '0'}">
+          		  <input class="button" type="button" value="申请升级" id="upLevelBtn" style="width:100px;" />
+          		</c:if>
+          		</div>
+          		</td>
           	</tr>
         </tbody></table>
         </fieldset>

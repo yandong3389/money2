@@ -49,7 +49,8 @@
 <!-- 	<table tableName="user_info" /> -->
 <!-- 	<table tableName="sm_function_info" /> -->
 <!-- 	<table tableName="money_history" /> -->
-	<table tableName="user" />
+	<table tableName="user_proxy_application_info" />
+<!-- 	<table tableName="user" /> -->
 <!-- 	<table tableName="admin" /> -->
 <!-- 	<table tableName="args" /> -->
 	

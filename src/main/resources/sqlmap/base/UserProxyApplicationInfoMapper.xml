@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="d.money.mapper.base.UserProxyApplicationInfoMapper" >
+  <resultMap id="BaseResultMap" type="d.money.pojo.base.UserProxyApplicationInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="up_proxy_flag" property="upProxyFlag" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="approve_flag" property="approveFlag" jdbcType="VARCHAR" />
+    <result column="approve_date" property="approveDate" jdbcType="TIMESTAMP" />
+    <result column="user_money" property="userMoney" jdbcType="INTEGER" />
+    <result column="user_client_count" property="userClientCount" jdbcType="INTEGER" />
+    <result column="user_sheng_proxy_count" property="userShengProxyCount" jdbcType="INTEGER" />
+    <result column="user_shi_proxy_count" property="userShiProxyCount" jdbcType="INTEGER" />
+    <result column="user_xian_proxy_count" property="userXianProxyCount" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, user_id, up_proxy_flag, create_date, approve_flag, approve_date, user_money, 
+    user_client_count, user_sheng_proxy_count, user_shi_proxy_count, user_xian_proxy_count
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="d.money.pojo.base.UserProxyApplicationInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_proxy_application_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="mysqlOffset != null and mysqlOffset>=0" >
+      limit #{mysqlOffset} , #{mysqlLength}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_proxy_application_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_proxy_application_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="d.money.pojo.base.UserProxyApplicationInfoExample" >
+    delete from user_proxy_application_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="d.money.pojo.base.UserProxyApplicationInfo" >
+    insert into user_proxy_application_info (id, user_id, up_proxy_flag, 
+      create_date, approve_flag, approve_date, 
+      user_money, user_client_count, user_sheng_proxy_count, 
+      user_shi_proxy_count, user_xian_proxy_count)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{upProxyFlag,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{approveFlag,jdbcType=VARCHAR}, #{approveDate,jdbcType=TIMESTAMP}, 
+      #{userMoney,jdbcType=INTEGER}, #{userClientCount,jdbcType=INTEGER}, #{userShengProxyCount,jdbcType=INTEGER}, 
+      #{userShiProxyCount,jdbcType=INTEGER}, #{userXianProxyCount,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="d.money.pojo.base.UserProxyApplicationInfo" >
+    insert into user_proxy_application_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="upProxyFlag != null" >
+        up_proxy_flag,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="approveFlag != null" >
+        approve_flag,
+      </if>
+      <if test="approveDate != null" >
+        approve_date,
+      </if>
+      <if test="userMoney != null" >
+        user_money,
+      </if>
+      <if test="userClientCount != null" >
+        user_client_count,
+      </if>
+      <if test="userShengProxyCount != null" >
+        user_sheng_proxy_count,
+      </if>
+      <if test="userShiProxyCount != null" >
+        user_shi_proxy_count,
+      </if>
+      <if test="userXianProxyCount != null" >
+        user_xian_proxy_count,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="upProxyFlag != null" >
+        #{upProxyFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approveFlag != null" >
+        #{approveFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="approveDate != null" >
+        #{approveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userMoney != null" >
+        #{userMoney,jdbcType=INTEGER},
+      </if>
+      <if test="userClientCount != null" >
+        #{userClientCount,jdbcType=INTEGER},
+      </if>
+      <if test="userShengProxyCount != null" >
+        #{userShengProxyCount,jdbcType=INTEGER},
+      </if>
+      <if test="userShiProxyCount != null" >
+        #{userShiProxyCount,jdbcType=INTEGER},
+      </if>
+      <if test="userXianProxyCount != null" >
+        #{userXianProxyCount,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="d.money.pojo.base.UserProxyApplicationInfoExample" resultType="java.lang.Integer" >
+    select count(*) from user_proxy_application_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user_proxy_application_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.upProxyFlag != null" >
+        up_proxy_flag = #{record.upProxyFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.approveFlag != null" >
+        approve_flag = #{record.approveFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approveDate != null" >
+        approve_date = #{record.approveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userMoney != null" >
+        user_money = #{record.userMoney,jdbcType=INTEGER},
+      </if>
+      <if test="record.userClientCount != null" >
+        user_client_count = #{record.userClientCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.userShengProxyCount != null" >
+        user_sheng_proxy_count = #{record.userShengProxyCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.userShiProxyCount != null" >
+        user_shi_proxy_count = #{record.userShiProxyCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.userXianProxyCount != null" >
+        user_xian_proxy_count = #{record.userXianProxyCount,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user_proxy_application_info
+    set id = #{record.id,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      up_proxy_flag = #{record.upProxyFlag,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      approve_flag = #{record.approveFlag,jdbcType=VARCHAR},
+      approve_date = #{record.approveDate,jdbcType=TIMESTAMP},
+      user_money = #{record.userMoney,jdbcType=INTEGER},
+      user_client_count = #{record.userClientCount,jdbcType=INTEGER},
+      user_sheng_proxy_count = #{record.userShengProxyCount,jdbcType=INTEGER},
+      user_shi_proxy_count = #{record.userShiProxyCount,jdbcType=INTEGER},
+      user_xian_proxy_count = #{record.userXianProxyCount,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="d.money.pojo.base.UserProxyApplicationInfo" >
+    update user_proxy_application_info
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="upProxyFlag != null" >
+        up_proxy_flag = #{upProxyFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approveFlag != null" >
+        approve_flag = #{approveFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="approveDate != null" >
+        approve_date = #{approveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userMoney != null" >
+        user_money = #{userMoney,jdbcType=INTEGER},
+      </if>
+      <if test="userClientCount != null" >
+        user_client_count = #{userClientCount,jdbcType=INTEGER},
+      </if>
+      <if test="userShengProxyCount != null" >
+        user_sheng_proxy_count = #{userShengProxyCount,jdbcType=INTEGER},
+      </if>
+      <if test="userShiProxyCount != null" >
+        user_shi_proxy_count = #{userShiProxyCount,jdbcType=INTEGER},
+      </if>
+      <if test="userXianProxyCount != null" >
+        user_xian_proxy_count = #{userXianProxyCount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="d.money.pojo.base.UserProxyApplicationInfo" >
+    update user_proxy_application_info
+    set user_id = #{userId,jdbcType=INTEGER},
+      up_proxy_flag = #{upProxyFlag,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      approve_flag = #{approveFlag,jdbcType=VARCHAR},
+      approve_date = #{approveDate,jdbcType=TIMESTAMP},
+      user_money = #{userMoney,jdbcType=INTEGER},
+      user_client_count = #{userClientCount,jdbcType=INTEGER},
+      user_sheng_proxy_count = #{userShengProxyCount,jdbcType=INTEGER},
+      user_shi_proxy_count = #{userShiProxyCount,jdbcType=INTEGER},
+      user_xian_proxy_count = #{userXianProxyCount,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

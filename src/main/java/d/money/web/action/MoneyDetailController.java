@@ -2,6 +2,7 @@ package d.money.web.action;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,6 +11,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
@@ -23,6 +25,7 @@ import d.money.pojo.base.Args;
 import d.money.pojo.base.MoneyHistory;
 import d.money.pojo.base.User;
 import d.money.pojo.base.UserExample;
+import d.money.service.Money2CalculateService;
 import d.money.service.MoneyDetailService;
 import d.money.service.UserService;
 
@@ -33,6 +36,8 @@ public class MoneyDetailController {
 	MoneyDetailService moneyDetailService;
 	@Autowired
 	UserService userservice;
+	@Autowired
+	Money2CalculateService money2CalculateService;
 
 	@RequestMapping("/userIndex")
 	public ModelAndView toNode(HttpServletRequest request,
@@ -61,9 +66,30 @@ public class MoneyDetailController {
 		example.createCriteria().andIdEqualTo(uid);
 		List<User> user = userservice.selectByExample(example);
 		request.setAttribute("userinfo", user.get(0));
+		
+		// 是否可升级
+		Map<String, Object> result = money2CalculateService.selectProxyByUserId(uid);
+		request.setAttribute("result", result);
+		
 		return "module2/index1";
 	}
+	
+	/**
+	 * 申请升级代理等级
+	 * @param user
+	 * @param request
+	 * @return
+	 */
+    @RequestMapping(value="/upLevelProxy",  produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+	public String upLevelProxy(User user, HttpServletRequest request) {
+        
+        int uid = Integer.valueOf(String.valueOf(request.getSession().getAttribute("username")));
+	    
+        return money2CalculateService.saveUpLevelProxyInfo(uid);
+	}
 
+	
 	@RequestMapping("/userSave")
 	public String saveUser(User user, HttpServletRequest request) {
 		String newPass = request.getParameter("newPass");

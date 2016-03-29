@@ -97,4 +97,24 @@ $(function(){
 		form1.action = "/userSave";
 		form1.submit();
 	});
+	
+	$("#upLevelBtn").click(function(){
+		
+		$.ajax({
+			url:"upLevelProxy",
+			dataType:"text",
+			success:function(msg){
+				
+				if (msg == '1') {
+					alert("申请成功，请等待管理员进行审核！");
+				} else if (msg == '2') {
+					alert("已经提交申请，请不要重复提交！");
+				} else {
+					alert("目前还不符合升级条件！");
+				}
+			}
+		});
+		
+	});
+	
 });

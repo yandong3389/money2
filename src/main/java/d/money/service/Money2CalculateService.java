@@ -1,6 +1,7 @@
 package d.money.service;
 
 import java.util.List;
+import java.util.Map;
 
 import d.money.common.utils.Node;
 import d.money.pojo.base.NodeExample;
@@ -12,17 +13,33 @@ public interface Money2CalculateService {
     public int countByExample(NodeExample example);
     
     /**
-     * 插入node数据
+     * 保存用户申请升级代理数据
+     * @return
+     */
+    public String saveUpLevelProxyInfo (int userId);
+    
+    /**
+     * 计算某人符合几级代理的升级条件
+     * @param userId
+     * @return int 如果返回0，表示不满足升级条件，非0，表示满足升到x级的代理条件
+     */
+    public Map<String, Object> selectProxyByUserId(int userId);
+    
+    /**
+     * 1、插入node数据
+     * 2、标记为用户为审核通过
+     * 3、计算奖金
      * @param userId 当前新增加的用户ID
      * @param parentId 当前新增加的用户的接点人ID
      */
-    public void insertNode(int userId, int parentId);
+    public void saveApproveSuccess(int userId, int parentId);
     
     /**
-     * 更新奖金数据,记录奖金获取历史
-     * @param currentNodeId 本次追加节点ID(当前新增加的用户ID)
+     * 审核未通过，标记用户为审核未通过状态
+     * @param userId
+     * @param parentId
      */
-    public void updateMoney (int currentNodeId, int currentUserJsrId);
+    public void saveApproveFail(int userId);
     
     /**
      * 级差节点（获取一条线上的所有上级）

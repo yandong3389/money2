@@ -20,8 +20,6 @@ $(function() {
 		
 		preShowChild(jsonData);
 		
-		return;
-//		
 //		// 子节点数量
 //		var length = jsonData.children.length;
 //		
@@ -234,6 +232,7 @@ $(function() {
 		}
 
 	}
+	
 	
 	var targets = $('[rel~=tooltip]'), target = false, tooltip = false, title = false;
 
