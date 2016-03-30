@@ -5,23 +5,24 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>基里科技网站后台管理</title>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/reset.css" type="text/css" media="screen" />
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/style.css" type="text/css" media="screen" />
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/invalid.css" type="text/css" media="screen" />
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery-1.3.2.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/simpla.jquery.configuration.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/facebox.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.wysiwyg.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.datePicker.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.date.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin.js"></script>
+<base href="${base_path}" target="_self" />
+<link rel="stylesheet" href="resources/css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="resources/css/style.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="resources/css/invalid.css" type="text/css" media="screen" />
+<script type="text/javascript" src="resources/js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="resources/js/simpla.jquery.configuration.js"></script>
+<script type="text/javascript" src="resources/js/facebox.js"></script>
+<script type="text/javascript" src="resources/js/jquery.wysiwyg.js"></script>
+<script type="text/javascript" src="resources/js/jquery.datePicker.js"></script>
+<script type="text/javascript" src="resources/js/jquery.date.js"></script>
+<script type="text/javascript" src="resources/js/admin.js"></script>
 </head>
 <body>
 <div id="body-wrapper">
   <div id="sidebar">
     <div id="sidebar-wrapper">
       <h1 id="sidebar-title"><a href="#">Simpla Admin</a></h1>
-      <a href="http://www.865171.cn"><img id="logo" src="<%=request.getContextPath() %>/resources/images/logo.png" alt="Simpla Admin logo" /></a>
+      <a href="http://www.865171.cn"><img id="logo" src="resources/images/logo.png" alt="Simpla Admin logo" /></a>
       <div id="profile-links"> 您好, <a href="#" title="Edit your profile">${sessionScope.username}</a><br />
         <br />
         <a href="#" title="View the Site">进入网站</a> | <a href="#" title="Sign Out">退出</a> 

@@ -58,6 +58,32 @@ $(function(){
 		form1.submit();
 	});
 	
+	// 审核处理
+	$("a[name='appvoeBtn']").bind("click", function(){
+		
+		var userId = $(this).attr("userId");
+		var approveFlag = $(this).attr("approveFlag");
+		
+		$.ajax({
+			url:"/admin/doApprove",
+			data:{
+				userId:userId,
+				approveFlag:approveFlag
+			},
+			dataType:"text",
+			success:function(msg){
+				if (msg == "1") {
+					alert("操作成功!");
+					window.location.reload();
+				} else {
+					alert("操作失败!");
+					window.location.reload();
+				}
+			}
+		});
+	});
+	
+	
 	$("#deleteUser").click(function(){
 		var check = $('input[type="checkbox"][name="check"]:checked');
 		if(check.length==0){

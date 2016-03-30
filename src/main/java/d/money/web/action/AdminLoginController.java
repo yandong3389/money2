@@ -17,6 +17,7 @@ import d.money.pojo.base.AdminExample;
 import d.money.pojo.base.Args;
 import d.money.pojo.base.ArgsExample;
 import d.money.pojo.base.User;
+import d.money.pojo.base.UserExample;
 import d.money.service.AdminService;
 import d.money.service.UserService;
 
@@ -50,13 +51,19 @@ public class AdminLoginController {
 		List<Admin> list = adminservice.selectByExample(example);
 
 		if (list.size() > 0) {
-			request.getSession()
-					.setAttribute("username", list.get(0).getName());
+			request.getSession().setAttribute("username", list.get(0).getName());
 			request.getSession().setAttribute("isAdmin", true);
 
-			List<User> userlist = nodeExtMapper.selectUserByzctime();
-			request.setAttribute("userlist", userlist);
+//			List<User> userlist = nodeExtMapper.selectUserByzctime();
+//			request.setAttribute("userlist", userlist);
 
+			
+		     UserExample userExample = new UserExample();
+	        // 待审核的用户
+	        userExample.createCriteria().andApproveFlagEqualTo("1");
+	        List<User> users = userservice.selectByExample(userExample);
+	        request.setAttribute("userlist", users);
+			
 			return "money/adminmain1";
 		} else {
 			request.setAttribute("message", "用户名或密码错误");

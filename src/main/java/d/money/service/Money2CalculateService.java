@@ -56,17 +56,4 @@ public interface Money2CalculateService {
      */
     public User getNodeListForGD(int jsrId);
 
-    /**
-     * 代理节点（获取一条线上的所有上级）符合什么代理的要求就给什么代理对应的奖金
-     * @param dataList
-     * @param node
-     * @param level
-     * @return
-     */
-    public List<Node> getNodeListForDL(List<Node> dataList, Node node, int level, List<Node> result);
-
-
-
-
-
 }

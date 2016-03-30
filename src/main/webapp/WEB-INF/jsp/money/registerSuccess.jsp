@@ -5,15 +5,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>注册成功</title>
+<base href="${base_path}" target="_self" />
 <!--[if lt IE 9]>
-<script src="<%=request.getContextPath() %>/js/html5shiv.js"></script>
+<script src="js/html5shiv.js"></script>
 <![endif]-->
-<link href="<%=request.getContextPath() %>/resources/css/normalize.css" rel="stylesheet"/>
-<link href="<%=request.getContextPath() %>/resources/css/jquery-ui.css" rel="stylesheet"/>
-<link href="<%=request.getContextPath() %>/resources/css/jquery.idealforms.min.css" rel="stylesheet" media="screen"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/invalid.css" type="text/css" media="screen" />
+<link href="resources/css/normalize.css" rel="stylesheet"/>
+<link href="resources/css/jquery-ui.css" rel="stylesheet"/>
+<link href="resources/css/jquery.idealforms.min.css" rel="stylesheet" media="screen"/>
+<link rel="stylesheet" href="resources/css/invalid.css" type="text/css" media="screen" />
 <style type="text/css">
-body{font:normal 15px/1.5 Arial, Helvetica, Free Sans, sans-serif;color: #222;background:url(<%=request.getContextPath() %>/resources/images/pattern.png);overflow-y:scroll;padding:60px 0 0 0;}
+body{font:normal 15px/1.5 Arial, Helvetica, Free Sans, sans-serif;color: #222;background:url(resources/images/pattern.png);overflow-y:scroll;padding:60px 0 0 0;}
 #my-form{width:880px;margin:0 auto;border:1px solid #ccc;padding:3em;border-radius:3px;box-shadow:0 0 2px rgba(0,0,0,.2);}
 #comments{width:350px;height:100px;}
 </style>
@@ -37,10 +38,10 @@ body{font:normal 15px/1.5 Arial, Helvetica, Free Sans, sans-serif;color: #222;ba
     <!-- End Form -->
 </div>
 </div>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery-1.8.2.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery-ui.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.idealforms.js"></script>
-<script src="<%=request.getContextPath() %>/resources/js/login.js" type="text/javascript"></script>
+<script type="text/javascript" src="resources/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="resources/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="resources/js/jquery.idealforms.js"></script>
+<script src="resources/js/login.js" type="text/javascript"></script>
 <div style="text-align:center;">
 </div>
 </body>

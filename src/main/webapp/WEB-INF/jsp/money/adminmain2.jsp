@@ -7,13 +7,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>网站后台管理</title>
-<link rel="stylesheet" href="<c:url value="/resources/css/reset.css"/>" type="text/css" media="screen" />
-<link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>" type="text/css" media="screen" />
-<link rel="stylesheet" href="<c:url value="/resources/css/invalid.css"/>" type="text/css" media="screen" />
-<link rel="stylesheet" href="<c:url value="/resources/css/module2/org5.css"/>" type="text/css" media="screen" />
+<base href="${base_path}" target="_self" />
+<link rel="stylesheet" href="resources/css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="resources/css/style.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="resources/css/invalid.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="resources/css/module2/org5.css" type="text/css" media="screen" />
 <link rel="shortcut icon" href="resources/images/favicon.ico" />
-<script type="text/javascript" src="<c:url value="/resources/js/jquery-1.7.1.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/money/index.js"/>"></script>
+<script type="text/javascript" src="resources/js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="resources/js/money/index.js"></script>
 </head>
 <body>
 <div id="body-wrapper">
@@ -29,7 +30,8 @@
         <!-- Accordion Menu -->
         <li> <a href="javascript:void(0);" class="nav-top-item">管理员配置</a>
           <ul>
-            <li><a href="/admin/main1">注册用户审核</a></li>
+            <li><a href="/admin/showUserList">注册用户审核</a></li>
+            <li><a href="/admin/showUserListForProxy">代理升级审核</a></li>
             <li><a href="/userIndexAdmin" class="current">推荐系统图</a></li>
             <li><a href="/admin/main3">奖金比例配置</a></li>
             <li><a href="/toMoneyWeek">奖金发放</a></li>

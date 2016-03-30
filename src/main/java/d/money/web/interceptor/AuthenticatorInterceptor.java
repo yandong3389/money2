@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import d.money.common.utils.WebUtils;
+
 public class AuthenticatorInterceptor implements HandlerInterceptor {
 
 	@Override
@@ -24,6 +26,11 @@ public class AuthenticatorInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object obj) throws Exception {
 
+	       // 获取基准路径
+        String basePath = WebUtils.getBasePath(request);
+        
+        request.setAttribute("base_path", basePath);
+	    
 		// System.out.println("request.getRequestURL().toString(); -=========="
 		// + request.getRequestURL().toString());
 		// System.out.println("request.getRequestURI().toString(); -=========="

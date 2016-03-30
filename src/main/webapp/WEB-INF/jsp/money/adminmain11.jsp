@@ -14,7 +14,7 @@
 <script type="text/javascript" src="resources/js/simpla.jquery.configuration.js"></script>
 <script type="text/javascript" src="resources/js/facebox.js"></script>
 <script type="text/javascript" src="resources/js/jquery.wysiwyg.js"></script>
-<script type="text/javascript" src="resources/js/money/adminmain4.js"></script>
+<script type="text/javascript" src="resources/js/admin.js"></script>
 </head>
 <body>
 <div id="body-wrapper">
@@ -31,10 +31,10 @@
         <li> <a href="javascript:void(0);" class="nav-top-item">管理员配置</a>
           <ul>
             <li><a href="/admin/showUserList">注册用户审核</a></li>
-            <li><a href="/admin/showUserListForProxy">代理升级审核</a></li>
+            <li><a href="/admin/showUserListForProxy" class="current">代理升级审核</a></li>
             <li><a href="/userIndexAdmin">推荐系统图</a></li>
             <li><a href="/admin/main3">奖金比例配置</a></li>
-            <li><a href="/toMoneyWeek" class="current">奖金发放</a></li>
+            <li><a href="/toMoneyWeek">奖金发放</a></li>
             <li><a href="/toUserList">用户信息</a></li>
           </ul>
         </li>
@@ -42,80 +42,69 @@
     </div>
   </div>
   <!-- End #sidebar -->
-<div id="main-content" style="padding-top:40px;">
-    <!--  start     表单-->
-    
-    
-    
-    
-        <div class="content-box">
-      <!-- Start Content Box -->
+  <div id="main-content">
+  	<div class="content-box">
+  		<!-- Start Content Box -->
       <div class="content-box-header">
-        <h3>奖金发放</h3>
+        <h3>代理升级申请用户列表</h3>
         <div class="clear"></div>
       </div>
-      <!-- End .content-box-header -->
-      <!-- 统计数据 -->
-      <div class="content-box-content">
-        <div class="tab-content default-tab" id="tab1">
+      <div class="tab-content default-tab" id="tab1">
           <!-- This is the target div. id must match the href of this div's tab -->
+          <form id="form1" action="" method="post">
           <table>
             <thead>
-              <tr style="border-bottom: 1px solid #E2E2E2;">
+              <tr>
                 <th>
                   <input class="check-all" type="checkbox" />
                 </th>
-                <th>序号</th>
-                <th>用户ID</th>
+                <th>用户Id</th>
                 <th>姓名</th>
-                <th>奖金金额</th>
-                <th>发放状态</th>
+                <th>身份证号</th>
+                <th>推荐人Id</th>
+                <th>接点人Id</th>
+                <th>tel</th>
+                <th>zcTime</th>
                 <th>操作</th>
               </tr>
             </thead>
             <tfoot>
               <tr>
                 <td colspan="8">
-                  <div class="pagination">${pageHtml}</div>
+                  <div class="bulk-actions align-right">
+<!--                     <a class="button" id="deleteUser" >&nbsp;&nbsp;&nbsp;&nbsp;删&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;除&nbsp;&nbsp;&nbsp;&nbsp;</a> -->
+                  </div>
                   <!-- End .pagination -->
                   <div class="clear"></div>
                 </td>
               </tr>
             </tfoot>
             <tbody>
-                <c:forEach items="${weekEnds}" var="week" varStatus="status">
-	              <tr <c:if test="${week.flag == 1}">style="background-color: white;border-bottom: 1px solid #E2E2E2;"</c:if>
-	                <c:if test="${week.flag == 2}">style="background-color: rgb(255, 27, 27);border-bottom: 1px solid #E2E2E2;"</c:if>
-	                <c:if test="${week.flag == 3}">style="background-color: rgb(0, 238, 0);border-bottom: 1px solid #E2E2E2;"</c:if>> 
+                <c:forEach items="${userlist}" var="view" varStatus="status">
+	              <tr> 
 	                <td>
-	                  <input type="checkbox" />
+	                  <input type="checkbox" name="check" value="${view.id}" />
 	                </td>
-	                <td>${status.count}</td>
-	                <td>${week.userId}</td>
-	                <td>${week.name}</td>
-	                <td>${week.money}</td>
+	                <td>${view.id}</td>
+	                <td>${view.name}</td>
+	                <td>${view.identityCard}</td>
+	                <td>${view.jsrId}</td>
+	                <td>${view.jdrId}</td>
+	                <td>${view.tel}</td>
+	                <td><fmt:formatDate value="${view.zcTime}" pattern="yyyy年MM月dd日 HH:mm:ss" /></td>
 	                <td>
-	                <c:if test="${week.flag == 1}">无奖金</c:if>
-	                <c:if test="${week.flag == 2}">有奖金，未发放</c:if>
-	                <c:if test="${week.flag == 3}">有奖金，已发放</c:if>
-	                </td>
-	                <td>
-	                   <c:if test="${week.flag == 2}">
-	                       <a class="button" href="javascript:void(0)" pkid="${week.pkId}" name="weekBtn">点击发放</a>
-	                   </c:if>
+	                <a class="button" href="javascript:;" userId="${view.id}" approveFlag="2" name="appvoeBtn">通过</a>
+	                <a class="button" href="javascript:;" userId="${view.id}" approveFlag="3" name="appvoeBtn">拒绝</a>
 	                </td>
 	              </tr>
                 </c:forEach>
             </tbody>
           </table>
+          </form>
         </div>
-        <!-- End #tab1 -->
-        <!-- End #tab2 -->
-      </div>
-      <!-- End .content-box-content -->
-    </div>
-    
-</div>
-</div>
+  	</div>
+  </div>
+ </div>
 </body>
+<!-- Download From www.exet.tk-->
 </html>

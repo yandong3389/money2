@@ -1,5 +1,6 @@
 package d.money.web.action;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,9 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import d.money.common.utils.PageUtil;
-import d.money.common.utils.StringUtil;
 import d.money.mapper.NodeExtMapper;
 import d.money.pojo.base.Admin;
 import d.money.pojo.base.User;
@@ -34,49 +34,99 @@ public class AdminApproveController {
 	
 	@RequestMapping("/showUserList")
 	public String toAdminLogin(HttpServletRequest request) {
+	    
+	    Object isAdmin = request.getSession().getAttribute("isAdmin");
+	    
+	    if (null == isAdmin || !"true".equals(isAdmin.toString())) {
+	        return "not admin";
+	    }
+	    
+//		String currentPageStr = request.getParameter("page");
+//		
+//		int currentPage = 1;
+//		int perpage = 10;
+//		if (StringUtil.isNotEmpty(currentPageStr)) {
+//			currentPage = Integer.parseInt(currentPageStr);
+//		}
+	    
+	    UserExample userExample = new UserExample();
+//		userExample.setMysqlOffset(PageUtil.getStartRecord(currentPage, perpage));
+//		userExample.setMysqlLength(perpage);
+	    
+	    // 待审核的用户
+	    userExample.createCriteria().andApproveFlagEqualTo("1");
+	    
+	    List<User> users = userService.selectByExample(userExample);
+	    
+	    request.setAttribute("userlist", users);
+	    
+//		// 总记录数
+//		int total = userService.countByExample(null);
+//        
+//        // 分页请求数据URL地址
+//        String url = "toUserList?";
+//        
+//        // 取得分页工具条
+//        String pageHtml = PageUtil.getBackPageHtml(currentPage, perpage, total, url);
+//		
+//        request.setAttribute("users", users);
+//		request.setAttribute("pageHtml", pageHtml);
+	    
+	    return "money/adminmain1";
+	}
+	
+	@RequestMapping("/showUserListForProxy")
+	public String showUserListForProxy(HttpServletRequest request) {
 		
 		Object isAdmin = request.getSession().getAttribute("isAdmin");
 		
-		if (null == isAdmin || !Boolean.getBoolean(isAdmin.toString())) {
+		if (null == isAdmin || !"true".equals(isAdmin.toString())) {
 			return "not admin";
 		}
 		
-		String currentPageStr = request.getParameter("page");
+		// TODO 取得所有待审核代理用户数据
+		// TODO 遍历抽取出用户ID集合
+		// TODO 根据用户ID集合查询用户信息结果集，用于显示页面
 		
-		int currentPage = 1;
-		int perpage = 10;
-		if (StringUtil.isNotEmpty(currentPageStr)) {
-			currentPage = Integer.parseInt(currentPageStr);
-		}
+		List<Integer> userIdList = new ArrayList<Integer>();
 		
 		UserExample userExample = new UserExample();
-		userExample.setMysqlOffset(PageUtil.getStartRecord(currentPage, perpage));
-		userExample.setMysqlLength(perpage);
+		userExample.createCriteria().andIdIn(userIdList);
 		
 		List<User> users = userService.selectByExample(userExample);
 		
-		// 总记录数
-		int total = userService.countByExample(null);
-        
-        // 分页请求数据URL地址
-        String url = "toUserList?";
-        
-        // 取得分页工具条
-        String pageHtml = PageUtil.getBackPageHtml(currentPage, perpage, total, url);
+        request.setAttribute("userlist", users);
 		
-        request.setAttribute("users", users);
-		request.setAttribute("pageHtml", pageHtml);
-		
-		return "adminLogin";
+		return "money/adminmain11";
 	}
 
+    @RequestMapping(value="/doApproveProxy",  produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String doApproveProxy(Admin admin, HttpServletRequest request, HttpServletResponse response) {
+        
+        // TODO 审核代理级别
+        
+        Object isAdmin = request.getSession().getAttribute("isAdmin");
+        
+        if (null == isAdmin || !"true".equals(isAdmin.toString())) {
+            return "not admin";
+        }
+        
+        String userId = request.getParameter("userId");
+        
+        String approveFlag = request.getParameter("approveFlag");
+        
+        
+        return "1";
+    }
 	
-	@RequestMapping("/doApprove")
-	public String validatorAdmin(Admin admin, HttpServletRequest request, HttpServletResponse response) {
+    @RequestMapping(value="/doApprove",  produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+	public String doApprove(Admin admin, HttpServletRequest request, HttpServletResponse response) {
 		
 		Object isAdmin = request.getSession().getAttribute("isAdmin");
 		
-		if (null == isAdmin || !Boolean.getBoolean(isAdmin.toString())) {
+		if (null == isAdmin || !"true".equals(isAdmin.toString())) {
 			return "not admin";
 		}
 		
@@ -97,6 +147,6 @@ public class AdminApproveController {
 		    money2CalculateService.saveApproveFail(user.getId());
 		}
 		
-		return null;
+		return "1";
 	}
 }

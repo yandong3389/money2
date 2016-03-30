@@ -128,7 +128,7 @@ public class Money2CalculateServiceImpl implements Money2CalculateService {
 		// TODO 当前用户推荐客户数（客户和代理感觉有重复，如果是代理了还计不计算客户数量？排除掉代理的推荐下线？）
 		int userClientCount = userMapper.countByExample(userExample);
 		
-		// TODO 要求有10个县代，那我下边有9个县代，1个市代，算不算合格？
+		// TODO 要求有10个县代，那我下边有9个县代，1个市代，算不算合格？（我下边的代理，计算的是推荐，不是接点）
 		List<User> usersTemp = userMapper.selectByExample(userExample);
 		
 		// 当前用户县代理数
@@ -308,15 +308,6 @@ public class Money2CalculateServiceImpl implements Money2CalculateService {
         for (Node node : parentNodeList) {
             
             // 计算用户的级别（总业绩、考核市场、最小市场业绩），得到级别对应的奖金比例
-            // 查询这个用户的所有子节点的ID集合
-            List<Integer> result = new ArrayList<Integer>();
-            getChildsUserIdList(node, result);
-            
-            UserExample userExample = new UserExample();
-            // 审核状态,通过才计算（1：待审核、2：审核通过、3：审核未通过）
-            userExample.createCriteria().andIdIn(result).andApproveFlagEqualTo("2");
-            List<User> userList = userMapper.selectByExample(userExample);
-            
             // TODO 总业绩，需不需要把此次用户投资的金额也计算在内
             int totalMoney = 0;
             // 市场考核人数
@@ -324,26 +315,38 @@ public class Money2CalculateServiceImpl implements Money2CalculateService {
             // 市场业绩
             int subMoney = 0;
             
-            // 市场考核人员
-            List<Node> children = node.getChildren();
+            // 查询这个用户的所有子节点的ID集合
+            List<Integer> result = new ArrayList<Integer>();
+            getChildsUserIdList(node, result);
             
-            for (User user : userList) {
-                // 累加总业绩
-                totalMoney += user.getUserMoney();
+            if (CollectionUtils.isNotEmpty(result)) {
                 
-                for (Node nodeTemp : children) {
-                    if (nodeTemp.getId() == user.getId()) {
-                        // 累加市场业绩
-                        subMoney += user.getUserMoney();
-                        break;
+                UserExample userExample = new UserExample();
+                // 审核状态,通过才计算（1：待审核、2：审核通过、3：审核未通过）
+                userExample.createCriteria().andIdIn(result).andApproveFlagEqualTo("2");
+                List<User> userList = userMapper.selectByExample(userExample);
+                
+                // 市场考核人员
+                List<Node> children = node.getChildren();
+                
+                for (User user : userList) {
+                    // 累加总业绩
+                    totalMoney += user.getUserMoney();
+                    
+                    for (Node nodeTemp : children) {
+                        if (nodeTemp.getId() == user.getId()) {
+                            // 累加市场业绩
+                            subMoney += user.getUserMoney();
+                            break;
+                        }
                     }
                 }
             }
             
-            // TODO 等级匹配,三个条件,递归向上逐级匹配
-            // TODO 当前用户所属级别对应的比例
-            int moneyScale = 20;
-            
+            // 等级匹配,三个条件,递归向上逐级匹配
+            // totalMoney userCount subMoney
+            // 当前用户所属级别对应的比例
+            int moneyScale = getMoneyScale(totalMoney, userCount, subMoney);
             
             // 级差奖金金额
             int awardMoney = 0;
@@ -384,19 +387,23 @@ public class Money2CalculateServiceImpl implements Money2CalculateService {
         // 隔代用户
         User gduser = getNodeListForGD(currentUserJsrId);
         
-        // TODO 隔代奖金比例
-        int gdMoneyScale = 10;
+        // 有隔代用户才给隔代奖金
+        if (gduser != null) {
+            
+            // TODO 隔代奖金比例,取配置
+            int gdMoneyScale = 10;
+            
+            // 插入隔代奖金数据
+            MoneyHistory history = new MoneyHistory();
+            history.setId(gduser.getId());
+            // 奖金类型 1：级差奖金、2：隔代奖金、3：代理奖金
+            history.setType(2);
+            history.setCreateDate(sysDate);
+            history.setAwardMoney((currentUser.getUserMoney() / 100) * gdMoneyScale);
+            history.setLinkUserId(currentNodeId);
+            moneyHistoryMapper.insert(history);
+        }
         
-        // 插入隔代奖金数据
-        MoneyHistory history = new MoneyHistory();
-        history.setId(gduser.getId());
-        // 奖金类型 1：级差奖金、2：隔代奖金、3：代理奖金
-        history.setType(2);
-        history.setCreateDate(sysDate);
-        history.setAwardMoney((currentUser.getUserMoney() / 100) * gdMoneyScale);
-        history.setLinkUserId(currentNodeId);
-        moneyHistoryMapper.insert(history);
-		
         
         
 		// TODO ****************************处理代理奖金****************************
@@ -449,7 +456,7 @@ public class Money2CalculateServiceImpl implements Money2CalculateService {
 	
 	private void getChildsUserIdList(Node node, List<Integer> result){
 	    
-	    if (CollectionUtils.isNotEmpty(result)) {
+	    if (CollectionUtils.isEmpty(result)) {
 	        // 首次调用不向result中追加，排除自己
 	        result.add(node.getId());
 	    }
@@ -500,24 +507,76 @@ public class Money2CalculateServiceImpl implements Money2CalculateService {
 	    UserExample userExample = new UserExample();
 	    userExample.createCriteria().andIdEqualTo(jsrId);
 	    List<User> users = userMapper.selectByExample(userExample);
+	    
+	    if (CollectionUtils.isEmpty(users)) {
+	        return null;
+	    }
 		
 	    // 取得介绍人的介绍人用户信息对象
 		return userMapper.selectByPrimaryKey(Integer.parseInt(users.get(0).getJsrId()));
 	}
 
 	/**
-	 * 代理节点（获取一条线上的所有上级）符合什么代理的要求就给什么代理对应的奖金
-	 * @param dataList
-	 * @param node
-	 * @param level
-	 * @return
+	 * 根据用户业绩的三个指标取得等级对应的级差奖金比率
+	 * @param totalMoney
+	 * @param userCount
+	 * @param subMoney
 	 */
-	public List<Node> getNodeListForDL(List<Node> dataList, Node node, int level, List<Node> result) {
+	private int getMoneyScale(int totalMoney, int userCount, int subMoney) {
 
-	    // TODO 
+	    // TODO 取配置
 	    
-		
-		return null;
-	}
+	    // 十二级
+	    if (totalMoney > 200000000 && userCount >= 4 && subMoney >= 15000000) {
+	        return 65;
+	    }
+	    // 十一级
+	    if (totalMoney > 100000000 && userCount >= 4 && subMoney >= 10000000) {
+	        return 60;
+	    }
+	    // 十级
+	    if (totalMoney > 80000000 && userCount >= 3 && subMoney >= 10000000) {
+	        return 55;
+	    }
+	    // 九级
+	    if (totalMoney > 50000000 && userCount >= 3 && subMoney >= 5000000) {
+	        return 50;
+	    }
+	    // 八级
+	    if (totalMoney > 20000000 && userCount >= 3 && subMoney >= 2000000) {
+	        return 45;
+	    }
+	    // 七级
+	    if (totalMoney > 10000000 && userCount >= 3 && subMoney >= 1500000) {
+	        return 40;
+	    }
+	    // 六级
+	    if (totalMoney > 6000000 && userCount >= 2 && subMoney >= 800000) {
+	        return 35;
+	    }
+	    // 五级
+	    if (totalMoney > 3000000 && userCount >= 2 && subMoney >= 500000) {
+	        return 30;
+	    }
+	    // 四级
+	    if (totalMoney > 1000000 && userCount >= 2 && subMoney >= 100000) {
+	        return 25;
+	    }
+	    // 三级
+	    if (totalMoney > 500000 && userCount >= 1 && subMoney >= 10000) {
+	        return 20;
+	    }
+	    // 二级
+	    if (totalMoney > 100000 && userCount >= 1 && subMoney >= 10000) {
+	        return 15;
+	    }
+	    // 一级
+	    if (totalMoney > 10000 && userCount >= 1 && subMoney >= 10000) {
+	        return 10;
+	    }
+	    
+	    // 无等级
+	    return 0;
+    }
 
 }
