@@ -220,13 +220,15 @@ public class Money2CalculateServiceImpl implements Money2CalculateService {
 	}
 	
 	/**
+	 * 
+	 * 用户注册审核通过
 	 * 1、插入node数据
 	 * 2、标记为用户为审核通过
 	 * 3、计算奖金
 	 * @param userId 当前新增加的用户ID
 	 * @param parentId 当前新增加的用户的接点人ID
 	 */
-	public void saveApproveSuccess(int userId, int parentId){
+	public void saveApproveSuccess(int userId, int parentId) {
 		
 	    // 1、插入node数据
 		// 取得接点人节点
