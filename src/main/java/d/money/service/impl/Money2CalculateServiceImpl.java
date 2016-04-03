@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ import d.money.mapper.base.MoneyHistoryMapper;
 import d.money.mapper.base.NodeMapper;
 import d.money.mapper.base.UserMapper;
 import d.money.mapper.base.UserProxyApplicationInfoMapper;
+import d.money.pojo.UserProxyInfoView;
 import d.money.pojo.base.MoneyHistory;
 import d.money.pojo.base.NodeExample;
 import d.money.pojo.base.User;
@@ -42,6 +44,66 @@ public class Money2CalculateServiceImpl implements Money2CalculateService {
 
 	public int countByExample(NodeExample example) {
 		return nodeMapper.countByExample(example);
+	}
+	
+	/**
+	 * 查询所有待审核的代理升级申请信息数据
+	 * @return
+	 */
+	public List<UserProxyInfoView> selectUserProxyInfoViewList() {
+	    
+	    // 取得所有待审核代理用户数据
+	    UserProxyApplicationInfoExample userProxyApplicationInfoExample = new UserProxyApplicationInfoExample();
+	    // 1：待审核、2：审核通过、3：审核未通过
+	    userProxyApplicationInfoExample.createCriteria().andApproveFlagEqualTo("1");
+        List<UserProxyApplicationInfo> userProxyApplicationInfos = userProxyApplicationInfoMapper.selectByExample(userProxyApplicationInfoExample);
+	    
+        // 遍历抽取出用户ID集合
+        List<Integer> userIdList = new ArrayList<Integer>();
+        
+        for (UserProxyApplicationInfo userProxyApplicationInfo : userProxyApplicationInfos) {
+            userIdList.add(userProxyApplicationInfo.getUserId());
+        }
+        
+        // 根据用户ID集合查询用户信息结果集，用于显示页面
+        UserExample userExample = new UserExample();
+        userExample.createCriteria().andIdIn(userIdList);
+        
+        List<User> users = userMapper.selectByExample(userExample);
+        
+        List<UserProxyInfoView> result = new ArrayList<UserProxyInfoView>();
+        UserProxyInfoView userProxyInfoView = null;
+        
+        for (User userTemp : users) {
+            
+            userProxyInfoView = new UserProxyInfoView();
+            BeanUtils.copyProperties(userTemp, userProxyInfoView);
+            
+            for (UserProxyApplicationInfo userProxyApplicationInfo : userProxyApplicationInfos) {
+                
+                if (userProxyApplicationInfo.getUserId() == userProxyInfoView.getId()) {
+                    
+                    // 申请的代理级别
+                    userProxyInfoView.setApplyProxyFlag(userProxyApplicationInfo.getUpProxyFlag());
+                    
+                    // 取得代理升级需要考核的指标数据（客户数量、省代个数、市代个数、县代个数）
+                    Map<String, Object> map = selectProxyByUserId(userProxyInfoView.getId());
+                    
+                    // 客户数量
+                    userProxyInfoView.setUserClientCount(Integer.parseInt(String.valueOf(map.get("userClientCount"))));
+                    
+                    // 省代/市代/县代
+                    userProxyInfoView.setUserShengProxyCount(Integer.parseInt(String.valueOf(map.get("shengProxyCount"))));
+                    userProxyInfoView.setUserShiProxyCount(Integer.parseInt(String.valueOf(map.get("shiProxyCount"))));
+                    userProxyInfoView.setUserXianProxyCount(Integer.parseInt(String.valueOf(map.get("xianProxyCount"))));
+                    break;
+                }
+            }
+            
+            result.add(userProxyInfoView);
+        }
+	    
+	    return result;
 	}
 	
 	/**
@@ -111,13 +173,14 @@ public class Money2CalculateServiceImpl implements Money2CalculateService {
 		// 当前用户信息对象
 		User user = userMapper.selectByPrimaryKey(userId);
 		
-		// TODO 用户当前代理级别 ,改用int 存储代理级别，默认0
+		// 用户当前代理级别 
 		String proxyFlag = user.getProxyFlag();
 		
-		// TODO 取得升级要求
-		int money = 0;
-		int clientCount = 0;
-		int proxyCount = 0;
+		// 根据当前代理级别取得升级要求，取配置
+		Map<String, Integer> proxyInfo = getMoneyScale(proxyFlag);
+		int money = proxyInfo.get("money");
+		int clientCount = proxyInfo.get("clientCount");
+		int proxyCount = proxyInfo.get("proxyCount");
 		
 		// 当前用户投资额
 		int userMoney = user.getUserMoney();
@@ -128,7 +191,7 @@ public class Money2CalculateServiceImpl implements Money2CalculateService {
 		// TODO 当前用户推荐客户数（客户和代理感觉有重复，如果是代理了还计不计算客户数量？排除掉代理的推荐下线？）
 		int userClientCount = userMapper.countByExample(userExample);
 		
-		// TODO 要求有10个县代，那我下边有9个县代，1个市代，算不算合格？（我下边的代理，计算的是推荐，不是接点）
+		// 要求有10个县代，那我下边有9个县代，1个市代，算不算合格？（我下边的代理，计算的是推荐，不是接点）
 		List<User> usersTemp = userMapper.selectByExample(userExample);
 		
 		// 当前用户县代理数
@@ -173,7 +236,7 @@ public class Money2CalculateServiceImpl implements Money2CalculateService {
             return result;
         }
 		
-		// TODO 符合要求的代理个数
+		// 符合要求的代理个数
 		int nowProxyCount = 0;
 		
 		// 非代理
@@ -279,7 +342,7 @@ public class Money2CalculateServiceImpl implements Money2CalculateService {
 	    // 当前系统时间
 	    Date sysDate = new Date();
 	    
-		// TODO ****************************处理级差奖金****************************
+		// ****************************处理级差奖金****************************
 		/*
 		 * 计划级别时不算自己的投资金额
 		 * 获取一条线上的所有上级
@@ -308,7 +371,7 @@ public class Money2CalculateServiceImpl implements Money2CalculateService {
         for (Node node : parentNodeList) {
             
             // 计算用户的级别（总业绩、考核市场、最小市场业绩），得到级别对应的奖金比例
-            // TODO 总业绩，需不需要把此次用户投资的金额也计算在内
+            // TODO 总业绩，需不需要把此次用户投资的金额也计算在内（目前没算） 
             int totalMoney = 0;
             // 市场考核人数
             int userCount = node.getChildren().size();
@@ -378,7 +441,7 @@ public class Money2CalculateServiceImpl implements Money2CalculateService {
         
         
         
-		// TODO ****************************处理隔代奖金****************************
+		// ****************************处理隔代奖金****************************
 		/*
 		 * 获取当前注册用户上级的上级，增加隔代奖金，上级计算按照推荐人，不
 		 * 只给一个人加？
@@ -406,7 +469,7 @@ public class Money2CalculateServiceImpl implements Money2CalculateService {
         
         
         
-		// TODO ****************************处理代理奖金****************************
+		// ****************************处理代理奖金****************************
 		/*
 		 *  A->B->C->D 比如这样的关系，D注册进来，代理奖金都给谁加，一条线上的所有上级（接点人树结构），符号什么级别的代理就给计算什么级别的代理奖金
 		 *  
@@ -450,8 +513,6 @@ public class Money2CalculateServiceImpl implements Money2CalculateService {
             moneyHistoryMapper.insert(history2);
         }
         
-        // TODO ****************************给所有上级重新计算代理级别（非代理可能升县代、县代可能市代、市代可能升省代）****************************
-        // TODO 需要个人用户在资料详情页面进行【申请x代】（符合条件的情况下）
 	}
 	
 	private void getChildsUserIdList(Node node, List<Integer> result){
@@ -516,6 +577,46 @@ public class Money2CalculateServiceImpl implements Money2CalculateService {
 		return userMapper.selectByPrimaryKey(Integer.parseInt(users.get(0).getJsrId()));
 	}
 
+    /**
+     * 根据用户业绩的三个指标取得等级对应的级差奖金比率
+     * @param totalMoney
+     * @param userCount
+     * @param subMoney
+     */
+    private Map<String, Integer> getMoneyScale(String proxyLevelFlag) {
+        
+        // TODO 取数据库配置
+        
+        Map<String, Integer> result = new HashMap<String, Integer>();
+        
+        // 当前非代理
+        if ("0".equals(proxyLevelFlag)||StringUtil.isEmpty(proxyLevelFlag)) {
+            result.put("money", 20000);
+            result.put("clientCount", 10);
+            result.put("proxyCount", 0);
+        }
+        // 当前县代升市代
+        if ("1".equals(proxyLevelFlag)) {
+            result.put("money", 50000);
+            result.put("clientCount", 10);
+            result.put("proxyCount", 10);
+        }
+        // 当前市代升省代
+        if ("2".equals(proxyLevelFlag)) {
+            result.put("money", 100000);
+            result.put("clientCount", 10);
+            result.put("proxyCount", 10);
+        }
+//        // 当前省代，不能再升了
+//        if ("3".equals(proxyLevelFlag)){
+//            result.put("money", 9999);
+//            result.put("clientCount", 9999);
+//            result.put("proxyCount", 9999);
+//        }
+        
+        return result;   
+    }
+    
 	/**
 	 * 根据用户业绩的三个指标取得等级对应的级差奖金比率
 	 * @param totalMoney
@@ -524,7 +625,7 @@ public class Money2CalculateServiceImpl implements Money2CalculateService {
 	 */
 	private int getMoneyScale(int totalMoney, int userCount, int subMoney) {
 
-	    // TODO 取配置
+	    // TODO 取数据库配置
 	    
 	    // 十二级
 	    if (totalMoney > 200000000 && userCount >= 4 && subMoney >= 15000000) {

@@ -64,7 +64,12 @@
                 <th>推荐人Id</th>
                 <th>接点人Id</th>
                 <th>tel</th>
-                <th>zcTime</th>
+                <th>注册时间</th>
+                <th>投资金额</th>
+                <th>客户人数</th>
+                <th>省代/市代/县代</th>
+                <th>当前代理级别</th>
+                <th>申请代理级别</th>
                 <th>操作</th>
               </tr>
             </thead>
@@ -92,6 +97,22 @@
 	                <td>${view.jdrId}</td>
 	                <td>${view.tel}</td>
 	                <td><fmt:formatDate value="${view.zcTime}" pattern="yyyy年MM月dd日 HH:mm:ss" /></td>
+	                <td>${view.userMoney}</td>
+	                <td>${view.userClientCount}</td>
+	                <td>${view.userShengProxyCount}/${view.userShiProxyCount}/${view.userXianProxyCount}</td>
+	                <%--代理类型，0：非代理、1：县代、2：市代、3：省代 --%>
+	                <td>
+	                  <c:if test="${view.proxyFlag == '0'}">非代理</c:if>
+	                  <c:if test="${view.proxyFlag == '1'}">县代</c:if>
+	                  <c:if test="${view.proxyFlag == '2'}">市代</c:if>
+	                  <c:if test="${view.proxyFlag == '3'}">省代</c:if>
+	                </td>
+	                <td>
+	                  <c:if test="${view.applyProxyFlag == '0'}">非代理</c:if>
+	                  <c:if test="${view.applyProxyFlag == '1'}">县代</c:if>
+	                  <c:if test="${view.applyProxyFlag == '2'}">市代</c:if>
+	                  <c:if test="${view.applyProxyFlag == '3'}">省代</c:if>
+	                </td>
 	                <td>
 	                <a class="button" href="javascript:;" userId="${view.id}" approveFlag="2" name="appvoeBtn">通过</a>
 	                <a class="button" href="javascript:;" userId="${view.id}" approveFlag="3" name="appvoeBtn">拒绝</a>

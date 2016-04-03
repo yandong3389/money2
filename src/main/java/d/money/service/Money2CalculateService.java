@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import d.money.common.utils.Node;
+import d.money.pojo.UserProxyInfoView;
 import d.money.pojo.base.NodeExample;
 import d.money.pojo.base.User;
 
@@ -11,6 +12,12 @@ import d.money.pojo.base.User;
 public interface Money2CalculateService {
 
     public int countByExample(NodeExample example);
+    
+    /**
+     * 查询所有待审核的代理升级申请信息数据
+     * @return
+     */
+    public List<UserProxyInfoView> selectUserProxyInfoViewList();
     
     /**
      * 保存用户申请升级代理数据

@@ -64,7 +64,8 @@
                 <th>推荐人Id</th>
                 <th>接点人Id</th>
                 <th>tel</th>
-                <th>zcTime</th>
+                <th>注册时间</th>
+                <th>投资金额</th>
                 <th>操作</th>
               </tr>
             </thead>
@@ -92,6 +93,7 @@
 	                <td>${view.jdrId}</td>
 	                <td>${view.tel}</td>
 	                <td><fmt:formatDate value="${view.zcTime}" pattern="yyyy年MM月dd日 HH:mm:ss" /></td>
+	                <td>${view.userMoney}</td>
 	                <td>
 	                <a class="button" href="javascript:;" userId="${view.id}" approveFlag="2" name="appvoeBtn">通过</a>
 	                <a class="button" href="javascript:;" userId="${view.id}" approveFlag="3" name="appvoeBtn">拒绝</a>

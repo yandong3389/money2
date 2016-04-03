@@ -6,12 +6,14 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import d.money.mapper.NodeExtMapper;
+import d.money.pojo.UserProxyInfoView;
 import d.money.pojo.base.Admin;
 import d.money.pojo.base.User;
 import d.money.pojo.base.UserExample;
@@ -83,19 +85,10 @@ public class AdminApproveController {
 		if (null == isAdmin || !"true".equals(isAdmin.toString())) {
 			return "not admin";
 		}
-		
-		// TODO 取得所有待审核代理用户数据
-		// TODO 遍历抽取出用户ID集合
-		// TODO 根据用户ID集合查询用户信息结果集，用于显示页面
-		
-		List<Integer> userIdList = new ArrayList<Integer>();
-		
-		UserExample userExample = new UserExample();
-		userExample.createCriteria().andIdIn(userIdList);
-		
-		List<User> users = userService.selectByExample(userExample);
-		
-        request.setAttribute("userlist", users);
+
+		// 查询所有待审核的代理升级申请信息数据
+		List<UserProxyInfoView> result = money2CalculateService.selectUserProxyInfoViewList();
+        request.setAttribute("userlist", result);
 		
 		return "money/adminmain11";
 	}
